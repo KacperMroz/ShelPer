@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import { Button } from '../UI/Button';
 import {NavLink as Link} from "react-router-dom";
 
-export const LoginForm = () => {
-    //login page
+export const SignUpForm = ({ text, navigate}) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
     const [error, setError] = useState('');
 
     const setUsernameHandler = event => {
@@ -13,6 +13,9 @@ export const LoginForm = () => {
     };
     const setPasswordHandler = event => {
         setPassword(event.target.value);
+    };
+    const setConfirmPasswordHandler = event => {
+        setConfirmPassword(event.target.value);
     };
 
     return (
@@ -28,7 +31,7 @@ export const LoginForm = () => {
                     }
                 }}
             >
-                <h1 className={"header"}>Zaloguj się</h1>
+                <h1 className={"header"}>Zarejestruj się</h1>
                 <div>
                     <input type='text' value={email} onChange={setUsernameHandler} placeholder={"Podaj swój e-mail"} />
                 </div>
@@ -41,9 +44,17 @@ export const LoginForm = () => {
                     />
                 </div>
                 <div>
-                    <Button text={'Zaloguj się'} />
+                    <input
+                        type='password'
+                        value={confirmPassword}
+                        onChange={setConfirmPasswordHandler}
+                        placeholder={"Podaj swoje hasło"}
+                    />
                 </div>
-                <div>Nie posiadasz konta? <Link to="/register">Zarejestruj się</Link></div>
+                <div>
+                    <Button text={text} navigate={navigate}/>
+                </div>
+                <div>Posiadasz konto? <Link to="/login">Zaloguj się</Link></div>
                 {error && <div style={{ color: 'red' }}>{error}</div>}
             </form>
         </div>
