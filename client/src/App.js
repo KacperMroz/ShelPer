@@ -1,24 +1,24 @@
 import './App.css';
 import { NavBar } from './components/NavBar/NavBar';
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './components/pages';
-import {Login} from './components/pages/Login';
+import { Login } from './components/pages/Login';
 import SignUp from './components/pages/SignUp';
-import {SignUpPersonal} from './components/pages/SignUpPersonal';
-import {SignUpShelter} from './components/pages/SignUpShelter';
+import { SignUpPersonal } from './components/pages/SignUpPersonal';
+import { SignUpShelter } from './components/pages/SignUpShelter';
 
 function App() {
   return (
     <Router>
       <NavBar />
-        <Switch>
-            <Route exact path='/' component={Home} />
-            <Route exact path='/login' component={Login} />
-            <Route exact path='/signup' component={SignUp} />
-            <Route exact path='/sign-up-personal' component={SignUpPersonal} />
-            <Route exact path='/sign-up-shelter' component={SignUpShelter} />
-         </Switch>
+      <Routes>
+        <Route exact path='/' element={<Home />} />
+        <Route path='/login' element={<Login />} />
+        <Route path='/signup' element={<SignUp />} />
+        <Route path='/signuppersonal' element={<SignUpPersonal />} />
+        <Route path='/signupshelter' element={<SignUpShelter />} />
+      </Routes>
     </Router>
   );
 }
