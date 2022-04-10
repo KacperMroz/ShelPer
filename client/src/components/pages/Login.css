@@ -1,0 +1,20 @@
+.base-container{
+    grid-row: 2;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    height: 100%;
+    width: 100%
+}
+
+.dog-container{
+    background: linear-gradient(180deg, rgba(241, 244, 249, 0.8) 0%, rgba(233, 239, 249, 0.8) 100%);
+    grid-column: 1;
+    display: flex;
+    height: 100%;
+    align-items: flex-end;
+}
+
+.dog-container > img{
+    height: 90%;
+    width: 100%;
+}

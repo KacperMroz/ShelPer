@@ -1,0 +1,78 @@
+.base-login-container{
+    background-color: #F5F5F5;
+    display: grid;
+    justify-items: center;
+    grid-template-rows: 30% 50% 20%;
+    height: 100%;
+    width: 100%;
+}
+
+form{
+    grid-row: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+}
+
+.header{
+    color: #6E6E6E;
+    font-size: 65px;
+}
+
+form > div{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+input{
+    background-color: #FFFFFF;
+    border: none;
+    border-bottom: 1px solid #FFFFFF;
+    color: #9A9A9A;
+    padding: 1em;
+    margin: 4%;
+    width: 35%;
+    height: 30%;
+    border-radius: 35px;
+    font-size: 20px;
+}
+
+input::placeholder{
+    color: #9A9A9A
+}
+
+.input-div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 10%;
+}
+
+.button-div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20%;
+}
+
+.input-div > div, .button-div > div{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.button-div > .bottom-text{
+    color: #B8B8B8;
+    font-size: 20px;
+    margin-top: 1%;
+}
+
+.bottom-text > a{
+    color: #939393;
+    text-decoration: none;
+    font-weight: 700;
+    margin-left: 1%;
+}

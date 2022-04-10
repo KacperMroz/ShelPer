@@ -7,7 +7,7 @@ import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
 library.add(faMagnifyingGlass)
 
 export const NavBar = () => {
-  return <div>
+  return <div className='navbar'>
     <nav>
         <Link to="/">
           <img src={Logo} className="navbar-brand" alt="logo" />

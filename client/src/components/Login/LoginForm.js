@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Button } from '../UI/Button';
+import './LoginForm.css'
 import {NavLink as Link} from "react-router-dom";
 
 export const LoginForm = () => {
@@ -16,7 +17,7 @@ export const LoginForm = () => {
     };
 
     return (
-        <div>
+        <div class='base-login-container'>
             <form
                 onSubmit={e => {
                     e.preventDefault();
@@ -29,6 +30,7 @@ export const LoginForm = () => {
                 }}
             >
                 <h1 className={"header"}>Zaloguj się</h1>
+                <div className='input-div'>
                 <div>
                     <input type='text' value={email} onChange={setUsernameHandler} placeholder={"Podaj swój e-mail"} />
                 </div>
@@ -40,11 +42,14 @@ export const LoginForm = () => {
                         placeholder={"Podaj swoje hasło"}
                     />
                 </div>
+                </div>
+                <div class='button-div'>
                 <div>
                     <Button text={'Zaloguj się'} />
                 </div>
-                <div>Nie posiadasz konta? <Link to="/register">Zarejestruj się</Link></div>
+                <div className='bottom-text'>Nie posiadasz konta? <Link to="/register">Zarejestruj się</Link></div>
                 {error && <div style={{ color: 'red' }}>{error}</div>}
+                </div>
             </form>
         </div>
     );

@@ -1,14 +1,17 @@
 .button {
-  display: inline-block;
-  border-radius: 4px;
-  background-color: #f4511e;
+  display: flex;
+  border-radius: 39px;
+  background-color: #E2A300;
   border: none;
   color: #ffffff;
-  text-align: center;
   font-size: 28px;
   padding: 20px;
-  width: 200px;
+  width: 35%;
+  height: 35%;
   transition: all 0.5s;
   cursor: pointer;
   margin: 5px;
+  text-decoration: none;
+  justify-content: center;
+  align-items: center;
 }

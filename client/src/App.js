@@ -10,6 +10,7 @@ import { SignUpShelter } from './components/pages/SignUpShelter';
 
 function App() {
   return (
+    <div className='App'>
     <Router>
       <NavBar />
       <Routes>
@@ -20,6 +21,7 @@ function App() {
         <Route path='/sign-up-shelter' element={<SignUpShelter />} />
       </Routes>
     </Router>
+    </div>
   );
 }
 
