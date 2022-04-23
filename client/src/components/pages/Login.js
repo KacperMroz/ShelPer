@@ -6,12 +6,14 @@ import './Login.css';
 
 export const Login = () => {
   return (
-    <div className='base-container'>
+    <div className="login-page">
       <NavBar />
-      <div className='dog-container'>
-        <img src={Background} alt='background' />
+      <div className="login-page-content">
+        <div className="dog-container">
+          <img src={Background} alt="background" />
+        </div>
+        <LoginForm />
       </div>
-      <LoginForm />
     </div>
   );
 };
