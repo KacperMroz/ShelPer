@@ -1,6 +1,6 @@
 import React from 'react';
 import { LoginForm } from '../Login/LoginForm';
-import { NavBar } from '../NavBar/NavBar.js';
+import NavBar from '../NavBar';
 import Background from '../../img/background-login.png';
 import './Login.css';
 
