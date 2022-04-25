@@ -1,0 +1,24 @@
+.signup-page{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+}
+
+.sign-up-content{
+    display: flex;
+    height: 85%;
+}
+.dog-container {
+    background-color: #f7f9ff;
+    display: flex;
+    height: 100%;
+    align-items: flex-end;
+    justify-content: center;
+    flex: 1;
+  }
+  
+  .dog-container > img {
+    width: 90%;
+    height: 95%;
+  }

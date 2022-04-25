@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { Button } from '../UI/Button';
 import { NavLink as Link } from 'react-router-dom';
+import './SignUpForm.css';
+
+
 
 export const SignUpForm = ({ text, navigate }) => {
   const [email, setEmail] = useState('');
@@ -19,7 +22,7 @@ export const SignUpForm = ({ text, navigate }) => {
   };
 
   return (
-    <div>
+    <div className='base-sign-up-container'>
       <form
         onSubmit={e => {
           e.preventDefault();
@@ -32,6 +35,7 @@ export const SignUpForm = ({ text, navigate }) => {
         }}
       >
         <h1 className={'header'}>Zarejestruj się</h1>
+        <div className='input-div'>
         <div>
           <input
             type='text'
@@ -56,10 +60,11 @@ export const SignUpForm = ({ text, navigate }) => {
             placeholder={'Podaj swoje hasło'}
           />
         </div>
+        </div>
         <div>
           <Button text={text} navigate={navigate} />
         </div>
-        <div>
+        <div className='bottom-text'>
           Posiadasz konto? <Link to='/login'>Zaloguj się</Link>
         </div>
         {error && <div style={{ color: 'red' }}>{error}</div>}

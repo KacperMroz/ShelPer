@@ -8,8 +8,8 @@ library.add(faMagnifyingGlass);
 export const SearchButton = props => {
   return (
     <div className={classes.search}>
-      <FontAwesomeIcon icon='search' />
-      <div> {props.text} </div>
+      <FontAwesomeIcon icon='search' className='icon' />
+      <input className='find' placeholder={props.text}></input>
     </div>
   );
 };
