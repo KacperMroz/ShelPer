@@ -1,4 +1,4 @@
-export const getNavBarItems = (isLoggedIn) => {
+export const getNavBarItems = isLoggedIn => {
   if (isLoggedIn) {
     return [
       {
@@ -6,7 +6,7 @@ export const getNavBarItems = (isLoggedIn) => {
         title: 'Zaloguj się',
       },
       {
-        pathname: '/sign-up',
+        pathname: '/signup',
         title: 'Rejestracja',
       },
       {
@@ -25,7 +25,7 @@ export const getNavBarItems = (isLoggedIn) => {
       title: 'Zaloguj się',
     },
     {
-      pathname: '/sign-up',
+      pathname: '/signup',
       title: 'Rejestracja',
     },
   ];
