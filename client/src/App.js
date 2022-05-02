@@ -6,6 +6,8 @@ import { Login } from './components/pages/Login';
 import { SignUp } from './components/pages/SignUp';
 import { SignUpPersonal } from './components/pages/SignUpPersonal';
 import { SignUpShelter } from './components/pages/SignUpShelter';
+import Account from './components/pages/Account';
+import AccountSettings from './components/pages/AccountSettings';
 
 function App() {
   return (
@@ -17,6 +19,8 @@ function App() {
           <Route path='/signup' element={<SignUp />} />
           <Route path='/sign-up-personal' element={<SignUpPersonal />} />
           <Route path='/sign-up-shelter' element={<SignUpShelter />} />
+          <Route path='/account' element={<Account />} />
+          <Route path='/account-settings' element={<AccountSettings />} />
         </Routes>
       </Router>
     </div>
