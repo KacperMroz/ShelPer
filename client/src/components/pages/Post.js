@@ -4,6 +4,7 @@ import { faHeartCircleMinus, faHeartCirclePlus } from '@fortawesome/free-solid-s
 import {useParams} from "react-router-dom";
 import Description from "../Post/Description";
 import Info from "../Post/Info";
+import NavBar from "../NavBar";
 
 const Post = () => {
     const [heart, setHeart] = React.useState(faHeartCirclePlus);
@@ -38,6 +39,7 @@ const Post = () => {
 
     return (
         <div>
+            <NavBar />
             <Photo post={post}/>
             <Description post={post} heart={heart} handleClickOnHeart={handleClickOnHeart} />
             <Info />
