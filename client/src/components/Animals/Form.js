@@ -1,5 +1,4 @@
 import React from 'react';
-import {Button} from "../UI/Button";
 import FormType from "./FormType";
 import FormSex from "./FormSex";
 import FormLocation from "./FormLocation";
