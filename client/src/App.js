@@ -8,6 +8,8 @@ import { SignUpPersonal } from './components/pages/SignUpPersonal';
 import { SignUpShelter } from './components/pages/SignUpShelter';
 import Account from './components/pages/Account';
 import AccountSettings from './components/pages/AccountSettings';
+import Animals  from './components/pages/Animals';
+
 
 function App() {
   return (
@@ -21,6 +23,7 @@ function App() {
           <Route path='/sign-up-shelter' element={<SignUpShelter />} />
           <Route path='/account' element={<Account />} />
           <Route path='/account-settings' element={<AccountSettings />} />
+          <Route path='/animals' element={<Animals />} />
         </Routes>
       </Router>
     </div>
