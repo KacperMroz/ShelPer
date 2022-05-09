@@ -59,11 +59,11 @@ export const LoginForm = () => {
 
   return (
     <div className='base-login-container'>
-      <form onSubmit={submitHandler}>
+      <form className='log-sign-form' onSubmit={submitHandler}>
         <h1 className='header'>Zaloguj się</h1>
         <div className='input-div'>
           <div>
-            <input
+            <input className='log-sign-input'
               type='text'
               value={email}
               onChange={setUsernameHandler}
@@ -73,7 +73,7 @@ export const LoginForm = () => {
             {emailHasError && <p className='error-text'>Niepoprawny email</p>}
           </div>
           <div>
-            <input
+            <input className='log-sign-input'
               type='password'
               value={password}
               onChange={setPasswordHandler}

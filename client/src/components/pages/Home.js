@@ -2,7 +2,7 @@ import React from 'react';
 import { SearchButton } from '../UI/SearchButton';
 import { Button } from '../UI/Button';
 import NavBar from '../NavBar';
-import Background from '../../img/background-index.png';
+import dogImg from '../../img/background-index.png';
 import './Home.css';
 
 
@@ -22,8 +22,8 @@ export const Home = () => {
               <Button text='Zaloguj się' navigate='/login' />
             </div>
         </div>
-        <div className='dog-container'>
-          <img src={Background} alt='' />
+        <div className='home-dog-container'>
+          <img src={dogImg} alt='' />
         </div>
       </div>
    </div>

@@ -10,25 +10,29 @@ const AccountSettings = () => {
   };
 
   return (
-    <div>
+    <div className='acc-home-div'>
       <NavBar />
-      <h1>Ustawienia konta</h1>
+      <div className='acc-content-div'>
+      <h2 className='title'>Ustawienia konta</h2>
+      <div className='acc-input-div'>
       <div>
         <span>E-mail</span>
-        <input type='text' />
+        <input className='acc-input' type='text' />
       </div>
       <div>
         <span>Hasło</span>
-        <input type={passwordVisibility ? 'text' : 'password'} />
-        <button onClick={togglePasswordVisibility}>
+        <input className='acc-input' type={passwordVisibility ? 'text' : 'password'} />
+        {/* <button onClick={togglePasswordVisibility}>
           {passwordVisibility ? 'Ukryj' : 'Pokaż'}
-        </button>
+        </button> */}
       </div>
       <div>
         <span>Powtórz hasło</span>
-        <input type={passwordVisibility ? 'text' : 'password'} />
+        <input className='acc-input' type={passwordVisibility ? 'text' : 'password'} />
+      </div>
       </div>
       <Button text='Zatwierdź zmiany' />
+      </div>
     </div>
   );
 };

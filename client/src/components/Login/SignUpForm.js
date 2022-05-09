@@ -23,7 +23,7 @@ export const SignUpForm = ({ text, navigate }) => {
 
   return (
     <div className='base-sign-up-container'>
-      <form
+      <form className='log-sign-form'
         onSubmit={e => {
           e.preventDefault();
           if (email === 'admin' && password === 'admin') {
@@ -37,7 +37,7 @@ export const SignUpForm = ({ text, navigate }) => {
         <h1 className={'header'}>Zarejestruj się</h1>
         <div className='input-div'>
         <div>
-          <input
+          <input className='log-sign-input'
             type='text'
             value={email}
             onChange={setUsernameHandler}
@@ -45,7 +45,7 @@ export const SignUpForm = ({ text, navigate }) => {
           />
         </div>
         <div>
-          <input
+          <input className='log-sign-input'
             type='password'
             value={password}
             onChange={setPasswordHandler}
@@ -53,7 +53,7 @@ export const SignUpForm = ({ text, navigate }) => {
           />
         </div>
         <div>
-          <input
+          <input className='log-sign-input'
             type='password'
             value={confirmPassword}
             onChange={setConfirmPasswordHandler}

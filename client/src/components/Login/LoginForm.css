@@ -28,7 +28,7 @@ form > div {
   justify-content: center;
 }
 
-input {
+.log-sign-input {
   background-color: #ffffff;
   border: none;
   border-bottom: 1px solid #ffffff;
@@ -41,7 +41,7 @@ input {
   font-size: 20px;
 }
 
-input::placeholder {
+.log-sign-input::placeholder {
   color: #9a9a9a;
 }
 
