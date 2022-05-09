@@ -1,43 +1,27 @@
 import React, { useState } from 'react';
 import { Button } from '../UI/Button';
 import './LoginForm.css';
-import useInput from '../../hooks/use-input';
 import { NavLink as Link } from 'react-router-dom';
 
 export const LoginForm = () => {
   //login page
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [isSubmitted, setIsSubmitted] = useState(false);
   const [error, setError] = useState('');
 
-  const {
-    value: emailValue,
-    isValid: emailIsValid,
-    hasError: emailHasError,
-    valueChangedHandler: emailChangedHandler,
-    inputBlurHandler: emailBlurHandler,
-    reset: resetEmailInput,
-  } = useInput(value =>
-    /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)
-  );
+  const database = [
+    {
+      email: 'admin@shelper.com',
+      password: 'admin',
+    },
+    {
+      email: 'user1@shelper.com',
+      password: 'user1',
+    },
+  ];
 
-  let formIsValid = false;
-
-  // password validation
-  const {
-    value: passwordValue,
-    isValid: passwordIsValid,
-    hasError: passwordHasError,
-    valueChangedHandler: passwordChangedHandler,
-    inputBlurHandler: passwordBlurHandler,
-    reset: resetPasswordInput,
-  } = useInput(value => value.trim() !== '');
-
-  if (emailIsValid && passwordIsValid) {
-    formIsValid = true;
-  }
-
-  const setUsernameHandler = event => {
+  const setEmailHandler = event => {
     setEmail(event.target.value);
   };
   const setPasswordHandler = event => {
@@ -46,14 +30,18 @@ export const LoginForm = () => {
 
   const submitHandler = e => {
     e.preventDefault();
-    if (!formIsValid) {
-      return;
-    }
-    if (email === 'admin' && password === 'admin') {
-      setError('');
-      window.location.href = '/';
+
+    const user = database.find(user => user.email === email);
+    if (user) {
+      if (user.password === password) {
+        setIsSubmitted(true);
+        setError('');
+        console.log(user);
+      } else {
+        setError('Invalid password');
+      }
     } else {
-      setError('Invalid email or password');
+      setError('Invalid email');
     }
   };
 
@@ -63,31 +51,31 @@ export const LoginForm = () => {
         <h1 className='header'>Zaloguj się</h1>
         <div className='input-div'>
           <div>
-            <input className='log-sign-input'
+            <input
+              className='log-sign-input'
               type='text'
-              value={email}
-              onChange={setUsernameHandler}
-              onBlur={emailBlurHandler}
+              name='email'
               placeholder='Podaj swój e-mail'
+              value={email}
+              onChange={setEmailHandler}
             />
-            {emailHasError && <p className='error-text'>Niepoprawny email</p>}
           </div>
           <div>
-            <input className='log-sign-input'
+            <input
+              className='log-sign-input'
+              name='password'
               type='password'
+              placeholder='Podaj swoje hasło'
               value={password}
               onChange={setPasswordHandler}
-              onBlur={passwordBlurHandler}
-              placeholder='Podaj swoje hasło'
             />
-            {passwordHasError && (
-              <p className='error-text'>Niepoprawne hasło</p>
-            )}
           </div>
         </div>
         <div className='button-div'>
           <div>
-            <Button text='Zaloguj się' />
+            <button className='log-sign-button' type='submit'>
+              {'Zaloguj się'}
+            </button>
           </div>
           <div className='bottom-text'>
             Nie posiadasz konta? <Link to='/signup'>Zarejestruj się</Link>

@@ -13,25 +13,33 @@ const AccountSettings = () => {
     <div className='acc-home-div'>
       <NavBar />
       <div className='acc-content-div'>
-      <h2 className='title'>Ustawienia konta</h2>
-      <div className='acc-input-div'>
-      <div>
-        <span>E-mail</span>
-        <input className='acc-input' type='text' />
-      </div>
-      <div>
-        <span>Hasło</span>
-        <input className='acc-input' type={passwordVisibility ? 'text' : 'password'} />
-        {/* <button onClick={togglePasswordVisibility}>
-          {passwordVisibility ? 'Ukryj' : 'Pokaż'}
-        </button> */}
-      </div>
-      <div>
-        <span>Powtórz hasło</span>
-        <input className='acc-input' type={passwordVisibility ? 'text' : 'password'} />
-      </div>
-      </div>
-      <Button text='Zatwierdź zmiany' />
+        <h2 className='title'>Ustawienia konta</h2>
+        <div className='acc-input-div'>
+          <div>
+            <span>E-mail</span>
+            <input className='acc-input' type='text' />
+          </div>
+          <div>
+            <span>Hasło</span>
+            <input
+              className='acc-input'
+              type={passwordVisibility ? 'text' : 'password'}
+            />
+            {/* {
+              <button onClick={togglePasswordVisibility}>
+                {passwordVisibility ? 'Ukryj' : 'Pokaż'}
+              </button>
+            } */}
+          </div>
+          <div>
+            <span>Powtórz hasło</span>
+            <input
+              className='acc-input'
+              type={passwordVisibility ? 'text' : 'password'}
+            />
+          </div>
+        </div>
+        <Button text='Zatwierdź zmiany' />
       </div>
     </div>
   );
