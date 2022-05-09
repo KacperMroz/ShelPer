@@ -33,12 +33,14 @@ const Animals = () => {
     }
 
     return (
-        <div>
+        <div className='animals-base-container'>
             <NavBar />
+            <div className='animals-content-container'>
             <Filter />
             <div className={'container'}>
-                <Card key={Lola.id} animal={Lola}/>
+                <Card className='animal-card' key={Lola.id} animal={Lola}/>
                 <Card key={Edgar.id} animal={Edgar}/>
+            </div>
             </div>
         </div>
     );

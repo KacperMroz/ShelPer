@@ -1,0 +1,55 @@
+.animals-base-container{
+    height: 100%;
+}
+
+.animals-content-container{
+    height: 85%;
+}
+
+.container{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 2em;
+    padding: 2em;
+    overflow: auto;
+    height: 100%;
+}
+
+.container > div > img{
+    width: 100%;
+    grid-row: 1;
+    grid-column: 1/3;
+    height: 100%;
+}
+
+.container > div > .info{
+    grid-column: 1/3;
+    grid-row: 2/4;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    flex-direction: column;
+}
+
+.container > div > .description{
+    grid-row: 4;
+    grid-column: 1/3;
+    margin: 25px;
+}
+
+.container > div > .date{
+    grid-row: 5;
+    grid-column: 2;
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 10px;
+}
+
+.container > div{
+    border: 1px solid;
+    border-radius: 10px;
+    display: grid;
+    grid-template-rows: 60% 10% 10% 15% 5%;
+    grid-template-columns: 50% 50%;
+    height: 60%;
+}
