@@ -11,6 +11,7 @@
     text-decoration: none;
     align-items: center;
     justify-content: space-between;
+    background-color: white;
 }
 .text{
     flex: 1 1;

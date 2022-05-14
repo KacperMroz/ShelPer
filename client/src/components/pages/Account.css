@@ -1,0 +1,41 @@
+.acc-home-div{
+    background-color: #EBEFF5;
+    width: 100vw;
+    height: 100vh;
+}
+
+.acc-content-div{
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.title{
+    font-size: 4em;
+}
+
+.acc-input-div{
+    width: 40%;
+}
+
+.acc-input-div > div{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.acc-input{
+    background-color: #ffffff;
+    border: none;
+    border-bottom: 1px solid #ffffff;
+    color: #9a9a9a;
+    padding: 1em;
+    margin: 4%;
+    width: 35%;
+    height: 30%;
+    border-radius: 50px;
+    font-size: 20px;
+}
