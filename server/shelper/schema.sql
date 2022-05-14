@@ -70,7 +70,7 @@ CREATE TABLE animal(
     weight INTEGER NOT NULL,
     description TEXT NOT NULL,
     healthy INTEGER NOT NULL,
-    sex BOOLEAN NOT NULL,
+    male BOOLEAN NOT NULL,
     color TEXT NOT NULL,
     advert_date datetime default current_timestamp NOT NULL,
     breed_id INTEGER NOT NULL,
