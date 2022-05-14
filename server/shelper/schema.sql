@@ -70,13 +70,15 @@ CREATE TABLE animal(
     weight INTEGER NOT NULL,
     description TEXT NOT NULL,
     healthy INTEGER NOT NULL,
-    sex BOOLEAN NOT NULL,
+    male BOOLEAN NOT NULL,
     color TEXT NOT NULL,
     advert_date datetime default current_timestamp NOT NULL,
     breed_id INTEGER NOT NULL,
     size_id INTEGER NOT NULL,
+    shelter_id INTEGER NOT NULL,
     animal_type_id INTEGER NOT NULL,
     FOREIGN KEY (breed_id) REFERENCES breed(breed_id),
+    FOREIGN KEY (shelter_id) REFERENCES shelter(shelter_id),
     FOREIGN KEY (animal_type_id) REFERENCES animal_type(animal_type_id),
     FOREIGN KEY (size_id) REFERENCES size(size_id)
 );
