@@ -45,6 +45,11 @@ form > div {
   color: #9a9a9a;
 }
 
+/* error input */
+.has-error {
+  border: 1px solid #ff0000;
+}
+
 .input-div {
   display: flex;
   flex-direction: column;
