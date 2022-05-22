@@ -1,8 +1,8 @@
 import React from 'react';
-import FormType from "./FormType";
-import FormSex from "./FormSex";
-import FormLocation from "./FormLocation";
-import FormColor from "./FormColor";
+import Type from "../AnimalSpec/Type";
+import Sex from "../AnimalSpec/Sex";
+import Location from "../AnimalSpec/Location";
+import Color from "../AnimalSpec/Color";
 
 const Form = () => {
     const [type, setType] = React.useState([]);
@@ -45,10 +45,10 @@ const Form = () => {
 
     return (
         <form>
-            <FormType handleTypeChange={handleTypeChange}/>
-            <FormSex handleSexChange={handleSexChange} />
-            <FormLocation handleLocalizationChange={handleLocalizationChange} />
-            <FormColor handleColorChange={handleColorChange}/>
+            <Type handleTypeChange={handleTypeChange} type="checkbox" />
+            <Sex handleSexChange={handleSexChange} type="checkbox" />
+            <Location handleLocalizationChange={handleLocalizationChange} type="checkbox" />
+            <Color handleColorChange={handleColorChange} type="checkbox" />
             <button type="submit" onClick={handleSubmit}>Wyszukaj</button>
         </form>
     );

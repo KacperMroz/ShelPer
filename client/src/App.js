@@ -10,6 +10,7 @@ import Account from './components/pages/Account';
 import AccountSettings from './components/pages/AccountSettings';
 import Animals  from './components/pages/Animals';
 import Post from './components/pages/Post';
+import AddPost from "./components/pages/AddPost";
 
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
           <Route path='/account-settings' element={<AccountSettings />} />
           <Route path='/animals' element={<Animals />} />
           <Route path='/animals/:id' element={<Post />} />
+          <Route path='/add-post' element={<AddPost />} />
         </Routes>
       </Router>
     </div>
