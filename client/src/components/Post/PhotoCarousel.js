@@ -2,6 +2,13 @@ import React from 'react';
 import { Carousel } from 'react-carousel-minimal';
 
 const PhotoCarousel = (props) => {
+    // TODO: CSS FOR THUMBNAILS
+    //.thumbnail {
+    //     margin: 0 5px;
+    //     height: 100px;
+    //     width: 100px;
+    //     object-fit: cover;
+    //     border-radius: 5px;
 
     return (
         <>
@@ -21,8 +28,8 @@ const PhotoCarousel = (props) => {
                         dots={true}
                         pauseIconColor="white"
                         pauseIconSize="40px"
-                        slideBackgroundColor="darkgrey"
-                        slideImageFit="cover"
+                        slideBackgroundColor="#EEEEEE"
+                        slideImageFit="contain"
                         thumbnails={true}
                         thumbnailWidth="100px"
                         style={{
