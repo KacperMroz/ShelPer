@@ -1,10 +1,10 @@
 import React from 'react';
-import Photo from "../Post/Photo";
 import { faHeartCircleMinus, faHeartCirclePlus } from '@fortawesome/free-solid-svg-icons';
 import {useParams} from "react-router-dom";
 import Description from "../Post/Description";
 import Info from "../Post/Info";
 import NavBar from "../NavBar";
+import PhotoCarousel from "../Post/PhotoCarousel";
 
 const Post = () => {
     const [heart, setHeart] = React.useState(faHeartCirclePlus);
@@ -19,7 +19,7 @@ const Post = () => {
     const post = {
         id: 1,
         name: "Lola",
-        image: "https://images.unsplash.com/photo-1583337130417-3346a1be7dee?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80",
+        image: [{image: "https://images.unsplash.com/photo-1583337130417-3346a1be7dee?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80"}],
         description: "Poznaj Lolę lepiej. Lorem ipsum dolor sit amet, consectetur adipiscing elit lorem....",
         gender: "female",
         city: "Kraków",
@@ -40,7 +40,7 @@ const Post = () => {
     return (
         <div>
             <NavBar />
-            <Photo post={post}/>
+            <PhotoCarousel post={post.image}/>
             <Description post={post} heart={heart} handleClickOnHeart={handleClickOnHeart} />
             <Info />
         </div>
