@@ -3,7 +3,7 @@ import React from 'react';
 const Type = (props) => {
     const types = [
         { name: 'dog', emoji: '🐶', label: 'Pies' },
-        { name: 'car', emoji: '🐱', label: 'Kot' },
+        { name: 'cat', emoji: '🐱', label: 'Kot' },
         { name: 'other', emoji: '🐹', label: 'Inne' },
         { name: 'all', emoji: '', label: 'Wszystkie' },
     ]
