@@ -12,7 +12,7 @@ export const Home = () => {
       <NavBar />
       <div className='home-page-content'>            
         <div className='text-container'>
-          <SearchButton text='Znajdź ogłoszenie' />
+          <SearchButton text=' Znajdź ogłoszenie' />
             <div className='text-button'>
               <h1>Pomagajmy razem</h1>
                 <p>
