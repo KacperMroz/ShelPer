@@ -1,0 +1,134 @@
+body{
+    background: linear-gradient(180deg, rgba(229, 232, 237, 0.8) 0%, rgba(200, 207, 217, 0.8) 100%); 
+       position:relative;
+       overflow:hidden;
+   }
+
+.post-base-container{
+    height: 100%;
+    width: auto;
+}
+
+.post-info-container{
+    height: 85%;
+    display:grid;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: 20% 30% 20% 20%;
+    grid-gap: 2em;
+    padding: 2em;
+    overflow: auto;
+}
+#post-name-icon{
+    margin-top:1em;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: baseline;
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 4em;
+    color: #E2A300;
+}
+.post-description-container{
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+}
+#icon-heart{
+    color:#7c7c7c;
+    font-size:0.5em;
+    font-weight: 400;
+}
+#post-name{
+    border-bottom: 3px solid #7c7c7c;
+    margin-bottom: 0.2em;
+}
+
+.post-descritpion{
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 1em;
+    color: #909090;
+    margin-top:2em;
+    margin-bottom:2em;
+    word-wrap: break-word;
+    max-height: 200px;
+}
+
+.post-information{
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    grid-template-rows: repeat(3,1fr);
+}
+
+#post-city, #post-size, #post-bread{
+    background: #edeef0;
+    border:none;
+    border-radius: 25px;
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 1em;
+    color: #484848;
+    padding: 0.5em 1em;
+    width:70%;
+    text-align: center;
+    margin-bottom:1em;
+    margin-top: 2em;
+    filter: drop-shadow(0px 4px 30px rgba(70, 120, 197, 0.15));
+}
+
+#post-age, #post-health, #post-gender{
+    background: white;
+    border:none;
+    border-radius: 25px;
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 1em;
+    color: #484848;
+    padding: 0.5em 1em;
+    width:70%;
+    text-align: center;
+    object-fit:cover;
+    margin-bottom:1em;
+    margin-top: 2em;
+}
+.post-date{
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 0.7em;
+    color: #919191;
+}
+
+.thumbnail {
+     margin: 0 5px;
+     height: 100px;
+     width: 100px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+.post-carousel{
+    grid-row: 1/5;
+    grid-column: 1/2;
+}
+
+.post-last-info{
+    grid-row: 4/5;
+    grid-column: 2/3;
+    display:grid;
+    grid-template-columns: 20% 20% 20% 40%;
+    justify-content: center;
+    justify-items:center;
+}
+#calendar{
+    background: #4678C5;
+    border-radius: 52px;
+    color:white;
+    padding:0.5em 1em;
+    text-align: center;
+    margin-bottom: auto;
+}
