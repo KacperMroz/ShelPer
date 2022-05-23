@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button } from '../UI/Button';
 import './Login.css';
+import './SignUp.css'
 import NavBar from '../NavBar';
 import Background from '../../img/background-login.png';
 

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Button } from '../UI/Button';
 import { NavLink as Link } from 'react-router-dom';
 
+
 export const SignUpFormShelter = ({ text, navigate }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
