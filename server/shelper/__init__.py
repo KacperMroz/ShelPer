@@ -1,11 +1,13 @@
 import os
 
 from flask import Flask
+from flask_cors import CORS
 
 
 def create_app(test_config=None):
     # create and configure the app
     app = Flask(__name__, instance_relative_config=True)
+    CORS(app)
     app.config.from_mapping(
         SECRET_KEY='dev',
         DATABASE=os.path.join(app.instance_path, 'shelper.sqlite'),
@@ -40,5 +42,8 @@ def create_app(test_config=None):
 
     from . import visit
     app.register_blueprint(visit.bp)
+
+    from . import favourite
+    app.register_blueprint(favourite.bp)
 
     return app

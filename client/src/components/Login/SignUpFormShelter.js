@@ -1,12 +1,7 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { Button } from '../UI/Button';
 import { NavLink as Link } from 'react-router-dom';
 import './SignUpForm.css';
-
-const scrollToBottom = () => window.scrollTo({
-  top: document.documentElement.scrollHeight,
-  behavior: "smooth"
-})
 
 
 export const SignUpFormShelter = ({ text, navigate }) => {
@@ -49,9 +44,16 @@ export const SignUpFormShelter = ({ text, navigate }) => {
     setWebiste(event.target.value);
   };
 
+  const additionalInfoSection = useRef(null);
+
+  const goToAdditionalInfoSection = () => window.scrollTo({
+  top: additionalInfoSection.current.offsetTop,
+  behavior: "smooth"
+  })
+
   return (
-    <div className='base-sign-up-container'>
-      <form
+    <div className='sign-form-shelter-container'>
+      <form className='shelter-form'
         onSubmit={e => {
           e.preventDefault();
           if (email === 'admin' && password === 'admin') {
@@ -62,95 +64,91 @@ export const SignUpFormShelter = ({ text, navigate }) => {
           }
         }}
       >
-        <h1 className='header'>Zarejestruj się</h1>
-        <div>
+        <div className='basic-shelter-form'>
+        <h1 className='shelter-header'>Zarejestruj się</h1>
+        <div className='shelter-input-div'>
           <input
-            className='log-sign-input'
+            className='shelter-sign-input'
             type='text'
             value={email}
             onChange={setUsernameHandler}
             placeholder={'Podaj swój e-mail'}
           />
-        </div>
-        <div>
           <input
-            className='log-sign-input'
+            className='shelter-sign-input'
             type='password'
             value={password}
             onChange={setPasswordHandler}
             placeholder={'Podaj swoje hasło'}
           />
-        </div>
-        <div>
           <input
-            className='log-sign-input'
+            className='shelter-sign-input'
             type='password'
             value={confirmPassword}
             onChange={setConfirmPasswordHandler}
             placeholder={'Podaj swoje hasło'}
           />
-        </div>
-        <div>
           {/* Zmieniłem to delikatnie, żeby móc automatycznie scrollowac do dołu, ale nie wiem czy nie zepsuje to logiki */}
           {/* <Button text={text} navigate={navigate}/> */}
-          <button className='go-bottom-button' onClick={scrollToBottom}>
+          <button className='go-bottom-button' onClick={goToAdditionalInfoSection}>
             {text}
           </button>
         </div>
         <div>
           Posiadasz konto? <Link to='/login'>Zaloguj się</Link>
         </div>
+        </div>
 
-        <div className='additional-info-div'>
-        <h2 className={'header'}>Potrzebujemy jeszcze kilku informacji</h2>
-        <div>
+        <div className='additional-shelter-form'>
+        <h2 className='shelter-header' ref={additionalInfoSection}>Potrzebujemy jeszcze kilku informacji</h2>
+        <div className='shelter-input-div'>
           <input
-            className='log-sign-input'
+            className='shelter-sign-input'
             type='text'
             value={streetName}
             onChange={setStreetNameHandler}
             placeholder={'Podaj ulicę schroniska'}
           />
         </div>
-        <div>
+        <div className='shelter-input-div'>
           <input
-            className='log-sign-input'
+            className='shelter-sign-input'
             type='text'
             value={number}
             onChange={setNumberHandler}
             placeholder={'Podaj numer budynku'}
           />
         </div>
-        <div>
+        <div className='shelter-input-div'>
           <input
-            className='log-sign-input'
+            className='shelter-sign-input'
             type='text'
             value={city}
             onChange={setCityHandler}
             placeholder={'Podaj miejscowość'}
           />
         </div>
-        <div>
+        <div className='shelter-input-div'>
           <input
-            className='log-sign-input'
+            className='shelter-sign-input'
             type='text'
             value={postalCode}
             onChange={setPostalCodeHandler}
             placeholder={'Podaj kod pocztowy'}
           />
         </div>
-        <div>
+        <div className='shelter-input-div'>
           <input
-            className='log-sign-input'
+            className='shelter-sign-input'
             type='text'
             value={phoneNumber}
             onChange={setPhoneNumberHandler}
             placeholder={'Podaj numer telefonu'}
           />
         </div>
-        <div>
+        <div className='shelter-input-div'>
           <input
-            className='log-sign-input'
+            className='shelter-sign-input'
             type='text'
             value={website}
             onChange={setWebsiteHandler}
