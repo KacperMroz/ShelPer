@@ -5,6 +5,7 @@ import Description from "../Post/Description";
 import Info from "../Post/Info";
 import NavBar from "../NavBar";
 import PhotoCarousel from "../Post/PhotoCarousel";
+import "./Post.css";
 
 const Post = () => {
     const [heart, setHeart] = React.useState(faHeartCirclePlus);
@@ -43,11 +44,13 @@ const Post = () => {
     }
 
     return (
-        <div>
+        <div className='post-base-container'>
             <NavBar />
-            <PhotoCarousel post={post.image}/>
-            <Description post={post} heart={heart} handleClickOnHeart={handleClickOnHeart} />
-            <Info />
+            <div className='post-info-container'>
+                <PhotoCarousel post={post.image}/>
+                <Description post={post} heart={heart} handleClickOnHeart={handleClickOnHeart} />
+                <Info />
+            </div>
         </div>
     );
 };

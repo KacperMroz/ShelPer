@@ -1,5 +1,6 @@
 import React from 'react';
 import { Carousel } from 'react-carousel-minimal';
+import "../pages/Post.css";
 
 const PhotoCarousel = (props) => {
     // TODO: CSS FOR THUMBNAILS
@@ -12,7 +13,7 @@ const PhotoCarousel = (props) => {
 
     return (
         <>
-            <div style={{ textAlign: "center" }}>
+            <div className='post-carousel' style={{ textAlign: "center" }}>
                 <div style={{
                     padding: "0 20px"
                 }}>

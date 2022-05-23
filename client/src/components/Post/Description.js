@@ -1,20 +1,22 @@
 import React from 'react';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import "../pages/Post.css";
 
 const Description = (props) => {
     return (
-        <div className={""}>
-            <div>{props.post.name}</div>
-            <FontAwesomeIcon icon={props.heart} onClick={props.handleClickOnHeart}/>
-            <div>{props.post.description}</div>
-            <div>{props.post.date}</div>
-            <div>
-                <div>{props.post.city}</div>
-                <div>Rozmiar: {props.post.size}</div>
-                <div>{props.post.breed}</div>
-                <div>Wiek: {props.post.age}</div>
-                <div>Zdrowie: {props.post.health}</div>
-                <div>{props.post.gender}</div>
+        <div className={"post-description-container"}>
+            <div id='post-name-icon'><div id='post-name'>{props.post.name}</div>
+            <FontAwesomeIcon id='icon-heart' icon={props.heart} onClick={props.handleClickOnHeart}/>
+            </div>
+            <div className='post-descritpion'>{props.post.description}</div>
+            <div className='post-date'>{props.post.date}</div>
+            <div className='post-information'>
+                <div id='post-city'>{props.post.city}</div>
+                <div id='post-size'>Rozmiar: {props.post.size}</div>
+                <div id='post-bread'>{props.post.breed}</div>
+                <div id='post-age'>Wiek: {props.post.age}</div>
+                <div id='post-health'>Zdrowie: {props.post.health}</div>
+                <div id='post-gender'>{props.post.gender}</div>
             </div>
         </div>
     );
