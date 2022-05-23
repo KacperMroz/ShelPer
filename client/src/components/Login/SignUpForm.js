@@ -62,14 +62,36 @@ export const SignUpForm = () => {
     return true;
   };
 
+  // send data to server
+  const sendUserData = async () => {
+    if (validateForm()) {
+      const response = await fetch(
+        'http://127.0.0.1:5000/api/auth/register/client',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(user),
+        }
+      );
+      const data = await response.json();
+      if (data.error) {
+        setError(data.error);
+      } else {
+        navigate('/animals');
+      }
+    }
+  };
+
   const submitHandler = e => {
     e.preventDefault();
     if (validateForm()) {
       console.log(user);
-      // TODO: send user to server
-
+      //Send user data to server
+      sendUserData();
       // Redirect to animals page
-      navigate('/animals');
+      // navigate('/animals');
     }
   };
 
