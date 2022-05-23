@@ -13,7 +13,13 @@ export const SignUpForm = () => {
   const user = {
     email,
     password,
-    confirmPassword,
+    name: 'Michael',
+    surname: 'Scott',
+    phone_number: '123456789',
+    town_id: 7,
+    building_number: '48A',
+    street_name: 'koscielna',
+    zip_code: '12-340',
   };
 
   const emailHandler = event => {
@@ -65,16 +71,13 @@ export const SignUpForm = () => {
   // send data to server
   const sendUserData = async () => {
     if (validateForm()) {
-      const response = await fetch(
-        'http://127.0.0.1:5000/api/auth/register/client',
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(user),
-        }
-      );
+      const response = await fetch('/api/auth/register/client', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(user),
+      });
       const data = await response.json();
       if (data.error) {
         setError(data.error);
