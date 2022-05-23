@@ -41,4 +41,7 @@ def create_app(test_config=None):
     from . import visit
     app.register_blueprint(visit.bp)
 
+    from . import favourite
+    app.register_blueprint(favourite.bp)
+
     return app
