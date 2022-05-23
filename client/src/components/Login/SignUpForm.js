@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { Button } from '../UI/Button';
-import { NavLink as Link } from 'react-router-dom';
+import { Navigate, NavLink as Link, useNavigate } from 'react-router-dom';
 import './SignUpForm.css';
 
 export const SignUpForm = () => {
+  const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -65,6 +66,10 @@ export const SignUpForm = () => {
     e.preventDefault();
     if (validateForm()) {
       console.log(user);
+      // TODO: send user to server
+
+      // Redirect to animals page
+      navigate('/animals');
     }
   };
 
