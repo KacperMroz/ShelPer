@@ -7,7 +7,7 @@ from datetime import date
 
 from shelper.db import get_db
 
-from server.shelper.auth import login_required
+from shelper.auth import login_required
 
 bp = Blueprint('animal', __name__)
 
