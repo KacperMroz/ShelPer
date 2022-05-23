@@ -38,4 +38,7 @@ def create_app(test_config=None):
     from . import animal
     app.register_blueprint(animal.bp)
 
+    from . import visit
+    app.register_blueprint(visit.bp)
+
     return app
