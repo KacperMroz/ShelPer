@@ -36,13 +36,13 @@
     width: 70%;
     height: 70%;
   }
-  input[type="text"]
+  /* input[type="text"]
   {
       background: transparent;
       border: none;
       outline: none;
       width:100%;
-  }
+  } */
 
   input{
     width: 100%;
@@ -51,6 +51,24 @@
     border: none;
     outline: none;
   }
+
+  .log-sign-button{
+    display: flex;
+    border-radius: 36px;
+    background-color: #E2A300;
+    border: none;
+    color: #ffffff;
+    font-size: 28px;
+    padding: 25px;
+    width: 45%;
+    transition: all 0.5s;
+    cursor: pointer;
+    margin: 42px;
+    text-decoration: none;
+    justify-content: center;
+    align-items: center;
+  }
+  
 
   /* background-color: #ffffff;
   border: none;

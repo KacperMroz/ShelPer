@@ -1,6 +1,12 @@
 import React, { useState } from 'react';
 import { Button } from '../UI/Button';
 import { NavLink as Link } from 'react-router-dom';
+import './SignUpForm.css';
+
+const scrollToBottom = () => window.scrollTo({
+  top: document.documentElement.scrollHeight,
+  behavior: "smooth"
+})
 
 
 export const SignUpFormShelter = ({ text, navigate }) => {
@@ -44,7 +50,7 @@ export const SignUpFormShelter = ({ text, navigate }) => {
   };
 
   return (
-    <div>
+    <div className='base-sign-up-container'>
       <form
         onSubmit={e => {
           e.preventDefault();
@@ -59,6 +65,7 @@ export const SignUpFormShelter = ({ text, navigate }) => {
         <h1 className='header'>Zarejestruj się</h1>
         <div>
           <input
+            className='log-sign-input'
             type='text'
             value={email}
             onChange={setUsernameHandler}
@@ -67,6 +74,7 @@ export const SignUpFormShelter = ({ text, navigate }) => {
         </div>
         <div>
           <input
+            className='log-sign-input'
             type='password'
             value={password}
             onChange={setPasswordHandler}
@@ -75,6 +83,7 @@ export const SignUpFormShelter = ({ text, navigate }) => {
         </div>
         <div>
           <input
+            className='log-sign-input'
             type='password'
             value={confirmPassword}
             onChange={setConfirmPasswordHandler}
@@ -82,15 +91,21 @@ export const SignUpFormShelter = ({ text, navigate }) => {
           />
         </div>
         <div>
-          <Button text={text} navigate={navigate} />
+          {/* Zmieniłem to delikatnie, żeby móc automatycznie scrollowac do dołu, ale nie wiem czy nie zepsuje to logiki */}
+          {/* <Button text={text} navigate={navigate}/> */}
+          <button className='go-bottom-button' onClick={scrollToBottom}>
+            {text}
+          </button>
         </div>
         <div>
           Posiadasz konto? <Link to='/login'>Zaloguj się</Link>
         </div>
 
+        <div className='additional-info-div'>
         <h2 className={'header'}>Potrzebujemy jeszcze kilku informacji</h2>
         <div>
           <input
+            className='log-sign-input'
             type='text'
             value={streetName}
             onChange={setStreetNameHandler}
@@ -99,6 +114,7 @@ export const SignUpFormShelter = ({ text, navigate }) => {
         </div>
         <div>
           <input
+            className='log-sign-input'
             type='text'
             value={number}
             onChange={setNumberHandler}
@@ -107,6 +123,7 @@ export const SignUpFormShelter = ({ text, navigate }) => {
         </div>
         <div>
           <input
+            className='log-sign-input'
             type='text'
             value={city}
             onChange={setCityHandler}
@@ -115,6 +132,7 @@ export const SignUpFormShelter = ({ text, navigate }) => {
         </div>
         <div>
           <input
+            className='log-sign-input'
             type='text'
             value={postalCode}
             onChange={setPostalCodeHandler}
@@ -123,6 +141,7 @@ export const SignUpFormShelter = ({ text, navigate }) => {
         </div>
         <div>
           <input
+            className='log-sign-input'
             type='text'
             value={phoneNumber}
             onChange={setPhoneNumberHandler}
@@ -131,6 +150,7 @@ export const SignUpFormShelter = ({ text, navigate }) => {
         </div>
         <div>
           <input
+            className='log-sign-input'
             type='text'
             value={website}
             onChange={setWebsiteHandler}
@@ -139,6 +159,7 @@ export const SignUpFormShelter = ({ text, navigate }) => {
         </div>
         <Button text={'Zarejestruj się'} navigate={navigate} />
         {error && <div style={{ color: 'red' }}>{error}</div>}
+        </div>
       </form>
     </div>
   );
