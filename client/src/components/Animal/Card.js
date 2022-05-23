@@ -1,5 +1,4 @@
 import React from 'react';
-import Form from "../Animals/Form";
 import "./Card.css";
 
 const Card = (props) => {
@@ -12,13 +11,13 @@ const Card = (props) => {
                 <p>{props.animal.city}</p>
                 <p>Rozmiar: {props.animal.size}</p>
                 <p>Wiek: {props.animal.age}</p>
-                <p>Zdrowie: {props.animal.health}</p>
+                <p>Zdrowie: {props.animal.healthy}</p>
             </div>
             <div className={"description"}>
                 {props.animal.description}
             </div>
             <div className={"date"}>
-                {props.animal.date}
+                {props.animal.advert_date}
             </div>
         </div>
     );

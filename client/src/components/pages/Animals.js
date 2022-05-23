@@ -3,6 +3,7 @@ import NavBar from "../NavBar";
 import Card from "../Animal/Card";
 import Filter from "../Animals/Filter";
 import "./Animals.css";
+import FetchAnimals from "../Animals/FetchAnimals";
 
 const Animals = () => {
     // TODO: replace with fetching data from server (when endpoint is ready)
@@ -15,8 +16,8 @@ const Animals = () => {
             city: "Kraków",
             size: "Mała",
             age: "3",
-            health: "Zdrowa",
-            date: "19.10.2021 19:20"
+            healthy: "Zdrowa",
+            advert_date: "19.10.2021 19:20"
         }
 
     const Edgar = {
@@ -28,19 +29,21 @@ const Animals = () => {
         city: "Kraków",
         size: "Mały",
         age: "3",
-        health: "Zdrowy",
-        date: "19.10.2021 19:20"
+        healthy: "Zdrowy",
+        advert_date: "19.10.2021 19:20"
     }
 
     return (
         <div className='animals-base-container'>
             <NavBar />
             <div className='animals-content-container'>
-            <Filter />
-            <div className={'container'}>
+                <Filter />
+                <div className={'container'}>
                 <Card className='animal-card' key={Lola.id} animal={Lola}/>
                 <Card key={Edgar.id} animal={Edgar}/>
-            </div>
+                    <FetchAnimals />
+
+                </div>
             </div>
         </div>
     );
