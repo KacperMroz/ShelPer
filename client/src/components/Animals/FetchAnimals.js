@@ -1,5 +1,5 @@
 import Card from "../Animal/Card";
-import useFetchGet from "../Hooks/useFetchGet";
+import useFetchGet from "../../hooks/useFetchGet";
 
 const FetchAnimals = () => {
     const { data, hasError, loading } = useFetchGet('http://localhost:5000/animals')

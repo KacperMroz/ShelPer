@@ -16,6 +16,8 @@ const Form = () => {
     const [description, setDescription] = React.useState('');
     const [photo, setPhoto] = React.useState([]);
     const [healthy, setHealthy] = React.useState(true);
+    const formData = new FormData();
+
 
     const handleInputChange = (e, set) => {
         set(e.target.value);
@@ -27,7 +29,6 @@ const Form = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const formData = new FormData();
         formData.append('name', name);
         formData.append('age', age);
         formData.append('weight', weight);
@@ -39,32 +40,10 @@ const Form = () => {
         formData.append('size_id', 1);
         formData.append('animal_type_id', 1);
         console.log('Form submitted' + formData.forEach(e => console.log(e)));
-        addAnimal(formData);
     }
 
-    const addAnimal = async (formData) => {
-        document.cookie = "user_id=1; expires=Thu, 18 Dec 2023 12:00:00 UTC; path=/";
-        console.log("cookie: " + document.cookie);
-        const response = await fetch(
-            'http://127.0.0.1:5000/animal',
-            {
-                method: 'POST',
-                credentials: 'include',
-                headers: {
-                    'Accept': 'application/json',
-                    'Access-Control-Allow-Origin':'http://127.0.0.1:5000/',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(formData)
-            }
-        );
-        const data = await response.json();
-        if (data.error) {
-            console.log(data.error);
-        } else {
-            console.log("idk");
-        }
-    }
+
+
 
     return (
         <form>
