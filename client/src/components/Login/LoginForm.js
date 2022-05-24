@@ -28,8 +28,9 @@ export const LoginForm = () => {
         setError(data.message);
       }
       if (document.cookie) {
-        localStorage.setItem('token', document.cookie);
-        console.log(document.cookie);
+        const token = document.cookie.split('=')[1];
+        localStorage.setItem('token', token);
+        console.log(token);
         navigate('/animals');
       }
     } catch (error) {
