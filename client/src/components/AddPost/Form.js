@@ -17,13 +17,11 @@ const Form = () => {
     const [photo, setPhoto] = React.useState([]);
     const [healthy, setHealthy] = React.useState(true);
 
-
     const handleInputChange = (e, set) => {
         set(e.target.value);
     }
 
     const handleFileInput = (e) => {
-        console.log(e.target.files);
         setPhoto([...photo, ...e.target.files]);
     };
 
@@ -40,20 +38,24 @@ const Form = () => {
         formData.append('breed_id', 1);
         formData.append('size_id', 1);
         formData.append('animal_type_id', 1);
-
         console.log('Form submitted' + formData.forEach(e => console.log(e)));
-        addAnimal(formData).then(r => console.log(r));
+        addAnimal(formData);
     }
 
     const addAnimal = async (formData) => {
+        document.cookie = "user_id=1; expires=Thu, 18 Dec 2023 12:00:00 UTC; path=/";
+        console.log("cookie: " + document.cookie);
         const response = await fetch(
             'http://127.0.0.1:5000/animal',
             {
                 method: 'POST',
+                credentials: 'include',
                 headers: {
-                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                    'Access-Control-Allow-Origin':'http://127.0.0.1:5000/',
+                    'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(formData),
+                body: JSON.stringify(formData)
             }
         );
         const data = await response.json();
@@ -62,7 +64,7 @@ const Form = () => {
         } else {
             console.log("idk");
         }
-    };
+    }
 
     return (
         <form>
