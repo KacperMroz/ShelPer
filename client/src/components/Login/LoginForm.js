@@ -1,25 +1,41 @@
 import React, { useState } from 'react';
-import { Button } from '../UI/Button';
 import './LoginForm.css';
-import { NavLink as Link } from 'react-router-dom';
+import { NavLink as Link, useNavigate } from 'react-router-dom';
 
 export const LoginForm = () => {
   //login page
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [isSubmitted, setIsSubmitted] = useState(false);
   const [error, setError] = useState('');
+  const navigate = useNavigate();
 
-  const database = [
-    {
-      email: 'admin@shelper.com',
-      password: 'admin',
-    },
-    {
-      email: 'user1@shelper.com',
-      password: 'user1',
-    },
-  ];
+  const user = {
+    email,
+    password,
+  };
+
+  const loginUser = async () => {
+    try {
+      const response = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(user),
+      });
+      const data = await response.json();
+      if (data.message) {
+        setError(data.message);
+      }
+      if (document.cookie) {
+        localStorage.setItem('token', document.cookie);
+        console.log(document.cookie);
+        navigate('/animals');
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const setEmailHandler = event => {
     setEmail(event.target.value);
@@ -30,19 +46,7 @@ export const LoginForm = () => {
 
   const submitHandler = e => {
     e.preventDefault();
-
-    const user = database.find(user => user.email === email);
-    if (user) {
-      if (user.password === password) {
-        setIsSubmitted(true);
-        setError('');
-        console.log(user);
-      } else {
-        setError('Invalid password');
-      }
-    } else {
-      setError('Invalid email');
-    }
+    loginUser();
   };
 
   return (

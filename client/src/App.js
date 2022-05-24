@@ -8,10 +8,9 @@ import { SignUpPersonal } from './components/pages/SignUpPersonal';
 import { SignUpShelter } from './components/pages/SignUpShelter';
 import Account from './components/pages/Account';
 import AccountSettings from './components/pages/AccountSettings';
-import Animals  from './components/pages/Animals';
+import Animals from './components/pages/Animals';
 import Post from './components/pages/Post';
-import AddPost from "./components/pages/AddPost";
-
+import AddPost from './components/pages/AddPost';
 
 function App() {
   return (

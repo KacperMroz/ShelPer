@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { Button } from '../UI/Button';
-import { Navigate, NavLink as Link, useNavigate } from 'react-router-dom';
+import { NavLink as Link, useNavigate } from 'react-router-dom';
 import './SignUpForm.css';
 
 export const SignUpForm = () => {
