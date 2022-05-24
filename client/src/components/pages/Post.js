@@ -18,7 +18,6 @@ const Post = () => {
 
     // TODO: fetch post data
     const post = {
-        id: 1,
         name: "Lola",
         image: [
             {image: "https://images.unsplash.com/photo-1583337130417-3346a1be7dee?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80"},
@@ -27,13 +26,15 @@ const Post = () => {
             {image: "https://images.unsplash.com/photo-1583511666372-62fc211f8377?ixlib=rb-1.2.1&raw_url=true&q=80&fm=jpg&crop=entropy&cs=tinysrgb&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=688"}
         ],
         description: "Poznaj Lolę lepiej. Lorem ipsum dolor sit amet, consectetur adipiscing elit lorem....",
-        gender: "female",
+        male: true,
         city: "Kraków",
-        size: "Mała",
+        size: "Mały/a",
         age: "3",
-        health: "Zdrowa",
+        healthy: true,
         date: "19.10.2021 19:20",
-        breed: "Mieszaniec"
+        breed: "Mieszaniec",
+        weight: "6",
+        color: "white"
     }
 
     const handleClickOnHeart = () => {

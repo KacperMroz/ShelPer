@@ -16,8 +16,6 @@ const Form = () => {
     const [description, setDescription] = React.useState('');
     const [photo, setPhoto] = React.useState([]);
     const [healthy, setHealthy] = React.useState(true);
-    const formData = new FormData();
-
 
     const handleInputChange = (e, set) => {
         set(e.target.value);
@@ -29,6 +27,7 @@ const Form = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        const formData = new FormData();
         formData.append('name', name);
         formData.append('age', age);
         formData.append('weight', weight);
@@ -40,10 +39,39 @@ const Form = () => {
         formData.append('size_id', 1);
         formData.append('animal_type_id', 1);
         console.log('Form submitted' + formData.forEach(e => console.log(e)));
+        addAnimal(formData);
     }
 
-
-
+    const addAnimal = async (formData) => {
+        const response = await fetch(
+            'http://127.0.0.1:5000/animal',
+            {
+                method: 'POST',
+                credentials: 'include',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    "name":"Michael",
+                    "age":7,
+                    "weight":6,
+                    "description":"good dog",
+                    "healthy":true,
+                    "male":true,
+                    "color":"white",
+                    "breed_id":6,
+                    "size_id":2,
+                    "animal_type_id":1
+                })
+            }
+        );
+        const data = await response.json();
+        if (data.error) {
+            console.log(data.error);
+        } else {
+            console.log("idk");
+        }
+    }
 
     return (
         <form>
