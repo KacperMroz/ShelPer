@@ -3,4 +3,6 @@
 ![alt text](./documentation/3.png)  
 ![alt text](./documentation/4.png)  
 ![alt text](./documentation/5.png)
-![alt text](./documentation/6.png) 
+![alt text](./documentation/6.png)
+![alt text](./documentation/7.png)
+![alt text](./documentation/8.png) 
