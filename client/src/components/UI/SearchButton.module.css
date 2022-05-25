@@ -1,29 +1,27 @@
 .search {
-    display: flex;
-    flex-direction: row;
-    border-radius: 50px;
-    border: none;
-    font-size: 32px;
-    padding: 24px;
-    width: 40%;
-    cursor: pointer;
-    margin: 8px;
-    text-decoration: none;
-    align-items: center;
-    justify-content: space-between;
-    background-color: white;
+  display: flex;
+  flex-direction: row;
+  border-radius: 50px;
+  border: none;
+  padding: 0 16px;
+  width: 100%;
+  max-width: 560px;
+  height: 54px;
+  cursor: pointer;
+  text-decoration: none;
+  align-items: center;
+  justify-content: space-between;
+  background-color: white;
 }
-.text{
-    flex: 1 1;
-    height: fit-content;
-    width: fit-content;
+.text {
+  flex: 1 1;
+  height: fit-content;
+  width: fit-content;
 }
-.icon{
-    flex: 1;
-    padding: 1em;
+.icon {
+  margin-right: 15px;
 }
 
 .find {
-    width: 100%;
-
+  width: 100%;
 }

@@ -15,14 +15,16 @@ const NavBar = ({ isLoggedIn = false }) => {
   return (
     <div className="navbar">
       <div className="navbar-items">
-        <Link to="/">
-          <img src={Logo} className="navbar-brand" alt="logo" />
+        <Link className="navbar-logo" to="/">
+          <img src={Logo} alt="logo" />
         </Link>
         {items.map((item) => {
           return (
             <Link
               key={item.pathname}
-              className={`navbar-item ${location.pathname === item.pathname ? 'active' : ''}`}
+              className={`navbar-item ${
+                location.pathname === item.pathname ? 'active-navbar' : ''
+              }`}
               to={item.pathname}>
               {item.title}
             </Link>
