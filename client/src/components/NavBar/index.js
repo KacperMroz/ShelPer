@@ -8,7 +8,9 @@ import { getNavBarItems } from './utils';
 import './index.css';
 library.add(faMagnifyingGlass);
 
-const NavBar = ({ isLoggedIn = false }) => {
+const NavBar = () => {
+  const isLoggedIn = !!document.cookie;
+  console.log(isLoggedIn);
   const items = getNavBarItems(isLoggedIn);
   const location = useLocation();
 
