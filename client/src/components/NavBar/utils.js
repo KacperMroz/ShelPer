@@ -1,4 +1,4 @@
-export const getNavBarItems = isLoggedIn => {
+export const getNavBarItems = (isLoggedIn) => {
   if (isLoggedIn) {
     return [
       {
@@ -32,16 +32,12 @@ export const getNavBarItems = isLoggedIn => {
         title: 'Dodaj ogłoszenie',
       },
       {
-        pathname: '/',
-        title: 'Strona główna',
+        pathname: '/add-post',
+        title: 'Dodaj ogłoszenie',
       },
     ];
   }
   return [
-    {
-      pathname: '/',
-      title: 'Strona główna',
-    },
     {
       pathname: '/login',
       title: 'Zaloguj się',
@@ -49,6 +45,10 @@ export const getNavBarItems = isLoggedIn => {
     {
       pathname: '/signup',
       title: 'Rejestracja',
+    },
+    {
+      pathname: '/',
+      title: 'Strona główna',
     },
   ];
 };

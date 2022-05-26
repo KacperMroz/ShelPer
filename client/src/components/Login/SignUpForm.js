@@ -21,17 +21,17 @@ export const SignUpForm = () => {
     zip_code: '12-340',
   };
 
-  const emailHandler = event => {
+  const emailHandler = (event) => {
     setEmail(event.target.value);
   };
-  const passwordHandler = event => {
+  const passwordHandler = (event) => {
     setPassword(event.target.value);
   };
-  const confirmPasswordHandler = event => {
+  const confirmPasswordHandler = (event) => {
     setConfirmPassword(event.target.value);
   };
 
-  const validateEmail = email => {
+  const validateEmail = (email) => {
     // check for @
     if (email.indexOf('@') === -1) {
       return false;
@@ -43,7 +43,7 @@ export const SignUpForm = () => {
     return true;
   };
 
-  const validatePassword = password => {
+  const validatePassword = (password) => {
     // check for length
     if (password.length < 6) {
       return false;
@@ -86,7 +86,7 @@ export const SignUpForm = () => {
     }
   };
 
-  const submitHandler = e => {
+  const submitHandler = (e) => {
     e.preventDefault();
     if (validateForm()) {
       console.log(user);
@@ -98,52 +98,48 @@ export const SignUpForm = () => {
   };
 
   return (
-    <div className='base-sign-up-container'>
-      <form className='log-sign-form' onSubmit={submitHandler}>
+    <div className="base-sign-up-container">
+      <form className="log-sign-form" onSubmit={submitHandler}>
         <h1 className={'header'}>Zarejestruj się</h1>
-        <div className='input-div'>
+        <div className="input-div">
           <div>
             <input
               className={'log-sign-input'}
-              type='text'
+              type="text"
               value={email}
               onChange={emailHandler}
-              placeholder='Podaj swój e-mail'
+              placeholder="Podaj swój e-mail"
             />
           </div>
           <div>
             <input
               className={'log-sign-input'}
-              type='password'
+              type="password"
               value={password}
               onChange={passwordHandler}
-              placeholder='Podaj swoje hasło'
+              placeholder="Podaj swoje hasło"
             />
           </div>
           <div>
             <input
               className={'log-sign-input'}
-              type='password'
+              type="password"
               value={confirmPassword}
               onChange={confirmPasswordHandler}
               onBlur={validatePassword}
-              placeholder='Podaj ponownie swoje hasło'
+              placeholder="Podaj ponownie swoje hasło"
             />
           </div>
         </div>
         <div>
-          <button
-            className='log-sign-button'
-            type='submit'
-            onClick={submitHandler}
-          >
+          <button className="log-sign-button" type="submit" onClick={submitHandler}>
             Zarejestruj się
           </button>
           {/* <Button text={text} navigate={navigate} />
            */}
         </div>
-        <div className='bottom-text'>
-          Posiadasz konto? <Link to='/login'>Zaloguj się</Link>
+        <div className="bottom-text">
+          Posiadasz konto? <Link to="/login">Zaloguj się</Link>
         </div>
         {error && <div style={{ color: 'red' }}>{error}</div>}
       </form>

@@ -19,11 +19,11 @@
 
 .header {
   color: #6e6e6e;
-  font-size: 65px;
+  font-size: 48px;
 }
 
 form > div {
-  width: 100%;
+  width: 65%;
   display: flex;
   justify-content: center;
 }
@@ -33,12 +33,12 @@ form > div {
   border: none;
   border-bottom: 1px solid #ffffff;
   color: #9a9a9a;
-  padding: 1em;
-  margin: 4%;
-  width: 35%;
-  height: 30%;
+  padding-left: 28px;
+  height: 54px;
   border-radius: 50px;
   font-size: 20px;
+  margin-bottom: 44px;
+  max-width: 390px;
 }
 
 .log-sign-input::placeholder {
@@ -54,7 +54,6 @@ form > div {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 10%;
   width: 100%;
 }
 
@@ -74,8 +73,8 @@ form > div {
 
 .button-div > .bottom-text {
   color: #b8b8b8;
-  font-size: 20px;
-  margin-top: 1%;
+  font-size: 14px;
+  margin-top: 21px;
 }
 
 .bottom-text > a {

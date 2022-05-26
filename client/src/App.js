@@ -15,7 +15,7 @@ import Favourites from "./components/pages/Favourites";
 
 function App() {
   return (
-    <div className='App'>
+    <div className="App">
       <Router>
         <Routes>
           <Route exact path='/' element={<Home />} />
