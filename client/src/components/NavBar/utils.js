@@ -6,8 +6,30 @@ export const getNavBarItems = (isLoggedIn) => {
         title: 'Strona główna',
       },
       {
-        pathname: '/account',
+        pathname: '/favourites',
+        title: 'Ulubione',
+      },
+      {
+        pathname: '/account-settings',
         title: 'Konto',
+      }
+
+    ];
+  }
+  // schronisko
+  if (isLoggedIn) {
+    return [
+      {
+        pathname: '/account-settings',
+        title: 'Konto',
+      },
+      {
+        pathname: '/favourites',
+        title: 'Ulubione',
+      },
+      {
+        pathname: '/favourites',
+        title: 'Dodaj ogłoszenie',
       },
       {
         pathname: '/add-post',

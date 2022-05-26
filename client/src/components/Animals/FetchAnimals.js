@@ -1,8 +1,9 @@
 import Card from '../Animal/Card';
 import useFetchGet from '../../hooks/useFetchGet';
 
-const FetchAnimals = () => {
-  const { data, hasError, loading } = useFetchGet('/animals');
+
+const FetchAnimals = (props) => {
+    const { data, hasError, loading } = useFetchGet(props.url)
 
   return (
     <>

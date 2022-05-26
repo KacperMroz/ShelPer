@@ -7,77 +7,85 @@ import { animalTypes, sexTypes, sizeTypes } from './utils';
 import './Form.css';
 
 const Form = () => {
-  const [type, setType] = React.useState('dog');
-  const [sex, setSex] = React.useState(false);
-  const [color, setColor] = React.useState('black');
-  const [size, setSize] = React.useState('small');
-  const [age, setAge] = React.useState('');
-  const [name, setName] = React.useState('');
-  const [weight, setWeight] = React.useState('');
-  const [description, setDescription] = React.useState('');
-  const [photo, setPhoto] = React.useState([]);
-  const [healthy, setHealthy] = React.useState(true);
-  const [error, setError] = React.useState('');
-  const formData = new FormData();
 
-  const handleInputChange = (e, set) => {
-    set(e.target.value);
-  };
+    const [photo, setPhoto] = React.useState([]);
+    const [error, setError] = React.useState('Please fill in all fields');
+    const [validated, setValidated] = React.useState(false);
+    const [model, setModel] = React.useState({
+        name: '',
+        age: '',
+        weight: '',
+        description: '',
+        healthy: true,
+        male: true,
+        color: '',
+        breed_id: 1,
+        size_id: 1,
+        animal_type_id: 1,
+    });
 
-  const handleFileInput = (e) => {
-    setPhoto([...photo, ...e.target.files]);
-  };
+    const handleFileInput = e => {
+        setPhoto([...photo, ...e.target.files]);
+    };
 
-  const formDataStatic = {
-    name: 'Michał',
-    age: '3',
-    weight: '5',
-    description: 'Lorem ipsum',
-    healthy: true,
-    male: false,
-    color: 'red',
-    breed_id: 5,
-    size_id: 2,
-    animal_type_id: 1,
-  };
+    const addAnimal = async (fetchData) => {
+        try {
+            const response = await fetch('/animal', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(fetchData),
+            });
+            const data = await response.json();
+            if (data.message) {
+                setError(data.message);
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    };
 
-  const addAnimal = async () => {
-    try {
-      const response = await fetch('/animal', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formDataStatic),
-      });
-      const data = await response.json();
-      if (data.message) {
-        setError(data.message);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
+    const handleSubmit = e => {
+        e.preventDefault();
+        checkIfNotEmpty();
+        validated ? addAnimal(model) : console.log(error);
+    };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    formData.append('name', name);
-    formData.append('age', age);
-    formData.append('weight', weight);
-    formData.append('description', description);
-    formData.append('healthy', healthy);
-    formData.append('male', sex);
-    formData.append('color', color);
-    formData.append('breed_id', 1);
-    formData.append('size_id', 1);
-    formData.append('animal_type_id', 1);
-    console.log('Form submitted ' + formData.forEach((e) => console.log(e)));
-    addAnimal();
-  };
+    const handleChange = e => {
+        console.log(e.target.name);
+        checkIfNumber(e);
+        setModel({
+            ...model,
+            [e.target.name]: e.target.value,
+        });
+    };
 
-  return (
-    <form className="form-container">
-      <CheckBoxes
+
+    // form validation
+    const checkIfNotEmpty = () => {
+        const values = Object.values(model);
+        const isEmpty = values.some(value => value === '');
+        const isSpaces = values.some(value => value === ' ');
+        if (isEmpty || isSpaces) {
+            setValidated(false);
+            setError('Please fill in all fields');
+        } else {
+            setValidated(true);
+        }
+    };
+
+    const checkIfNumber = (e) => {
+        const inputName = "model." + e.target.name;
+        if (isNaN(eval(inputName)) && (e.target.name === 'age' || e.target.name === 'weight')) {
+            setValidated(false);
+            setError(e.target.name + ' not a number');
+        }
+    };
+
+    return (
+        <form>
+             <CheckBoxes
         handleChange={(e) => handleInputChange(e, setType)}
         type="radio"
         name="animals"
@@ -123,20 +131,8 @@ const Form = () => {
         placeholder={'Opis zwierzaka'}
       />
       <div>
-        <Photo value={photo} handlePhotoInput={handleFileInput} />
-        {photo.length === 0 && <p>Zdjęcia</p>}
-        {photo.map((x) => (
-          <div className="file-preview" key={x.name}>
-            {x.name}
-          </div>
-        ))}
-      </div>
-
-      <button type="submit" className="log-sign-button" onClick={handleSubmit}>
-        Dodaj ogłoszenie
-      </button>
-    </form>
-  );
+        </form>
+    );
 };
 
 export default Form;

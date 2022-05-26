@@ -6,11 +6,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { getNavBarItems } from './utils';
 import './index.css';
+import checkIfLogged from "./checkIfLogged";
 library.add(faMagnifyingGlass);
 
 const NavBar = () => {
   const isLoggedIn = !!document.cookie;
-  console.log(isLoggedIn);
   const items = getNavBarItems(isLoggedIn);
   const location = useLocation();
 
@@ -34,7 +34,7 @@ const NavBar = () => {
         })}
       </div>
       <div className="search">
-        <Link to="/search">
+        <Link to="/animals">
           <FontAwesomeIcon className="icon" icon="search" />
         </Link>
       </div>
