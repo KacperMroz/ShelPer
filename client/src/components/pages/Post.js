@@ -6,17 +6,18 @@ import Info from "../Post/Info";
 import NavBar from "../NavBar";
 import PhotoCarousel from "../Post/PhotoCarousel";
 import "./Post.css";
+import useFetchGet from "../../hooks/useFetchGet";
 
 const Post = () => {
     const [heart, setHeart] = React.useState(faHeartCirclePlus);
     let {id} = useParams();
 
     // TODO: route to 404 page if post is not found and better error handling
-    if (isNaN(id)) {
-        return <div>404</div>
-    }
+
+    const { data, hasError, loading } = useFetchGet('http://localhost:5000/animal', id);
 
     // TODO: fetch post data
+
     const post = {
         name: "Lola",
         image: [
@@ -47,11 +48,14 @@ const Post = () => {
     return (
         <div className='post-base-container'>
             <NavBar />
-            <div className='post-info-container'>
-                <PhotoCarousel post={post.image}/>
-                <Description post={post} heart={heart} handleClickOnHeart={handleClickOnHeart} />
-                <Info />
-            </div>
+            {hasError ? <div>404</div> :
+                <div className='post-info-container'>
+                    <PhotoCarousel post={post.image}/>
+                    {id === '1' ? <Description post={post} heart={heart} handleClickOnHeart={handleClickOnHeart}/> :
+                        <Description post={data} heart={heart} handleClickOnHeart={handleClickOnHeart}/>}
+                    <Info/>
+                </div>
+            }
         </div>
     );
 };

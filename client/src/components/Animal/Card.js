@@ -1,9 +1,10 @@
 import React from 'react';
 import "./Card.css";
+import { Link } from 'react-router-dom';
 
 const Card = (props) => {
     return (
-        <div className = {"card"}>
+        <Link to={"/animals/"+props.animal.animal_id} className = {"card"}>
             <h1 className = {"name"}>{props.animal.name}</h1>
             <img src = {props.animal.image} alt = {props.animal.name} />
             <div className={"sex"} />
@@ -19,7 +20,7 @@ const Card = (props) => {
             <div className={"date"}>
                 {props.animal.advert_date}
             </div>
-        </div>
+        </Link>
     );
 };
 
