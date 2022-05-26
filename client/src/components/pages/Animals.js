@@ -41,7 +41,7 @@ const Animals = () => {
                 <div className={'container'}>
                     <Card className='animal-card' key={Lola.id} animal={Lola}/>
                     <Card key={Edgar.id} animal={Edgar}/>
-                    <FetchAnimals />
+                    <FetchAnimals url={'/animals'}/>
                 </div>
             </div>
         </div>

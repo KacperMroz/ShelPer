@@ -11,6 +11,7 @@ import AccountSettings from './components/pages/AccountSettings';
 import Animals from './components/pages/Animals';
 import Post from './components/pages/Post';
 import AddPost from './components/pages/AddPost';
+import Favourites from "./components/pages/Favourites";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
           <Route path='/animals' element={<Animals />} />
           <Route path='/animals/:id' element={<Post />} />
           <Route path='/add-post' element={<AddPost />} />
+          <Route path='/favourites' element={<Favourites />} />
         </Routes>
       </Router>
     </div>

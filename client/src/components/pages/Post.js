@@ -12,11 +12,7 @@ const Post = () => {
     const [heart, setHeart] = React.useState(faHeartCirclePlus);
     let {id} = useParams();
 
-    // TODO: route to 404 page if post is not found and better error handling
-
     const { data, hasError, loading } = useFetchGet('http://localhost:5000/animal', id);
-
-    // TODO: fetch post data
 
     const post = {
         name: "Lola",
