@@ -47,7 +47,7 @@ input {
 
 input,
 input::placeholder {
-  font: 16px sans-serif;
+  font: bold 16px sans-serif;
 }
 
 .log-sign-button {

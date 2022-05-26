@@ -1,15 +1,16 @@
 import React from 'react';
-import Type from '../AnimalSpec/Type';
-import Sex from '../AnimalSpec/Sex';
+import CheckBoxes from '../AnimalSpec/CheckBoxes';
 import Color from '../AnimalSpec/Color';
-import Size from '../AnimalSpec/Size';
+import Input from '../AnimalSpec/Input';
 import Photo from '../AnimalSpec/Photo';
+import { animalTypes, sexTypes, sizeTypes } from './utils';
+import './Form.css';
 
 const Form = () => {
-  const [type, setType] = React.useState('');
+  const [type, setType] = React.useState('dog');
   const [sex, setSex] = React.useState(false);
-  const [color, setColor] = React.useState('');
-  const [size, setSize] = React.useState('');
+  const [color, setColor] = React.useState('black');
+  const [size, setSize] = React.useState('small');
   const [age, setAge] = React.useState('');
   const [name, setName] = React.useState('');
   const [weight, setWeight] = React.useState('');
@@ -23,7 +24,7 @@ const Form = () => {
     set(e.target.value);
   };
 
-  const handleFileInput = e => {
+  const handleFileInput = (e) => {
     setPhoto([...photo, ...e.target.files]);
   };
 
@@ -58,7 +59,7 @@ const Form = () => {
     }
   };
 
-  const handleSubmit = e => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     formData.append('name', name);
     formData.append('age', age);
@@ -70,56 +71,68 @@ const Form = () => {
     formData.append('breed_id', 1);
     formData.append('size_id', 1);
     formData.append('animal_type_id', 1);
-    console.log('Form submitted ' + formData.forEach(e => console.log(e)));
+    console.log('Form submitted ' + formData.forEach((e) => console.log(e)));
     addAnimal();
   };
 
   return (
-    <form>
-      <Type
-        handleTypeChange={e => handleInputChange(e, setType)}
-        type='radio'
+    <form className="form-container">
+      <CheckBoxes
+        handleChange={(e) => handleInputChange(e, setType)}
+        type="radio"
+        name="animals"
+        value={type}
+        data={animalTypes}
       />
-      <Sex handleSexChange={e => handleInputChange(e, setSex)} type='radio' />
-      <Color
-        handleColorChange={e => handleInputChange(e, setColor)}
-        type='radio'
+      <CheckBoxes
+        handleChange={(e) => handleInputChange(e, setSex)}
+        name="sex"
+        type="radio"
+        value={sex}
+        data={sexTypes}
       />
-      <Size
-        handleSizeChange={e => handleInputChange(e, setSize)}
-        type='radio'
+      <Color handleColorChange={(e) => handleInputChange(e, setColor)} type="radio" />
+      <CheckBoxes
+        handleChange={(e) => handleInputChange(e, setSize)}
+        type="radio"
+        name="size"
+        value={size}
+        data={sizeTypes}
       />
-      <input
-        type='text'
-        onChange={e => setAge(e.target.value)}
+      <Input
+        type="text"
+        value={age}
+        handleChange={(e) => setAge(e.target.value)}
         placeholder={'Podaj wiek zwierzaka'}
       />
-      <input
-        type='text'
-        onChange={e => setName(e.target.value)}
+      <Input
+        type="text"
+        value={name}
+        handleChange={(e) => setName(e.target.value)}
         placeholder={'Podaj imie zwierzaka'}
       />
-      <input
-        type='text'
-        onChange={e => setWeight(e.target.value)}
+      <Input
+        type="text"
+        value={weight}
+        handleChange={(e) => setWeight(e.target.value)}
         placeholder={'Podaj wagę zwierzaka (kg)'}
       />
       <textarea
-        onChange={e => setDescription(e.target.value)}
+        className="textarea"
+        onChange={(e) => setDescription(e.target.value)}
         placeholder={'Opis zwierzaka'}
       />
       <div>
         <Photo value={photo} handlePhotoInput={handleFileInput} />
         {photo.length === 0 && <p>Zdjęcia</p>}
-        {photo.map(x => (
-          <div className='file-preview' key={x.name}>
-            {' '}
-            {x.name}{' '}
+        {photo.map((x) => (
+          <div className="file-preview" key={x.name}>
+            {x.name}
           </div>
         ))}
       </div>
 
-      <button type='submit' onClick={handleSubmit}>
+      <button type="submit" className="log-sign-button" onClick={handleSubmit}>
         Dodaj ogłoszenie
       </button>
     </form>

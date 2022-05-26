@@ -3,7 +3,6 @@ import './LoginForm.css';
 import { NavLink as Link, useNavigate } from 'react-router-dom';
 
 export const LoginForm = () => {
-  //login page
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
