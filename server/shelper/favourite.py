@@ -9,6 +9,8 @@ from shelper.db import get_db
 
 from shelper.auth import login_required
 
+from shelper.cookie_reader import getSecodnaryId
+
 bp = Blueprint('favourite', __name__)
 
 @bp.route('/favourite', methods=('POST',))
@@ -20,7 +22,8 @@ def addFavourite():
     except Exception:
         return {'message': 'Malformed data.'}, 400
 
-    client_id = request.cookies.get('user_id')
+    auth_cookie = request.cookies.get('user_id')
+    client_id = getSecodnaryId(auth_cookie)
 
     db = get_db()
 
@@ -49,7 +52,9 @@ def addFavourite():
 @bp.route('/favourite', methods=('DELETE',))
 @login_required
 def deleteFavourite():
-    client_id = request.cookies.get('user_id')
+    auth_cookie = request.cookies.get('user_id')
+    client_id = getSecodnaryId(auth_cookie)
+
     animal_data = request.get_json()
     try:
         animal_id = animal_data['animal_id']
@@ -83,7 +88,8 @@ def deleteFavourite():
 @bp.route('/favourites', methods=('GET',))
 @login_required
 def getFavourites():
-    client_id = request.cookies.get('user_id')
+    auth_cookie = request.cookies.get('user_id')
+    client_id = getSecodnaryId(auth_cookie)
 
     db = get_db()
 

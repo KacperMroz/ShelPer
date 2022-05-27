@@ -24,7 +24,8 @@ def addVisit():
         return {'message': 'Malformed data.'}, 400
     
     try:
-        client_id = request.cookies.get('user_id')
+        auth_cookie = request.cookies.get('user_id')
+        client_id = getSecodnaryId(auth_cookie)
     except Exception:
         return {'message': 'Unauthorized'}, 401
 
@@ -47,7 +48,8 @@ def getVisit(visit_id):
     db = get_db()
 
     try:
-        client_id = request.cookies.get('user_id')
+        auth_cookie = request.cookies.get('user_id')
+        client_id = getSecodnaryId(auth_cookie)
     except Exception:
         return {'message': 'Unauthorized'}, 401
 
@@ -77,7 +79,8 @@ def updateVisit(visit_id):
         return {'message': 'Malformed data.'}, 400
 
     try:
-        client_id = request.cookies.get('user_id')
+        auth_cookie = request.cookies.get('user_id')
+        client_id = getSecodnaryId(auth_cookie)
     except Exception:
         return {'message': 'Unauthorized'}, 401
 
@@ -112,7 +115,8 @@ def updateVisit(visit_id):
 @login_required
 def deleteVisit(visit_id):
     try:
-        user_id = request.cookies.get('user_id')
+        auth_cookie = request.cookies.get('user_id')
+        user_id = getSecodnaryId(auth_cookie)
     except Exception:
         return {'message': 'Unauthorized'}, 401
 
@@ -147,7 +151,8 @@ def deleteVisit(visit_id):
 @login_required
 def getVisitsClient():
     try:
-        user_id = request.cookies.get('user_id')
+        auth_cookie = request.cookies.get('user_id')
+        user_id = getSecodnaryId(auth_cookie)
     except Exception:
         return {'message': 'Unauthorized'}, 401
 
@@ -172,7 +177,8 @@ def getVisitsClient():
 @login_required
 def getVisitsShelter():
     try:
-        user_id = request.cookies.get('user_id')
+        auth_cookie = request.cookies.get('user_id')
+        user_id = getSecodnaryId(auth_cookie)
     except Exception:
         return {'message': 'Unauthorized'}, 401
 

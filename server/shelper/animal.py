@@ -9,6 +9,8 @@ from shelper.db import get_db
 
 from shelper.auth import login_required
 
+from shelper.cookie_reader import getSecodnaryId
+
 bp = Blueprint('animal', __name__)
 
 
@@ -26,7 +28,7 @@ def addAnimal():
         color = animal_data['color']
         breed_id = animal_data['breed_id']
         size_id = animal_data['size_id']
-        shelter_id = request.cookies.get('user_id')
+        auth_cookie = request.cookies.get('user_id')
         animal_type_id = animal_data['animal_type_id']
     except Exception:
         return {'message': 'Malformed data.'}, 400
@@ -34,6 +36,10 @@ def addAnimal():
     # TODO: Data validation
 
     today = date.today()
+
+    shelter_id = getSecodnaryId(auth_cookie)
+
+    print("shelter_id: " + str(shelter_id))
 
     db = get_db()
 
@@ -79,11 +85,14 @@ def updateAnimal(animal_id):
         breed_id = animal_data['breed_id']
         size_id = animal_data['size_id']
         animal_type_id = animal_data['animal_type_id']
-        shelter_id = request.cookies.get('user_id')
+        auth_cookie = request.cookies.get('user_id')
     except BaseException:
         return {'message': 'Malformed data.'}, 400
 
     # TODO: Data validation
+
+    shelter_id = getSecodnaryId(auth_cookie)
+
     db = get_db()
 
     try:
@@ -112,9 +121,12 @@ def updateAnimal(animal_id):
 @bp.route('/animal/<int:animal_id>', methods=('DELETE',))
 @login_required
 def deleteAnimal(animal_id):
-    shelter_id = request.cookies.get('user_id')
+    auth_cookie = request.cookies.get('user_id')
 
     # TODO: Check if user is allowed to delete the animal
+
+    shelter_id = getSecodnaryId(auth_cookie)
+
     db = get_db()
 
     try:
