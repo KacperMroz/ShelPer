@@ -40,6 +40,11 @@
   border-bottom: 3px solid #e2a300;
 }
 
-.active {
+.active-navbar {
   border-bottom: 3px solid #e2a300;
+}
+
+.active-navbar,
+.navbar-logo {
+  background-color: transparent !important;
 }

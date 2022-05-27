@@ -1,19 +1,19 @@
+.home-page {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  background-color: #f8f8f8;
+  background-image: url('../../img/start_page_background.png');
+  background-size: cover;
+}
 
-.home-page
-{
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    width: 100%;
-    background-color: #f8f8f8;
-    background-image: url('../../img/start_page_background.png');
-    background-size: cover;
+.home-page-content {
+  display: flex;
+  height: 85%;
 }
-.home-page-content{
-    display: flex;
-    height: 85%;
-}
-.text-container{
+
+.text-container {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -24,59 +24,54 @@
   padding: 1em;
   margin: 1%;
 }
+
 .home-dog-container {
-    display: flex;
-    height: 100%;
-    align-items: inherit;
-    justify-content: space-between;
-    flex: 1;
-  }
-  
-  .dog-container > img {
-    width: 70%;
-    height: 70%;
-  }
-  /* input[type="text"]
-  {
-      background: transparent;
-      border: none;
-      outline: none;
-      width:100%;
-  } */
+  display: flex;
+  height: 100%;
+  align-items: inherit;
+  justify-content: space-between;
+  flex: 1;
+}
 
-  input{
-    width: 100%;
-    /*color: #FFF;*/
-    background: transparent;
-    border: none;
-    outline: none;
-  }
+.dog-container > img {
+  width: 70%;
+  height: 70%;
+}
 
-  .log-sign-button{
-    display: flex;
-    border-radius: 36px;
-    background-color: #E2A300;
-    border: none;
-    color: #ffffff;
-    font-size: 28px;
-    padding: 25px;
-    width: 45%;
-    transition: all 0.5s;
-    cursor: pointer;
-    margin: 42px;
-    text-decoration: none;
-    justify-content: center;
-    align-items: center;
-  }
-  
-
-  /* background-color: #ffffff;
+input {
+  width: 100%;
+  background: transparent;
   border: none;
-  border-bottom: 1px solid #ffffff;
-  color: #9a9a9a;
-  padding: 1em;
-  margin: 4%;
-  width: 35%;
-  height: 30%;
-  border-radius: 50px;
-  font-size: 20px; */
+  outline: none;
+}
+
+input,
+input::placeholder {
+  font: bold 16px sans-serif;
+}
+
+.log-sign-button {
+  display: flex;
+  border-radius: 36px;
+  background-color: #e2a300;
+  border: none;
+  color: #ffffff;
+  font-size: 16px;
+  height: 51px;
+  font-weight: bold;
+  width: 100%;
+  transition: all 0.5s;
+  cursor: pointer;
+  text-decoration: none;
+  justify-content: center;
+  align-items: center;
+  max-width: 420px;
+}
+
+.home-dog-image {
+  height: 100%;
+}
+
+.text-button {
+  max-width: 592px;
+}

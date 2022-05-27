@@ -9,21 +9,24 @@ import './index.css';
 import checkIfLogged from "./checkIfLogged";
 library.add(faMagnifyingGlass);
 
-const NavBar = ({ isLoggedIn = checkIfLogged }) => {
+const NavBar = () => {
+  const isLoggedIn = !!document.cookie;
   const items = getNavBarItems(isLoggedIn);
   const location = useLocation();
 
   return (
     <div className="navbar">
       <div className="navbar-items">
-        <Link to="/">
-          <img src={Logo} className="navbar-brand" alt="logo" />
+        <Link className="navbar-logo" to="/">
+          <img src={Logo} alt="logo" />
         </Link>
         {items.map((item) => {
           return (
             <Link
               key={item.pathname}
-              className={`navbar-item ${location.pathname === item.pathname ? 'active' : ''}`}
+              className={`navbar-item ${
+                location.pathname === item.pathname ? 'active-navbar' : ''
+              }`}
               to={item.pathname}>
               {item.title}
             </Link>
