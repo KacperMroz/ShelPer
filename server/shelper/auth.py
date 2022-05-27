@@ -155,16 +155,14 @@ def login():
         error = 'Incorrect password.'
 
     if error is None:
-        db.execute(
+        shelter = db.execute(
             "SELECT * from shelter where details = ?", (user['user_id'],)
-        )
-        shelter = db.fetchone()
+        ).fetchone()
 
         if shelter is None:
-            db.execute(
+            client = db.execute(
                 "SELECT * from client where details = ?", (user['user_id'],)
-            )
-            client = db.fetchone()
+            ).fetchone()
 
             if client is None:
                 error = 'User not found.'
