@@ -49,11 +49,11 @@ const Form = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     checkIfNotEmpty();
+    console.log(model);
     validated ? addAnimal(model) : console.log(error);
   };
 
   const handleChange = (e) => {
-    console.log(e.target.name);
     checkIfNumber(e);
     setModel({
       ...model,
@@ -93,9 +93,9 @@ const Form = () => {
       />
       <CheckBoxes
         handleChange={handleChange}
-        name="sex"
+        name="male"
         type="radio"
-        value={model.sex}
+        value={model.male}
         data={sexTypes}
       />
       <Color handleColorChange={handleChange} type="radio" />

@@ -2,10 +2,11 @@ import React from 'react';
 import CheckBoxes from '../AnimalSpec/CheckBoxes';
 import Location from '../AnimalSpec/Location';
 import Color from '../AnimalSpec/Color';
+import {animalTypes, sexTypes} from "../AddPost/utils";
 
 const Form = () => {
   const [type, setType] = React.useState([]);
-  const [sex, setSex] = React.useState([]);
+  const [male, setMale] = React.useState([]);
   const [localization, setLocalization] = React.useState('');
   const [color, setColor] = React.useState([]);
 
@@ -24,9 +25,9 @@ const Form = () => {
 
   const handleSexChange = (e) => {
     if (e.target.checked) {
-      setSex([...sex, e.target.value]);
+      setMale([...male, e.target.value]);
     } else {
-      setSex(type.filter((sex) => sex !== e.target.value));
+      setMale(type.filter((sex) => sex !== e.target.value));
     }
   };
 
@@ -44,9 +45,17 @@ const Form = () => {
 
   return (
     <form>
-      <CheckBoxes handleChange={handleTypeChange} type="checkbox" />
-      <CheckBoxes handleChange={handleSexChange} type="checkbox" />
-      <Location handleLocalizationChange={handleLocalizationChange} type="checkbox" />
+      <CheckBoxes handleChange={handleTypeChange}
+                  type="checkbox"
+                  value={type}
+                  name="type"
+                  data={animalTypes}/>
+      <CheckBoxes handleChange={handleSexChange}
+                  type="checkbox"
+                  value={male}
+                  data={sexTypes}
+      />
+      <Location handleLocalizationChange={handleLocalizationChange} type="checkbox" value={localization}/>
       <Color handleColorChange={handleColorChange} type="checkbox" />
       <button type="submit" onClick={handleSubmit}>
         Wyszukaj

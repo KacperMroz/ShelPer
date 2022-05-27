@@ -3,6 +3,7 @@
   flex-direction: column;
   height: 100%;
   width: 100%;
+  background-color: white;
 }
 
 .login-page-content {
@@ -20,8 +21,9 @@
 }
 
 .dog-container > img {
-  width: 90%;
-  height: 95%;
+  width: auto;
+  height: 90%;
+  max-height: 1200px;
 }
 
 .choose-type{

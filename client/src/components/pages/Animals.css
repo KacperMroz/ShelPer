@@ -1,11 +1,13 @@
 .animals-base-container{
     height: 100%;
+    background-color: white;
 }
 
 .animals-content-container{
     height: 85%;
     display: flex;
     flex-direction: column;
+    background:linear-gradient(180deg, rgba(229, 232, 237, 0.8) 0%, rgba(200, 207, 217, 0.8) 100%); ;
 }
 
 .container{
