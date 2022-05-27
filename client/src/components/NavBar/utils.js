@@ -1,4 +1,18 @@
 export const getNavBarItems = (isLoggedIn) => {
+  if (isLoggedIn === false) return [
+    {
+      pathname: '/login',
+      title: 'Zaloguj się',
+    },
+    {
+      pathname: '/signup',
+      title: 'Rejestracja',
+    },
+    {
+      pathname: '/',
+      title: 'Strona główna',
+    },
+  ];
   if (isLoggedIn.charAt(0) === 'C') {
     return [
       {
@@ -33,18 +47,4 @@ export const getNavBarItems = (isLoggedIn) => {
       }
     ];
   }
-  return [
-    {
-      pathname: '/login',
-      title: 'Zaloguj się',
-    },
-    {
-      pathname: '/signup',
-      title: 'Rejestracja',
-    },
-    {
-      pathname: '/',
-      title: 'Strona główna',
-    },
-  ];
 };
