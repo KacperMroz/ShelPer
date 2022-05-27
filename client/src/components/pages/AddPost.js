@@ -1,15 +1,16 @@
 import React from 'react';
-import NavBar from "../NavBar";
-import Form from "../AddPost/Form";
+import NavBar from '../NavBar';
+import Form from '../AddPost/Form';
+import './AddPost.css';
 
 const AddPost = () => {
-    return (
-        <div>
-            <NavBar />
-            <h1>Dodaj ogłoszenie</h1>
-            <Form />
-        </div>
-    );
+  return (
+    <>
+      <NavBar />
+      <h1 className="add-page-header">Dodaj ogłoszenie</h1>
+      <Form />
+    </>
+  );
 };
 
 export default AddPost;

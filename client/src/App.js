@@ -8,14 +8,14 @@ import { SignUpPersonal } from './components/pages/SignUpPersonal';
 import { SignUpShelter } from './components/pages/SignUpShelter';
 import Account from './components/pages/Account';
 import AccountSettings from './components/pages/AccountSettings';
-import Animals  from './components/pages/Animals';
+import Animals from './components/pages/Animals';
 import Post from './components/pages/Post';
-import AddPost from "./components/pages/AddPost";
-
+import AddPost from './components/pages/AddPost';
+import Favourites from "./components/pages/Favourites";
 
 function App() {
   return (
-    <div className='App'>
+    <div className="App">
       <Router>
         <Routes>
           <Route exact path='/' element={<Home />} />
@@ -28,6 +28,7 @@ function App() {
           <Route path='/animals' element={<Animals />} />
           <Route path='/animals/:id' element={<Post />} />
           <Route path='/add-post' element={<AddPost />} />
+          <Route path='/favourites' element={<Favourites />} />
         </Routes>
       </Router>
     </div>

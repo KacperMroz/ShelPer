@@ -15,8 +15,9 @@ const Description = (props) => {
                 <div id='post-size'>Rozmiar: {props.post.size}</div>
                 <div id='post-bread'>{props.post.breed}</div>
                 <div id='post-age'>Wiek: {props.post.age}</div>
-                <div id='post-health'>Zdrowie: {props.post.health}</div>
-                <div id='post-gender'>{props.post.gender}</div>
+                <div id='post-health'>{  props.post.male ? "Zdrowy/a" : "Wymaga leczenia" }</div>
+                <div id='post-gender'>
+                    {  props.post.male ? "Samiec" : "Samica" }</div>
             </div>
         </div>
     );

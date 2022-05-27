@@ -1,10 +1,9 @@
 import React, { useRef, useState } from 'react';
 import { Button } from '../UI/Button';
-import { NavLink as Link } from 'react-router-dom';
+import { NavLink as Link, useNavigate } from 'react-router-dom';
 import './SignUpForm.css';
 
-
-export const SignUpFormShelter = ({ text, navigate }) => {
+export const SignUpFormShelter = ({ text }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -15,6 +14,18 @@ export const SignUpFormShelter = ({ text, navigate }) => {
   const [phoneNumber, setPhoneNumber] = useState('');
   const [website, setWebiste] = useState('');
   const [error, setError] = useState('');
+  const navigate = useNavigate();
+
+  const shelter = {
+    email,
+    password,
+    name: 'Michael',
+    phone_number: phoneNumber,
+    town_id: 7,
+    building_number: number,
+    street_name: streetName,
+    zip_code: postalCode,
+  };
 
   const setUsernameHandler = event => {
     setEmail(event.target.value);
@@ -44,119 +55,182 @@ export const SignUpFormShelter = ({ text, navigate }) => {
     setWebiste(event.target.value);
   };
 
+  const validateEmail = email => {
+    // check for @
+    if (email.indexOf('@') === -1) {
+      return false;
+    }
+    // check for .
+    if (email.indexOf('.') === -1) {
+      return false;
+    }
+    return true;
+  };
+
+  const validatePassword = password => {
+    // check for length
+    if (password.length < 6) {
+      return false;
+    }
+    return true;
+  };
+
+  const validateForm = () => {
+    if (!validateEmail(email)) {
+      setError('Podaj poprawny adres e-mail.');
+      return false;
+    }
+    if (!validatePassword(password)) {
+      setError('Hasło musi mieć przynajmniej 6 znaków');
+      return false;
+    }
+    if (password !== confirmPassword) {
+      setError('Hasła nie są identyczne.');
+      return false;
+    }
+    return true;
+  };
+
+  const sendShelterData = async () => {
+    if (!validateForm()) {
+      return;
+    }
+    const response = await fetch('api/auth/register/shelter', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(shelter),
+    });
+    const data = await response.json();
+    if (data.error) {
+      setError(data.error);
+    } else {
+      navigate('/login');
+    }
+  };
+
+  const submitHandler = event => {
+    event.preventDefault();
+    console.log(shelter);
+    sendShelterData();
+  };
+
   const additionalInfoSection = useRef(null);
 
-  const goToAdditionalInfoSection = () => window.scrollTo({
-  top: additionalInfoSection.current.offsetTop,
-  behavior: "smooth"
-  })
+  const goToAdditionalInfoSection = () =>
+    window.scrollTo({
+      top: additionalInfoSection.current.offsetTop,
+      behavior: 'smooth',
+    });
 
   return (
     <div className='sign-form-shelter-container'>
-      <form className='shelter-form'
-        onSubmit={e => {
-          e.preventDefault();
-          if (email === 'admin' && password === 'admin') {
-            setError('');
-            window.location.href = '/';
-          } else {
-            setError('Invalid email or password');
-          }
-        }}
-      >
+      <form className='shelter-form' onSubmit={submitHandler}>
         <div className='basic-shelter-form'>
-        <h1 className='shelter-header'>Zarejestruj się</h1>
-        <div className='shelter-input-div'>
-          <input
-            className='shelter-sign-input'
-            type='text'
-            value={email}
-            onChange={setUsernameHandler}
-            placeholder={'Podaj swój e-mail'}
-          />
-          <input
-            className='shelter-sign-input'
-            type='password'
-            value={password}
-            onChange={setPasswordHandler}
-            placeholder={'Podaj swoje hasło'}
-          />
-          <input
-            className='shelter-sign-input'
-            type='password'
-            value={confirmPassword}
-            onChange={setConfirmPasswordHandler}
-            placeholder={'Podaj swoje hasło'}
-          />
-          {/* Zmieniłem to delikatnie, żeby móc automatycznie scrollowac do dołu, ale nie wiem czy nie zepsuje to logiki */}
-          {/* <Button text={text} navigate={navigate}/> */}
-          <button className='go-bottom-button' onClick={goToAdditionalInfoSection}>
-            {text}
-          </button>
-        </div>
-        <div>
-          Posiadasz konto? <Link to='/login'>Zaloguj się</Link>
-        </div>
+          <h1 className='shelter-header'>Zarejestruj się</h1>
+          {error && <div style={{ color: 'red' }}>{error}</div>}
+          <div className='shelter-input-div'>
+            <input
+              className='shelter-sign-input'
+              type='text'
+              value={email}
+              onChange={setUsernameHandler}
+              placeholder={'Podaj swój e-mail'}
+            />
+            <input
+              className='shelter-sign-input'
+              type='password'
+              value={password}
+              onChange={setPasswordHandler}
+              placeholder={'Podaj swoje hasło'}
+            />
+            <input
+              className='shelter-sign-input'
+              type='password'
+              value={confirmPassword}
+              onChange={setConfirmPasswordHandler}
+              placeholder={'Podaj swoje hasło'}
+            />
+            {/* Zmieniłem to delikatnie, żeby móc automatycznie scrollowac do dołu, ale nie wiem czy nie zepsuje to logiki */}
+            {/* <Button text={text} navigate={navigate}/> */}
+            <button
+              className='go-bottom-button'
+              onClick={goToAdditionalInfoSection}
+            >
+              {text}
+            </button>
+          </div>
+          <div>
+            Posiadasz konto? <Link to='/login'>Zaloguj się</Link>
+          </div>
         </div>
 
         <div className='additional-shelter-form'>
-        <h2 className='shelter-header' ref={additionalInfoSection}>Potrzebujemy jeszcze kilku informacji</h2>
-        <div className='shelter-input-div'>
-          <input
-            className='shelter-sign-input'
-            type='text'
-            value={streetName}
-            onChange={setStreetNameHandler}
-            placeholder={'Podaj ulicę schroniska'}
-          />
-        </div>
-        <div className='shelter-input-div'>
-          <input
-            className='shelter-sign-input'
-            type='text'
-            value={number}
-            onChange={setNumberHandler}
-            placeholder={'Podaj numer budynku'}
-          />
-        </div>
-        <div className='shelter-input-div'>
-          <input
-            className='shelter-sign-input'
-            type='text'
-            value={city}
-            onChange={setCityHandler}
-            placeholder={'Podaj miejscowość'}
-          />
-        </div>
-        <div className='shelter-input-div'>
-          <input
-            className='shelter-sign-input'
-            type='text'
-            value={postalCode}
-            onChange={setPostalCodeHandler}
-            placeholder={'Podaj kod pocztowy'}
-          />
-        </div>
-        <div className='shelter-input-div'>
-          <input
-            className='shelter-sign-input'
-            type='text'
-            value={phoneNumber}
-            onChange={setPhoneNumberHandler}
-            placeholder={'Podaj numer telefonu'}
-          />
-        </div>
-        <div className='shelter-input-div'>
-          <input
-            className='shelter-sign-input'
-            type='text'
-            value={website}
-            onChange={setWebsiteHandler}
-            placeholder={'Podaj stronę internetową'}
-          />
-        </div>
-        <Button text={'Zarejestruj się'} navigate={navigate} />
-        {error && <div style={{ color: 'red' }}>{error}</div>}
+          <h2 className='shelter-header' ref={additionalInfoSection}>
+            Potrzebujemy jeszcze kilku informacji
+          </h2>
+          <div className='shelter-input-div'>
+            <input
+              className='shelter-sign-input'
+              type='text'
+              value={streetName}
+              onChange={setStreetNameHandler}
+              placeholder={'Podaj ulicę schroniska'}
+            />
+          </div>
+          <div className='shelter-input-div'>
+            <input
+              className='shelter-sign-input'
+              type='text'
+              value={number}
+              onChange={setNumberHandler}
+              placeholder={'Podaj numer budynku'}
+            />
+          </div>
+          <div className='shelter-input-div'>
+            <input
+              className='shelter-sign-input'
+              type='text'
+              value={city}
+              onChange={setCityHandler}
+              placeholder={'Podaj miejscowość'}
+            />
+          </div>
+          <div className='shelter-input-div'>
+            <input
+              className='shelter-sign-input'
+              type='text'
+              value={postalCode}
+              onChange={setPostalCodeHandler}
+              placeholder={'Podaj kod pocztowy'}
+            />
+          </div>
+          <div className='shelter-input-div'>
+            <input
+              className='shelter-sign-input'
+              type='text'
+              value={phoneNumber}
+              onChange={setPhoneNumberHandler}
+              placeholder={'Podaj numer telefonu'}
+            />
+          </div>
+          <div className='shelter-input-div'>
+            <input
+              className='shelter-sign-input'
+              type='text'
+              value={website}
+              onChange={setWebsiteHandler}
+              placeholder={'Podaj stronę internetową'}
+            />
+          </div>
+          <button
+            className='log-sign-button'
+            type='submit'
+            onClick={submitHandler}
+          >
+            Zarejestruj się
+          </button>
         </div>
       </form>
     </div>

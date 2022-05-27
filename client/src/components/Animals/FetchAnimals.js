@@ -1,41 +1,24 @@
-import React, {useEffect, useState} from 'react';
-import Card from "../Animal/Card";
+import Card from '../Animal/Card';
+import useFetchGet from '../../hooks/useFetchGet';
 
-const FetchAnimals = () => {
 
-    // TODO: better loading and error handling
-    const [animals, setAnimals] = useState([]);
-    const [hasError, setErrors] =  useState(false);
-    const [loading, setLoading] = useState(true);
+const FetchAnimals = (props) => {
+    const { data, hasError, loading } = useFetchGet(props.url)
 
-    const getData = async () => {
-        try {
-            const response = await fetch('http://localhost:5000/animals')
-                .then(response => response.json())
-                .then(data => {
-                    setAnimals(data);
-                    console.log(data);
-                    setLoading(false);
-
-                });
-        } catch (e) {
-            setErrors(true);
-        }
-    };
-
-    useEffect(() => {
-        getData();
-    }, [])
-
-    return (
+  return (
+    <>
+      {loading ? (
+        <p>Loading...</p>
+      ) : (
         <>
-            {loading ? <p>Loading...</p> : <>
-                {animals.map(animal => <Card key={animal.animal_id} animal={animal}/>)}
-
-            </>}
-            {hasError ? <p>{hasError}</p> : null}
+          {data.map((animal) => (
+            <Card key={animal.animal_id} animal={animal} />
+          ))}
         </>
-    );
+      )}
+      {hasError ? <p>{hasError}</p> : null}
+    </>
+  );
 };
 
 export default FetchAnimals;

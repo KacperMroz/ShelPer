@@ -1,90 +1,153 @@
 import React from 'react';
-import Type from "../AnimalSpec/Type";
-import Sex from "../AnimalSpec/Sex";
-import Color from "../AnimalSpec/Color";
-import Size from "../AnimalSpec/Size";
-import Photo from "../AnimalSpec/Photo";
+import CheckBoxes from '../AnimalSpec/CheckBoxes';
+import Color from '../AnimalSpec/Color';
+import Input from '../AnimalSpec/Input';
+import Photo from '../AnimalSpec/Photo';
+import { animalTypes, sexTypes, sizeTypes } from './utils';
+import './Form.css';
 
 const Form = () => {
-    const [type, setType] = React.useState('');
-    const [sex, setSex] = React.useState(false);
-    const [color, setColor] = React.useState('');
-    const [size, setSize] = React.useState('');
-    const [age, setAge] = React.useState('');
-    const [name, setName] = React.useState('');
-    const [weight, setWeight] = React.useState('');
-    const [description, setDescription] = React.useState('');
-    const [photo, setPhoto] = React.useState([]);
-    const [healthy, setHealthy] = React.useState(true);
+  const [photo, setPhoto] = React.useState([]);
+  const [error, setError] = React.useState('Please fill in all fields');
+  const [validated, setValidated] = React.useState(false);
+  const [model, setModel] = React.useState({
+    name: '',
+    type: '',
+    age: '',
+    weight: '',
+    description: '',
+    healthy: true,
+    male: true,
+    color: '',
+    breed_id: 1,
+    size_id: 1,
+    animal_type_id: 1,
+  });
 
+  const handleFileInput = (e) => {
+    setPhoto([...photo, ...e.target.files]);
+  };
 
-    const handleInputChange = (e, set) => {
-        set(e.target.value);
+  const addAnimal = async (fetchData) => {
+    try {
+      const response = await fetch('/animal', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(fetchData),
+      });
+      const data = await response.json();
+      if (data.message) {
+        setError(data.message);
+      }
+    } catch (error) {
+      console.log(error);
     }
+  };
 
-    const handleFileInput = (e) => {
-        console.log(e.target.files);
-        setPhoto([...photo, ...e.target.files]);
-    };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    checkIfNotEmpty();
+    validated ? addAnimal(model) : console.log(error);
+  };
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        const formData = new FormData();
-        formData.append('name', name);
-        formData.append('age', age);
-        formData.append('weight', weight);
-        formData.append('description', description);
-        formData.append('healthy', healthy);
-        formData.append('male', sex);
-        formData.append('color', color);
-        formData.append('breed_id', 1);
-        formData.append('size_id', 1);
-        formData.append('animal_type_id', 1);
+  const handleChange = (e) => {
+    console.log(e.target.name);
+    checkIfNumber(e);
+    setModel({
+      ...model,
+      [e.target.name]: e.target.value,
+    });
+  };
 
-        console.log('Form submitted' + formData.forEach(e => console.log(e)));
-        addAnimal(formData).then(r => console.log(r));
+  // form validation
+  const checkIfNotEmpty = () => {
+    const values = Object.values(model);
+    const isEmpty = values.some((value) => value === '');
+    const isSpaces = values.some((value) => value === ' ');
+    if (isEmpty || isSpaces) {
+      setValidated(false);
+      setError('Please fill in all fields');
+    } else {
+      setValidated(true);
     }
+  };
 
-    const addAnimal = async (formData) => {
-        const response = await fetch(
-            'http://127.0.0.1:5000/animal',
-            {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(formData),
-            }
-        );
-        const data = await response.json();
-        if (data.error) {
-            console.log(data.error);
-        } else {
-            console.log("idk");
-        }
-    };
+  const checkIfNumber = (e) => {
+    const inputName = 'model.' + e.target.name;
+    if (isNaN(eval(inputName)) && (e.target.name === 'age' || e.target.name === 'weight')) {
+      setValidated(false);
+      setError(e.target.name + ' not a number');
+    }
+  };
 
-    return (
-        <form>
-            <Type handleTypeChange={(e) => handleInputChange(e, setType)} type="radio" />
-            <Sex handleSexChange={(e) => handleInputChange(e, setSex)} type="radio" />
-            <Color handleColorChange={(e) => handleInputChange(e, setColor)} type="radio" />
-            <Size handleSizeChange = {(e) => handleInputChange(e, setSize)} type="radio" />
-            <input type="text" onChange={e => setAge(e.target.value)}  placeholder={"Podaj wiek zwierzaka"}/>
-            <input type="text" onChange={e => setName(e.target.value)} placeholder={"Podaj imie zwierzaka"}/>
-            <input type="text" onChange={e => setWeight(e.target.value)} placeholder={"Podaj wagę zwierzaka (kg)"}/>
-            <textarea onChange={e => setDescription(e.target.value)} placeholder={"Opis zwierzaka"}/>
-            <div>
-                <Photo value={photo} handlePhotoInput={handleFileInput} />
-                {photo.length === 0 && <p>Zdjęcia</p>}
-                {photo.map(x =>
-                    <div className="file-preview" key={x.name}> {x.name} </div>
-                )}
-            </div>
-
-            <button type="submit" onClick={handleSubmit}>Dodaj ogłoszenie</button>
-        </form>
-    );
+  return (
+    <form className="form-container">
+      <CheckBoxes
+        handleChange={handleChange}
+        type="radio"
+        name="type"
+        value={model.type}
+        data={animalTypes}
+      />
+      <CheckBoxes
+        handleChange={handleChange}
+        name="sex"
+        type="radio"
+        value={model.sex}
+        data={sexTypes}
+      />
+      <Color handleColorChange={handleChange} type="radio" />
+      <CheckBoxes
+        handleChange={handleChange}
+        type="radio"
+        name="size"
+        value={model.size}
+        data={sizeTypes}
+      />
+      <Input
+        type="text"
+        name="age"
+        value={model.age}
+        handleChange={handleChange}
+        placeholder={'Podaj wiek zwierzaka'}
+      />
+      <Input
+        type="text"
+        name="name"
+        value={model.name}
+        handleChange={handleChange}
+        placeholder={'Podaj imie zwierzaka'}
+      />
+      <Input
+        type="text"
+        name="weight"
+        value={model.weight}
+        handleChange={handleChange}
+        placeholder={'Podaj wagę zwierzaka (kg)'}
+      />
+      <textarea
+        className="textarea"
+        name="description"
+        onChange={handleChange}
+        placeholder={'Opis zwierzaka'}
+      />
+      <div>
+        <Photo value={photo} handlePhotoInput={handleFileInput} />
+        {photo.length === 0 && <p>Zdjęcia</p>}
+        {photo.map((x) => (
+          <div className="file-preview" key={x.name}>
+            {' '}
+            {x.name}{' '}
+          </div>
+        ))}
+      </div>
+      <button type="submit" className="log-sign-button" onClick={handleSubmit}>
+        Dodaj ogłoszenie
+      </button>
+    </form>
+  );
 };
 
 export default Form;
