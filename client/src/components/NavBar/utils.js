@@ -1,5 +1,9 @@
 export const getNavBarItems = (isLoggedIn) => {
-  if (isLoggedIn === false) return [
+  if (!isLoggedIn) return [
+    {
+      pathname: '/',
+      title: 'Strona główna',
+    },
     {
       pathname: '/login',
       title: 'Zaloguj się',
@@ -7,11 +11,7 @@ export const getNavBarItems = (isLoggedIn) => {
     {
       pathname: '/signup',
       title: 'Rejestracja',
-    },
-    {
-      pathname: '/',
-      title: 'Strona główna',
-    },
+    }
   ];
   if (isLoggedIn.charAt(0) === 'C') {
     return [
