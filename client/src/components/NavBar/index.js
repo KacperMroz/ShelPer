@@ -6,11 +6,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { getNavBarItems } from './utils';
 import './index.css';
-import checkIfLogged from "./checkIfLogged";
 library.add(faMagnifyingGlass);
 
 const NavBar = () => {
-  const isLoggedIn = !!document.cookie;
+  const isLoggedIn = localStorage.getItem('token').charAt(0);
   const items = getNavBarItems(isLoggedIn);
   const location = useLocation();
 

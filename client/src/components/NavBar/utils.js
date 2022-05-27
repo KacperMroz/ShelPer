@@ -1,5 +1,5 @@
 export const getNavBarItems = (isLoggedIn) => {
-  if (isLoggedIn) {
+  if (isLoggedIn.charAt(0) === 'C') {
     return [
       {
         pathname: '/',
@@ -17,24 +17,20 @@ export const getNavBarItems = (isLoggedIn) => {
     ];
   }
   // schronisko
-  if (isLoggedIn) {
+  if (isLoggedIn.charAt(0) === 'S') {
     return [
-      {
-        pathname: '/account-settings',
-        title: 'Konto',
-      },
       {
         pathname: '/favourites',
         title: 'Ulubione',
       },
       {
-        pathname: '/favourites',
-        title: 'Dodaj ogłoszenie',
-      },
-      {
         pathname: '/add-post',
         title: 'Dodaj ogłoszenie',
       },
+      {
+        pathname: '/account-settings',
+        title: 'Konto',
+      }
     ];
   }
   return [

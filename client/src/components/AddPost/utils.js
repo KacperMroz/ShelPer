@@ -6,8 +6,8 @@ export const animalTypes = [
 ];
 
 export const sexTypes = [
-  { name: 'female', label: 'Samica' },
-  { name: 'male', label: 'Samiec' },
+  { name: 'false', label: 'Samica' },
+  { name: 'true', label: 'Samiec' },
 ];
 
 export const sizeTypes = [
