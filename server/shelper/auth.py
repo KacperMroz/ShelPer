@@ -154,6 +154,9 @@ def login():
     elif not check_password_hash(user['password'], password):
         error = 'Incorrect password.'
 
+    shelter = None
+    client = None
+
     if error is None:
         shelter = db.execute(
             "SELECT * from shelter where details = ?", (user['user_id'],)
