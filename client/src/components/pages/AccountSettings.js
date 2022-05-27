@@ -1,13 +1,28 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import NavBar from '../NavBar';
 import { Button } from '../UI/Button';
 
 const AccountSettings = () => {
   // password visibility toggle button
   const [passwordVisibility, setPasswordVisibility] = useState(false);
+  const [email, setEmail] = useState('');
+  const userId = document.cookie.split('=')[1];
   const togglePasswordVisibility = () => {
     setPasswordVisibility(!passwordVisibility);
   };
+
+  // get user email from backend
+  const getEmail = async () => {
+    const response = await fetch(`/user/client/${userId}`);
+    const data = await response.json();
+    setEmail(data.email);
+  };
+
+  useEffect(() => {
+    getEmail();
+  }, []);
+
+  // update user email
 
   return (
     <div className='acc-home-div'>
@@ -17,7 +32,7 @@ const AccountSettings = () => {
         <div className='acc-input-div'>
           <div>
             <span>E-mail</span>
-            <input className='acc-input' type='text' />
+            <input className='acc-input' type='text' value={email} />
           </div>
           <div>
             <span>Hasło</span>
