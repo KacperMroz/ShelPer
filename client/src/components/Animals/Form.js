@@ -3,6 +3,7 @@ import CheckBoxes from '../AnimalSpec/CheckBoxes';
 import Location from '../AnimalSpec/Location';
 import Color from '../AnimalSpec/Color';
 import {animalTypes, sexTypes} from "../AddPost/utils";
+import './Form.css'
 
 const Form = () => {
   const [type, setType] = React.useState([]);
@@ -57,7 +58,7 @@ const Form = () => {
       />
       <Location handleLocalizationChange={handleLocalizationChange} type="checkbox" value={localization}/>
       <Color handleColorChange={handleColorChange} type="checkbox" />
-      <button type="submit" onClick={handleSubmit}>
+      <button className='submit_btn' type="submit" onClick={handleSubmit}>
         Wyszukaj
       </button>
     </form>

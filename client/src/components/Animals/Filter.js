@@ -1,5 +1,6 @@
 import React from 'react';
 import Form from "./Form";
+import './Filter.css'
 
 const Filter = () => {
     const [filter, setFilter] = React.useState(false);
@@ -11,9 +12,9 @@ const Filter = () => {
 
     return (
         <div>
-            <button className={"btn btn-primary"} onClick={toggleFilter}>Pokaż filtry</button>
+            <button className={"btn-primary"} onClick={toggleFilter}>Pokaż filtry</button>
             {filter &&
-                (<div>
+                (<div class_name='filter_box'>
                     <Form />
                 </div>)}
             <select className={"order"} onChange={(e) => setOrder(e.target.value)}>
