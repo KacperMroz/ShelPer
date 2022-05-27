@@ -154,10 +154,32 @@ def login():
     elif not check_password_hash(user['password'], password):
         error = 'Incorrect password.'
 
+    if error is None:
+        db.execute(
+            "SELECT * from shelter where details = ?", (user['user_id'],)
+        )
+        shelter = db.fetchone()
+
+        if shelter is None:
+            db.execute(
+                "SELECT * from client where details = ?", (user['user_id'],)
+            )
+            client = db.fetchone()
+
+            if client is None:
+                error = 'User not found.'
+
+
+    if client is not None:
+        letter = 'C'
+
+    if shelter is not None:
+        letter = 'S'
 
     if error is None:
         response = make_response(jsonify({'message': 'Logged in successfully.'}, 200))
-        response.set_cookie('user_id', str(user['user_id']))
+        value = letter + str(user['user_id'])
+        response.set_cookie('user_id', value)
         return response
 
     return {'message': error}, 401
