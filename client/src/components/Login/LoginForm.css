@@ -22,7 +22,7 @@
   font-size: 48px;
 }
 
-form > div {
+.log-sign-form > div {
   width: 65%;
   display: flex;
   justify-content: center;
