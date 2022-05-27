@@ -2,7 +2,7 @@ import React from 'react';
 import NavBar from "../NavBar";
 import Filter from "../Animals/Filter";
 import "./Animals.css";
-import FetchAnimals from "../Animals/FetchAnimals";
+import FetchFavourites from "../Animals/FetchFavourites";
 
 const Favourites = () => {
     return (
@@ -11,7 +11,7 @@ const Favourites = () => {
             <div className='animals-content-container'>
                 <Filter />
                 <div className={'container'}>
-                    <FetchAnimals url={'/favourites'}/>
+                    <FetchFavourites url={'/favourites'}/>
                 </div>
             </div>
         </div>

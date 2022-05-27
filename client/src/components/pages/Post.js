@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { faHeartCircleMinus, faHeartCirclePlus } from '@fortawesome/free-solid-svg-icons';
 import {useParams} from "react-router-dom";
 import Description from "../Post/Description";
@@ -10,10 +10,16 @@ import useFetchAnimalAndShelter from "../../hooks/useFetchAnimalAndShelter";
 
 const Post = () => {
     const [heart, setHeart] = React.useState(faHeartCirclePlus);
+    const [fav, setFav] = React.useState('');
+    let tmpFavourites = JSON.parse(localStorage.getItem("favourites"));
     let {id} = useParams();
+    const idEval = eval(id);
+
+    const request = {
+        "animal_id":id
+    }
 
     const { data, dataInfo, hasError, loading } = useFetchAnimalAndShelter('http://localhost:5000/animal', id, 'http://localhost:5000/user/shelter/');
-    // get shelter info (after backend is fixed)
     const post = {
         name: "Lola",
         image: [
@@ -35,11 +41,51 @@ const Post = () => {
     }
 
     const handleClickOnHeart = () => {
-        if (heart === faHeartCirclePlus)
+        if (heart === faHeartCirclePlus) {
             setHeart(faHeartCircleMinus);
-        else
+            setFav(true);
+            tmpFavourites.push(idEval);
+            localStorage.setItem('favourites', JSON.stringify(tmpFavourites));
+        }
+        else {
             setHeart(faHeartCirclePlus);
+            setFav(false);
+            tmpFavourites = tmpFavourites.filter(item => item !== idEval);
+            localStorage.setItem('favourites', JSON.stringify(tmpFavourites));
+        }
     }
+
+    useEffect(() =>{
+        if (tmpFavourites.includes(idEval)) {
+            setHeart(faHeartCircleMinus);
+        }
+    }, []);
+
+    useEffect( () => {
+        async function fetchData(method) {
+            try {
+                await fetch('/favourite', {
+                    method: method,
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(request),
+                });
+                if (data.message) {
+                    console.log(data.message);
+                }
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        if (fav === true) {
+            fetchData('POST');
+        }
+        else if (fav === false) {
+            fetchData('DELETE');
+        }
+    }, [fav]);
+
 
     return (
         <div className='post-base-container'>

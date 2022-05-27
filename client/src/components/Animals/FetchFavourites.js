@@ -1,8 +1,17 @@
 import Card from '../Animal/Card';
 import useFetchGet from '../../hooks/useFetchGet';
+import {useEffect, useState} from "react";
 
-const FetchAnimals = (props) => {
+
+const FetchFavourites = (props) => {
     const { data, hasError, loading } = useFetchGet(props.url)
+    const [favourites, setFavourites] = useState([]);
+
+    useEffect(() => {
+        setFavourites(data.map(animal => animal.animal_id))
+    }, [data])
+    localStorage.setItem('favourites', JSON.stringify(favourites));
+    console.log(localStorage.getItem('favourites'));
     return (
         <>
             {loading ? (
@@ -19,4 +28,4 @@ const FetchAnimals = (props) => {
     );
 };
 
-export default FetchAnimals;
+export default FetchFavourites;
