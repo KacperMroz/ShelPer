@@ -1,9 +1,9 @@
 import React, { useRef, useState } from 'react';
 import { Button } from '../UI/Button';
-import { NavLink as Link } from 'react-router-dom';
+import { NavLink as Link, useNavigate } from 'react-router-dom';
 import './SignUpForm.css';
 
-export const SignUpFormShelter = ({ text, navigate }) => {
+export const SignUpFormShelter = ({ text }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -14,6 +14,7 @@ export const SignUpFormShelter = ({ text, navigate }) => {
   const [phoneNumber, setPhoneNumber] = useState('');
   const [website, setWebiste] = useState('');
   const [error, setError] = useState('');
+  const navigate = useNavigate();
 
   const shelter = {
     email,
@@ -94,7 +95,7 @@ export const SignUpFormShelter = ({ text, navigate }) => {
     if (!validateForm()) {
       return;
     }
-    const response = await fetch('/api/auth/register/shelter', {
+    const response = await fetch('api/auth/register/shelter', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
