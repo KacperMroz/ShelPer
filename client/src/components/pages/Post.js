@@ -6,14 +6,14 @@ import Info from "../Post/Info";
 import NavBar from "../NavBar";
 import PhotoCarousel from "../Post/PhotoCarousel";
 import "./Post.css";
-import useFetchGet from "../../hooks/useFetchGet";
+import useFetchAnimalAndShelter from "../../hooks/useFetchAnimalAndShelter";
 
 const Post = () => {
     const [heart, setHeart] = React.useState(faHeartCirclePlus);
     let {id} = useParams();
 
-    const { data, hasError, loading } = useFetchGet('http://localhost:5000/animal', id);
-
+    const { data, dataInfo, hasError, loading } = useFetchAnimalAndShelter('http://localhost:5000/animal', id, 'http://localhost:5000/user/shelter/');
+    // get shelter info (after backend is fixed)
     const post = {
         name: "Lola",
         image: [
@@ -49,7 +49,7 @@ const Post = () => {
                     <PhotoCarousel post={post.image}/>
                     {id === '1' ? <Description post={post} heart={heart} handleClickOnHeart={handleClickOnHeart}/> :
                         <Description post={data} heart={heart} handleClickOnHeart={handleClickOnHeart}/>}
-                    <Info/>
+                    <Info dataInfo={dataInfo}/>
                 </div>
             }
         </div>

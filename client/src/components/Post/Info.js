@@ -3,7 +3,7 @@ import { faPhone, faComment, faGlobe } from '@fortawesome/free-solid-svg-icons';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import "../pages/Post.css";
 
-const Info = () => {
+const Info = (props) => {
     const [phone, setPhone] = React.useState(false);
     const [message, setMessage] = React.useState(false);
     const [website, setWebsite] = React.useState(false);
@@ -16,15 +16,15 @@ const Info = () => {
         <div className='post-last-info'>
             <div>
                 <FontAwesomeIcon icon={faPhone} onClick={() => handleClick(phone, setPhone)}/>
-                {phone && <span>phone number</span>}
+                {phone && <span>{props.dataInfo.phone_number}</span>}
             </div>
             <div>
                 <FontAwesomeIcon icon={faComment} onClick={() => handleClick(message, setMessage)}/>
-                {message && <span>email</span>}
+                {message && <span>{props.dataInfo.email}</span>}
             </div>
             <div>
                 <FontAwesomeIcon icon={faGlobe} onClick={() => handleClick(website, setWebsite)}/>
-                {website && <span>website</span>}
+                {website && <span>{props.dataInfo.phone_number}</span>}
             </div>
             <div id='calendar'>
                 Kalendarz wizyt
