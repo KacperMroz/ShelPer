@@ -1,21 +1,37 @@
 import React, { useState, useEffect } from 'react';
 import NavBar from '../NavBar';
 import { Button } from '../UI/Button';
+import classes from '../UI/Button.module.css';
 
 const AccountSettings = () => {
   // password visibility toggle button
   const [passwordVisibility, setPasswordVisibility] = useState(false);
   const [email, setEmail] = useState('');
-  const userId = localStorage.getItem('token').split('S')[1];
+  // set userType to 'client' or 'shelter' depending on letter C or S in token
+  let userType =
+    localStorage.getItem('token').charAt(0) === 'C' ? 'client' : 'shelter';
+  let userId;
+  if (userType === 'client') {
+    userId = localStorage.getItem('token').split('C')[1];
+  } else {
+    userId = localStorage.getItem('token').split('S')[1];
+  }
+
   const togglePasswordVisibility = () => {
     setPasswordVisibility(!passwordVisibility);
   };
 
   // get user email from backend
   const getEmail = async () => {
-    const response = await fetch(`/user/client/${userId}`);
+    const response = await fetch(`/user/${userType}/${userId}`);
     const data = await response.json();
     setEmail(data.email);
+  };
+
+  const logout = () => {
+    // remove cookies
+    localStorage.removeItem('token');
+    window.location.href = '/';
   };
 
   useEffect(() => {
@@ -54,7 +70,10 @@ const AccountSettings = () => {
             />
           </div>
         </div>
-        <Button text='Zatwierdź zmiany' />
+        <button className={classes.button}>Zatwierdź zmiany</button>
+        <button className={classes.button} onClick={logout}>
+          Wyloguj
+        </button>
       </div>
     </div>
   );
