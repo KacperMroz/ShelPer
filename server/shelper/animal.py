@@ -45,6 +45,7 @@ def addAnimal():
     # TODO: Data validation
 
     path = ''
+    external_path = ''
 
     if file and allowed_file(file.filename):
         filename = secure_filename(file.filename)
@@ -59,6 +60,8 @@ def addAnimal():
     today = date.today()
 
     shelter_id = getSecodnaryId(auth_cookie)
+    if shelter_id is None:
+        return {'message': 'No such shelter'}, 400
 
     print("shelter_id: " + str(shelter_id))
 
