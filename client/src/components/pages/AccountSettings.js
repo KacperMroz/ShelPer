@@ -6,7 +6,7 @@ const AccountSettings = () => {
   // password visibility toggle button
   const [passwordVisibility, setPasswordVisibility] = useState(false);
   const [email, setEmail] = useState('');
-  const userId = document.cookie.split('=')[1];
+  const userId = localStorage.getItem('token').split('S')[1];
   const togglePasswordVisibility = () => {
     setPasswordVisibility(!passwordVisibility);
   };
