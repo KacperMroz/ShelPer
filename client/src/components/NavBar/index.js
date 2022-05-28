@@ -9,11 +9,10 @@ import './index.css';
 library.add(faMagnifyingGlass);
 
 const NavBar = () => {
-    let isLoggedIn;
+    let isLoggedIn = '';
     if (localStorage.getItem('token') !== null) {
         isLoggedIn = localStorage.getItem('token').charAt(0);
     }
-    else isLoggedIn = false;
     const items = getNavBarItems(isLoggedIn);
     const location = useLocation();
 
