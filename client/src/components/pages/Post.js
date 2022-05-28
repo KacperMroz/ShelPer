@@ -11,7 +11,7 @@ import useFetchAnimalAndShelter from "../../hooks/useFetchAnimalAndShelter";
 const Post = () => {
     const [heart, setHeart] = React.useState(faHeartCirclePlus);
     const [fav, setFav] = React.useState('');
-    let tmpFavourites = JSON.parse(localStorage.getItem("favourites"));
+    let tmpFavourites = localStorage.getItem('favourites') !== null ? JSON.parse(localStorage.getItem('favourites')) : [];
     let {id} = useParams();
     const idEval = eval(id);
 

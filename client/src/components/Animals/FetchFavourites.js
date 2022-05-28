@@ -10,6 +10,7 @@ const FetchFavourites = (props) => {
     useEffect(() => {
         setFavourites(data.map(animal => animal.animal_id))
     }, [data])
+
     localStorage.setItem('favourites', JSON.stringify(favourites));
     console.log(localStorage.getItem('favourites'));
     return (
