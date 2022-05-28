@@ -144,12 +144,13 @@ def login():
         return {'message': 'Malformed data.'}, 400
 
     db = get_db()
+    error = None
     user = db.execute(
         'SELECT * FROM user_details WHERE email = ?', (email,)
     ).fetchone()
 
-    error = None
-    if email == '':
+
+    if user is None:
         error = 'Incorrect email.'
     elif not check_password_hash(user['password'], password):
         error = 'Incorrect password.'
