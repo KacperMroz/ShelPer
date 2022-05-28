@@ -30,7 +30,7 @@ const AccountSettings = () => {
 
   const logout = () => {
     // remove cookies
-    localStorage.clear();
+    localStorage.removeItem('token');
     window.location.href = '/';
   };
 
