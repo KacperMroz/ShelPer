@@ -30,19 +30,35 @@ const Form = () => {
         setPhoto([...photo, ...e.target.files]);
     };
 
-    const addAnimal = async (fetchData) => {
+    const addAnimal = async (fetchData, photo) => {
         try {
+            let formData = new FormData();
+            formData.set("Info", JSON.stringify(fetchData))
+            formData.set("Photo", photo[0])
             const response = await fetch('/animal', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(fetchData),
+                body: formData,
             });
             const data = await response.json();
             if (data.message) {
                 setError(data.message);
             }
+
+            // let animalId = data.animal_id
+
+            // const response = await fetch('/animal', {
+            //     method: 'POST',
+            //     headers: {
+            //         'Content-Type': 'application/json',
+            //     },
+            //     body: JSON.stringify(fetchData),
+            // });
+            // const data = await response.json();
+            // if (data.message) {
+            //     setError(data.message);
+            // }
+
+
         } catch (error) {
             console.log(error);
         }
@@ -51,7 +67,7 @@ const Form = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         if (validated) {
-            addAnimal(model);
+            addAnimal(model, photo);
             navigate('/animals');
         } else console.log(error);
 

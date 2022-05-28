@@ -1,8 +1,10 @@
 import json
+import os
 
 from flask import (
-    Blueprint, flash, g, redirect, render_template, request, session, url_for, make_response, jsonify
+    Blueprint, flash, g, redirect, render_template, request, session, url_for, make_response, jsonify, current_app
 )
+from werkzeug.utils import secure_filename
 from datetime import date
 
 from shelper.db import get_db
@@ -13,11 +15,18 @@ from shelper.cookie_reader import getSecodnaryId
 
 bp = Blueprint('animal', __name__)
 
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
+
+
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 @bp.route('/animal', methods=('POST',))
 @login_required
 def addAnimal():
-    animal_data = request.get_json()
+    file = request.files.get('Photo')
+    animal_data = json.loads(request.form.get('Info'))
     try:
         name = animal_data['name']
         age = animal_data['age']
@@ -35,6 +44,18 @@ def addAnimal():
 
     # TODO: Data validation
 
+    path = ''
+
+    if file and allowed_file(file.filename):
+        filename = secure_filename(file.filename)
+        path = os.path.join(current_app.instance_path, '../../client/public/photos', filename)
+        external_path = os.path.join("/public/photos", filename)
+        while os.path.exists(path):
+            path += "#"
+            external_path += "#"
+
+
+
     today = date.today()
 
     shelter_id = getSecodnaryId(auth_cookie)
@@ -45,15 +66,37 @@ def addAnimal():
 
     try:
         animal_id = db.execute(
-            "INSERT INTO animal(name, age, weight, description, healthy, male, color, advert_date, breed_id, size_id, shelter_id, animal_type_id) VALUES(?,?,?,?,?,?,?,?,?,?,?,?) RETURNING animal_id",
-            (name, age, weight, description, healthy, male, color, today, breed_id, size_id, shelter_id, animal_type_id),
+            "INSERT INTO animal(name, age, weight, description, healthy, male, color, advert_date, breed_id, size_id, shelter_id, animal_type_id, photo_path) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?) RETURNING animal_id",
+            (name, age, weight, description, healthy, male, color, today, breed_id, size_id, shelter_id, animal_type_id, external_path),
         ).fetchone()['animal_id']
+        if path != "":
+            file.save(path)
     except Exception:
         return {"message": 'Insert failed'}, 400
 
     db.commit()
     return {"animal_id": animal_id}, 201
 
+# @bp.route('/animal/id/photo', methods=('POST',))
+# @login_required
+# def addAnimal():
+#     files = request.form
+#     print(files)
+#     animal_data = request.get_json()
+#     try:
+#         name = animal_data['name']
+#         age = animal_data['age']
+#         weight = animal_data['weight']
+#         description = animal_data['description']
+#         healthy = animal_data['healthy']
+#         male = animal_data['male']
+#         color = animal_data['color']
+#         breed_id = animal_data['breed_id']
+#         size_id = animal_data['size_id']
+#         auth_cookie = request.cookies.get('user_id')
+#         animal_type_id = animal_data['animal_type_id']
+#     except Exception:
+#         return {'message': 'Malformed data.'}, 400
 
 @bp.route('/animal/<int:animal_id>', methods=('GET',))
 def getAnimal(animal_id):
