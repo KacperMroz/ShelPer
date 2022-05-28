@@ -6,7 +6,7 @@ import "./Animals.css";
 import FetchAnimals from "../Animals/FetchAnimals";
 
 const Animals = () => {
-    // TODO: replace with fetching data from server (when endpoint is ready)
+
     const Lola = {
         animal_id: 1,
         name: "Lola",

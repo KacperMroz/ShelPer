@@ -1,14 +1,15 @@
 import React, {useEffect} from 'react';
-import { faHeartCircleMinus, faHeartCirclePlus } from '@fortawesome/free-solid-svg-icons';
+import { faHeartCircleMinus, faHeartCirclePlus, faTrashCan } from '@fortawesome/free-solid-svg-icons';
 import {useParams} from "react-router-dom";
 import Description from "../Post/Description";
 import Info from "../Post/Info";
 import NavBar from "../NavBar";
-import PhotoCarousel from "../Post/PhotoCarousel";
 import "./Post.css";
 import useFetchAnimalAndShelter from "../../hooks/useFetchAnimalAndShelter";
+import { useNavigate } from 'react-router-dom';
 
 const Post = () => {
+    const navigate = useNavigate();
     const [heart, setHeart] = React.useState(faHeartCirclePlus);
     const [fav, setFav] = React.useState('');
     let tmpFavourites = localStorage.getItem('favourites') !== null ? JSON.parse(localStorage.getItem('favourites')) : [];
@@ -19,7 +20,7 @@ const Post = () => {
         "animal_id":id
     }
 
-    const { data, dataInfo, hasError, loading } = useFetchAnimalAndShelter('http://localhost:5000/animal', id, 'http://localhost:5000/user/shelter/');
+    const { data, dataInfo, hasError, loading, owner } = useFetchAnimalAndShelter('http://localhost:5000/animal', id, 'http://localhost:5000/user/shelter/');
     const post = {
         name: "Lola",
         description: "Poznaj Lolę lepiej. Lorem ipsum dolor sit amet, consectetur adipiscing elit lorem....",
@@ -45,8 +46,24 @@ const Post = () => {
         else {
             setHeart(faHeartCirclePlus);
             setFav(false);
-            tmpFavourites = tmpFavourites.filter(item => item !== idEval);
+            tmpFavourites.filter(item => item !== idEval);
             localStorage.setItem('favourites', JSON.stringify(tmpFavourites));
+        }
+    }
+
+    const handleClickOnTrash = () => {
+        if (window.confirm('Czy na pewno chcesz usunąć post?')) {
+            setFav(false);
+            tmpFavourites.filter(item => item !== idEval);
+            localStorage.setItem('favourites', JSON.stringify(tmpFavourites));
+
+            fetch('/animal/' + id, {
+                method: 'DELETE'
+            })
+            .then(res => res.json())
+            .then(() => {
+                navigate('/');
+            })
         }
     }
 
@@ -57,7 +74,6 @@ const Post = () => {
     }, []);
 
     useEffect( () => {
-        console.log(data);
         async function fetchData(method) {
             try {
                 await fetch('/favourite', {
@@ -82,8 +98,6 @@ const Post = () => {
         }
     }, [fav]);
 
-
-
     return (
         <div className='post-base-container'>
             <NavBar />
@@ -91,16 +105,15 @@ const Post = () => {
                 loading ? <div>Loading...</div> :
                     <div className='post-info-container'>
                         {id === '1' ? <>
-                                <img src={post.photo_path} alt="post" className="post-carousel"/>
-                                <Description post={post} heart={heart} handleClickOnHeart={handleClickOnHeart}/>
-                                <Info dataInfo={dataInfo}/>
-                            </> : <>
-                                <img src={data.photo_path.substring('/public'.length)} alt="post" className="post-carousel"/>
-                                <Description post={data} heart={heart} handleClickOnHeart={handleClickOnHeart}/>
-                                <Info dataInfo={dataInfo}/>
+                            <img src={post.photo_path} alt="post" className="post-carousel"/>
+                            <Description post={post} heart={heart} handleClickOnHeart={handleClickOnHeart}/>
+                            <Info dataInfo={dataInfo}/>
+                        </> : <>
+                            <img src={data.photo_path.substring('/public'.length)} alt="post" className="post-carousel"/>
+                            <Description post={data} heart={heart} handleClickOnHeart={handleClickOnHeart} owner={owner} trash={faTrashCan} handleClickOnTrash={handleClickOnTrash}/>
+                            <Info dataInfo={dataInfo}/>
                         </>}
                     </div>
-
             }
         </div>
     );

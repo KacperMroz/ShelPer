@@ -5,7 +5,7 @@ const useFetchAnimalAndShelter = (url, id = null, urlSecond) => {
     const [dataInfo, setDataInfo] = useState([]);
     const [hasError, setErrors] =  useState(false);
     const [loading, setLoading] = useState(true);
-
+    const [owner, setOwner] = useState(false);
 
     useEffect( () => {
         try {
@@ -22,6 +22,8 @@ const useFetchAnimalAndShelter = (url, id = null, urlSecond) => {
                         .then(response => response.json())
                         .then(dataSecond => {
                             setDataInfo(dataSecond);
+                            if ('S'+dataSecond.shelter_id === localStorage.getItem('token'))
+                                setOwner(true);
                             setLoading(false);
                             console.log(dataSecond);
                         })
@@ -33,7 +35,7 @@ const useFetchAnimalAndShelter = (url, id = null, urlSecond) => {
         }
     }, []);
 
-    return {data, dataInfo, hasError, loading};
+    return {data, dataInfo, hasError, loading, owner};
 };
 
 export default useFetchAnimalAndShelter;

@@ -5,8 +5,12 @@ import "../pages/Post.css";
 const Description = (props) => {
     return (
         <div className={"post-description-container"}>
-            <div id='post-name-icon'><div id='post-name'>{props.post.name}</div>
-            <FontAwesomeIcon id='icon-heart' icon={props.heart} onClick={props.handleClickOnHeart}/>
+            <div id='post-name-icon'>
+                <div id='post-name'>{props.post.name}</div>
+                <FontAwesomeIcon id='icon-heart' icon={props.heart} onClick={props.handleClickOnHeart}/>
+                {props.owner ?
+                    <FontAwesomeIcon id='icon-heart' icon={props.trash} onClick={props.handleClickOnTrash}/>
+                    : null}
             </div>
             <div className='post-descritpion'>{props.post.description}</div>
             <div className='post-date'>{props.post.date}</div>

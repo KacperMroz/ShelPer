@@ -19,9 +19,14 @@ const FetchFavourites = (props) => {
                 <p>Loading...</p>
             ) : (
                 <>
-                    {data.map((animal) => (
-                        <Card key={animal.animal_id} animal={animal} />
-                    ))}
+                    {
+                        data.length >0 ? <>
+                                {data.map((animal) => (
+                                    <Card key={animal.animal_id} animal={animal} />
+                                ))}
+                            </>
+                            : <p>No favourites</p>
+                    }
                 </>
             )}
             {hasError ? <p>{hasError}</p> : null}
