@@ -43,22 +43,7 @@ const Form = () => {
             if (data.message) {
                 setError(data.message);
             }
-
-            // let animalId = data.animal_id
-
-            // const response = await fetch('/animal', {
-            //     method: 'POST',
-            //     headers: {
-            //         'Content-Type': 'application/json',
-            //     },
-            //     body: JSON.stringify(fetchData),
-            // });
-            // const data = await response.json();
-            // if (data.message) {
-            //     setError(data.message);
-            // }
-
-
+            else navigate('/animals');
         } catch (error) {
             console.log(error);
         }
@@ -68,7 +53,6 @@ const Form = () => {
         e.preventDefault();
         if (validated) {
             addAnimal(model, photo);
-            navigate('/animals');
         } else console.log(error);
 
     };

@@ -16,7 +16,7 @@ import Favourites from "./components/pages/Favourites";
 function App() {
   return (
     <div className="App">
-      <Router>
+      <Router forceRefresh={true}>
         <Routes>
           <Route exact path='/' element={<Home />} />
           <Route path='/login' element={<Login />} />
