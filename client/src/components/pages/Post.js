@@ -22,12 +22,6 @@ const Post = () => {
     const { data, dataInfo, hasError, loading } = useFetchAnimalAndShelter('http://localhost:5000/animal', id, 'http://localhost:5000/user/shelter/');
     const post = {
         name: "Lola",
-        image: [
-            {image: "https://images.unsplash.com/photo-1583337130417-3346a1be7dee?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80"},
-            {image: "https://images.unsplash.com/photo-1583512603805-3cc6b41f3edb?crop=entropy&cs=tinysrgb&fm=jpg&ixlib=rb-1.2.1&q=80&raw_url=true&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880"},
-            {image: "https://images.unsplash.com/photo-1598628461950-268968751a2e?crop=entropy&cs=tinysrgb&fm=jpg&ixlib=rb-1.2.1&q=80&raw_url=true&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=688"},
-            {image: "https://images.unsplash.com/photo-1583511666372-62fc211f8377?ixlib=rb-1.2.1&raw_url=true&q=80&fm=jpg&crop=entropy&cs=tinysrgb&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=688"}
-        ],
         description: "Poznaj Lolę lepiej. Lorem ipsum dolor sit amet, consectetur adipiscing elit lorem....",
         male: true,
         city: "Kraków",
@@ -37,7 +31,8 @@ const Post = () => {
         date: "19.10.2021 19:20",
         breed: "Mieszaniec",
         weight: "6",
-        color: "white"
+        color: "white",
+        photo_path: "https://images.unsplash.com/photo-1583337130417-3346a1be7dee?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80"
     }
 
     const handleClickOnHeart = () => {
@@ -62,6 +57,7 @@ const Post = () => {
     }, []);
 
     useEffect( () => {
+        console.log(data);
         async function fetchData(method) {
             try {
                 await fetch('/favourite', {
@@ -87,16 +83,24 @@ const Post = () => {
     }, [fav]);
 
 
+
     return (
         <div className='post-base-container'>
             <NavBar />
             {hasError ? <div>404</div> :
-                <div className='post-info-container'>
-                    <PhotoCarousel post={post.image}/>
-                    {id === '1' ? <Description post={post} heart={heart} handleClickOnHeart={handleClickOnHeart}/> :
-                        <Description post={data} heart={heart} handleClickOnHeart={handleClickOnHeart}/>}
-                    <Info dataInfo={dataInfo}/>
-                </div>
+                loading ? <div>Loading...</div> :
+                    <div className='post-info-container'>
+                        {id === '1' ? <>
+                                <img src={post.photo_path} alt="post" className="post-carousel"/>
+                                <Description post={post} heart={heart} handleClickOnHeart={handleClickOnHeart}/>
+                                <Info dataInfo={dataInfo}/>
+                            </> : <>
+                                <img src={data.photo_path.substring('/public'.length)} alt="post" className="post-carousel"/>
+                                <Description post={data} heart={heart} handleClickOnHeart={handleClickOnHeart}/>
+                                <Info dataInfo={dataInfo}/>
+                        </>}
+                    </div>
+
             }
         </div>
     );

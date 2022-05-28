@@ -17,7 +17,8 @@ const Animals = () => {
         size: "Mała",
         age: "3",
         healthy: "Zdrowa",
-        advert_date: "19.10.2021 19:20"
+        advert_date: "19.10.2021 19:20",
+        photo_path: 'abc'
     }
 
     const Edgar = {
@@ -30,7 +31,8 @@ const Animals = () => {
         size: "Mały",
         age: "3",
         healthy: "Zdrowy",
-        advert_date: "19.10.2021 19:20"
+        advert_date: "19.10.2021 19:20",
+        photo_path: 'abc'
     }
 
     return (
