@@ -12,23 +12,25 @@ import Animals from './components/pages/Animals';
 import Post from './components/pages/Post';
 import AddPost from './components/pages/AddPost';
 import Favourites from "./components/pages/Favourites";
+import Appointments from './components/pages/Appointments';
 
 function App() {
   return (
     <div className="App">
       <Router>
         <Routes>
-          <Route exact path='/' element={<Home />} />
-          <Route path='/login' element={<Login />} />
-          <Route path='/signup' element={<SignUp />} />
-          <Route path='/sign-up-personal' element={<SignUpPersonal />} />
-          <Route path='/sign-up-shelter' element={<SignUpShelter />} />
-          <Route path='/account' element={<Account />} />
-          <Route path='/account-settings' element={<AccountSettings />} />
-          <Route path='/animals' element={<Animals />} />
-          <Route path='/animals/:id' element={<Post />} />
-          <Route path='/add-post' element={<AddPost />} />
-          <Route path='/favourites' element={<Favourites />} />
+          <Route exact path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/sign-up-personal" element={<SignUpPersonal />} />
+          <Route path="/sign-up-shelter" element={<SignUpShelter />} />
+          <Route path="/account" element={<Account />} />
+          <Route path="/account-settings" element={<AccountSettings />} />
+          <Route path="/animals" element={<Animals />} />
+          <Route path="/animals/:id" element={<Post />} />
+          <Route path="/animals/:id/appointments" element={<Appointments />} />
+          <Route path="/add-post" element={<AddPost />} />
+          <Route path="/favourites" element={<Favourites />} />
         </Routes>
       </Router>
     </div>
