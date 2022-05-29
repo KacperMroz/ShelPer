@@ -17,7 +17,7 @@ import Appointments from './components/pages/Appointments';
 function App() {
   return (
     <div className="App">
-      <Router>
+      <Router forceRefresh={true}>
         <Routes>
           <Route exact path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
