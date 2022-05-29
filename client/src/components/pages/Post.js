@@ -1,5 +1,6 @@
 import React, {useEffect} from 'react';
-import { faHeartCircleMinus, faHeartCirclePlus, faTrashCan } from '@fortawesome/free-solid-svg-icons';
+import { faHeart, faTrashCan } from '@fortawesome/free-solid-svg-icons';
+import { faHeart as farHeart } from '@fortawesome/free-regular-svg-icons'
 import {useParams} from "react-router-dom";
 import Description from "../Post/Description";
 import Info from "../Post/Info";
@@ -7,10 +8,11 @@ import NavBar from "../NavBar";
 import "./Post.css";
 import useFetchAnimalAndShelter from "../../hooks/useFetchAnimalAndShelter";
 import { useNavigate } from 'react-router-dom';
+import Photo from "../Post/Photo";
 
 const Post = () => {
     const navigate = useNavigate();
-    const [heart, setHeart] = React.useState(faHeartCirclePlus);
+    const [heart, setHeart] = React.useState(farHeart);
     const [fav, setFav] = React.useState('');
     let tmpFavourites = localStorage.getItem('favourites') !== null ? JSON.parse(localStorage.getItem('favourites')) : [];
     let {id} = useParams();
@@ -23,14 +25,14 @@ const Post = () => {
     const { data, dataInfo, town, size, hasError, loading, owner } = useFetchAnimalAndShelter('http://localhost:5000/animal', id, 'http://localhost:5000/user/shelter/');
 
     const handleClickOnHeart = () => {
-        if (heart === faHeartCirclePlus) {
-            setHeart(faHeartCircleMinus);
+        if (heart === farHeart) {
+            setHeart(faHeart);
             setFav(true);
             tmpFavourites.push(idEval);
             localStorage.setItem('favourites', JSON.stringify(tmpFavourites));
         }
         else {
-            setHeart(faHeartCirclePlus);
+            setHeart(farHeart);
             setFav(false);
             tmpFavourites.filter(item => item !== idEval);
             localStorage.setItem('favourites', JSON.stringify(tmpFavourites));
@@ -55,7 +57,7 @@ const Post = () => {
 
     useEffect(() =>{
         if (tmpFavourites.includes(idEval)) {
-            setHeart(faHeartCircleMinus);
+            setHeart(faHeart);
         }
     }, []);
 
@@ -90,7 +92,8 @@ const Post = () => {
             {hasError ? <div>404</div> :
                 loading ? <div>Loading...</div> :
                     <div className='post-info-container'>
-                        <img src={data.photo_path.substring('/public'.length)} alt="post" className="post-carousel"/>
+                        <Photo url={data.photo_path.substring('/public'.length)} name={data.name} male={data.male}/>
+                        {/*<img src={data.photo_path.substring('/public'.length)} alt="post" className="post-carousel"/>*/}
                         <Description post={data} town={town} size={size} heart={heart} handleClickOnHeart={handleClickOnHeart} owner={owner} trash={faTrashCan} handleClickOnTrash={handleClickOnTrash}/>
                         <Info dataInfo={dataInfo}/>
                     </div>

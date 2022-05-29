@@ -62,7 +62,8 @@ body{
     display: grid;
     grid-template-columns: repeat(3,1fr);
     grid-template-rows: repeat(3,1fr);
-    font-size: 14px;
+    font-size: 12px;
+    align-items: center;
 }
 
 #post-city, #post-size, #post-bread{
@@ -74,7 +75,7 @@ body{
     font-weight: 600;
     font-size: 1em;
     color: #484848;
-    padding: 0.5em 1em;
+    padding: 1em 1em;
     width:70%;
     text-align: center;
     margin-bottom:1em;
@@ -116,12 +117,10 @@ body{
 .post-carousel{
     grid-row: 1/5;
     grid-column: 1/2;
-    border-radius: 30px;
     height: 70%;
     width: 70%;
     max-width: 600px;
     max-height: 700px;
-    object-fit: cover;
     align-self: center;
     justify-self: center;
 }
@@ -129,11 +128,27 @@ body{
 .post-last-info{
     grid-row: 4/5;
     grid-column: 2/3;
-    display:grid;
-    grid-template-columns: 20% 20% 20% 40%;
-    justify-content: center;
-    justify-items:center;
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+
 }
+
+.post-last-info > * {
+    margin-right: 4em;
+}
+
+.post-last-info > *:not(:last-child) {
+    background: #B7B7B7;
+    border-radius: 52px;
+    color: #ffffff;
+    padding: 5px 20px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 #calendar{
     background: #4678C5;
     border-radius: 52px;
@@ -141,4 +156,57 @@ body{
     padding:0.5em 1em;
     text-align: center;
     margin-bottom: auto;
+}
+
+#post-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 30px;
+}
+
+#image-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: -3em;
+
+}
+
+#photo-name {
+    font-weight: 600;
+    font-size: 18px;
+    color: #000000;
+    background: rgba(255, 255, 254, 0.8);
+    backdrop-filter: blur(10px);
+    border-radius: 50px;
+    padding: 25px 60px;
+    margin-left: -2em;
+}
+
+#photo-male {
+    color:white;
+    z-index: 10;
+    font-size: 25px;
+    background: rgba(255, 255, 254, 0.8);
+    backdrop-filter: blur(10px);
+    border-radius: 50px;
+    padding: 10px 15px;
+    margin-right: -1em;
+    display: flex;
+    justify-content: center;
+}
+
+#photo-male *{
+    padding: 10px;
+    border-radius: 30px;
+}
+
+#photo-male.female *{
+    background-color: #E3668C;
+}
+
+#photo-male.male *{
+    background-color: #4678C5;
 }
