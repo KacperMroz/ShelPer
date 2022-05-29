@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import './LoginForm.css';
 import { NavLink as Link, useNavigate } from 'react-router-dom';
-import useFetchGet from "../../hooks/useFetchGet";
 
 export const LoginForm = () => {
   const [email, setEmail] = useState('');
@@ -34,6 +33,7 @@ export const LoginForm = () => {
             localStorage.setItem('favourites', JSON.stringify(data.map(animal => animal.animal_id)));
             console.log('fav: ' + localStorage.getItem('favourites'));
           });
+
       if (document.cookie) {
         const token = document.cookie.split('=')[1];
         localStorage.setItem('token', token);

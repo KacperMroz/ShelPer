@@ -2,6 +2,9 @@ import { useState, useEffect } from "react";
 
 const useFetchAnimalAndShelter = (url, id = null, urlSecond) => {
     const [data, setData] = useState([]);
+    const [town, setTown] = useState('');
+    const [size, setSize] = useState('');
+
     const [dataInfo, setDataInfo] = useState([]);
     const [hasError, setErrors] =  useState(false);
     const [loading, setLoading] = useState(true);
@@ -24,10 +27,20 @@ const useFetchAnimalAndShelter = (url, id = null, urlSecond) => {
                             setDataInfo(dataSecond);
                             if ('S'+dataSecond.shelter_id === localStorage.getItem('token'))
                                 setOwner(true);
-                            setLoading(false);
-                            console.log(dataSecond);
+                            fetch('/towns')
+                                .then(response => response.json())
+                                .then(dataTown => {
+                                    setTown(dataTown.find(town => town.town_id === dataSecond.town_id).name);
+                                })
                         })
+                    fetch('/sizes')
+                        .then(response => response.json())
+                        .then(dataSize => {
+                            setSize(dataSize.find(size => size.size_id === data.size_id).name);
+                        })
+                    setLoading(false);
                 });
+
         } catch (e) {
             setErrors(true);
             setLoading(false);
@@ -35,7 +48,7 @@ const useFetchAnimalAndShelter = (url, id = null, urlSecond) => {
         }
     }, []);
 
-    return {data, dataInfo, hasError, loading, owner};
+    return {data, dataInfo, town, size, hasError, loading, owner};
 };
 
 export default useFetchAnimalAndShelter;
