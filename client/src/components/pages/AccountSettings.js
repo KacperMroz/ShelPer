@@ -29,7 +29,6 @@ const AccountSettings = () => {
   };
 
   const logout = () => {
-    // remove cookies
     localStorage.removeItem('token');
     window.location.href = '/';
   };

@@ -1,15 +1,15 @@
 import React from 'react';
 import './index.css';
 
-const Color = (props) => {
+const Color = props => {
   const colors = ['black', 'gray', 'brown', 'yellow', 'white', 'all'];
-  const colorOptions = colors.map((color) => {
+  const colorOptions = colors.map(color => {
     return (
       <input
         key={color}
         type={props.type}
         className={`input-${color}`}
-        name="color"
+        name='color'
         value={color}
         id={color}
         onChange={props.handleColorChange}
@@ -17,7 +17,7 @@ const Color = (props) => {
     );
   });
 
-  return <div className="colors">{colorOptions}</div>;
+  return <div className='colors'>{colorOptions}</div>;
 };
 
 export default Color;

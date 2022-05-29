@@ -1,63 +1,68 @@
-import React from 'react';
+import { useState } from 'react';
 import CheckBoxes from '../AnimalSpec/CheckBoxes';
 import Location from '../AnimalSpec/Location';
 import Color from '../AnimalSpec/Color';
-import {animalTypes, sexTypes} from "../AddPost/utils";
+import { animalTypes, sexTypes } from '../AddPost/utils';
 
 const Form = () => {
-  const [type, setType] = React.useState([]);
-  const [male, setMale] = React.useState([]);
-  const [localization, setLocalization] = React.useState('');
-  const [color, setColor] = React.useState([]);
+  const [type, setType] = useState([]);
+  const [male, setMale] = useState([]);
+  const [localization, setLocalization] = useState('');
+  const [color, setColor] = useState([]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = e => {
     e.preventDefault();
     console.log('Form submitted');
+    console.log(type, male, localization, color);
   };
 
-  const handleTypeChange = (e) => {
+  const handleTypeChange = e => {
+    const newType = [...type];
     if (e.target.checked) {
-      setType([...type, e.target.value]);
+      newType.push(e.target.value);
     } else {
-      setType(type.filter((type) => type !== e.target.value));
+      newType.splice(newType.indexOf(e.target.value), 1);
     }
+    setType(newType);
   };
 
-  const handleSexChange = (e) => {
-    if (e.target.checked) {
-      setMale([...male, e.target.value]);
-    } else {
-      setMale(type.filter((sex) => sex !== e.target.value));
-    }
+  const handleSexChange = e => {
+    const newSex = e.target.value;
+    setMale(newSex);
   };
 
-  const handleLocalizationChange = (e) => {
-    setLocalization(e.target.value);
+  const handleLocalizationChange = e => {
+    const newLocalization = e.target.value;
+    setLocalization(newLocalization);
   };
 
-  const handleColorChange = (e) => {
-    if (e.target.checked) {
-      setColor([...color, e.target.value]);
-    } else {
-      setColor(type.filter((color) => color !== e.target.value));
-    }
+  const handleColorChange = e => {
+    const newColor = e.target.value;
+    setColor(newColor);
   };
 
   return (
     <form>
-      <CheckBoxes handleChange={handleTypeChange}
-                  type="checkbox"
-                  value={type}
-                  name="type"
-                  data={animalTypes}/>
-      <CheckBoxes handleChange={handleSexChange}
-                  type="checkbox"
-                  value={male}
-                  data={sexTypes}
+      <CheckBoxes
+        handleChange={handleTypeChange}
+        type='checkbox'
+        value={type}
+        name='type'
+        data={animalTypes}
       />
-      <Location handleLocalizationChange={handleLocalizationChange} type="checkbox" value={localization}/>
-      <Color handleColorChange={handleColorChange} type="checkbox" />
-      <button type="submit" onClick={handleSubmit}>
+      <CheckBoxes
+        handleChange={handleSexChange}
+        type='checkbox'
+        value={male}
+        data={sexTypes}
+      />
+      <Location
+        handleLocalizationChange={handleLocalizationChange}
+        type='checkbox'
+        value={localization}
+      />
+      <Color handleColorChange={handleColorChange} type='checkbox' />
+      <button type='submit' onClick={handleSubmit}>
         Wyszukaj
       </button>
     </form>
