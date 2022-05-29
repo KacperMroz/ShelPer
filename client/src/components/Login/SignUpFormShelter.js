@@ -1,5 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { Button } from '../UI/Button';
+import React, { useRef, useState } from 'react';
 import { NavLink as Link, useNavigate } from 'react-router-dom';
 import './SignUpForm.css';
 
