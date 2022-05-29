@@ -27,8 +27,13 @@ const Form = () => {
   };
 
   const handleSexChange = e => {
-    const newSex = e.target.value;
-    setMale(newSex);
+    const newMale = [...male];
+    if (e.target.checked) {
+      newMale.push(e.target.value);
+    } else {
+      newMale.splice(newMale.indexOf(e.target.value), 1);
+    }
+    setMale(newMale);
   };
 
   const handleLocalizationChange = e => {
@@ -37,7 +42,12 @@ const Form = () => {
   };
 
   const handleColorChange = e => {
-    const newColor = e.target.value;
+    const newColor = [...color];
+    if (e.target.checked) {
+      newColor.push(e.target.value);
+    } else {
+      newColor.splice(newColor.indexOf(e.target.value), 1);
+    }
     setColor(newColor);
   };
 
