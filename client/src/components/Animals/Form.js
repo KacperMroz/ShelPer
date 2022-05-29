@@ -1,6 +1,5 @@
 import React from 'react';
 import CheckBoxes from '../AnimalSpec/CheckBoxes';
-import Location from '../AnimalSpec/Location';
 import Color from '../AnimalSpec/Color';
 import {animalTypes, sexTypes} from "../AddPost/utils";
 
@@ -55,7 +54,7 @@ const Form = () => {
                   value={male}
                   data={sexTypes}
       />
-      <Location handleLocalizationChange={handleLocalizationChange} type="checkbox" value={localization}/>
+      {/*<Location handleLocalizationChange={handleLocalizationChange} type="checkbox" value={localization}/>*/}
       <Color handleColorChange={handleColorChange} type="checkbox" />
       <button type="submit" onClick={handleSubmit}>
         Wyszukaj

@@ -21,20 +21,6 @@ const Post = () => {
     }
 
     const { data, dataInfo, town, size, hasError, loading, owner } = useFetchAnimalAndShelter('http://localhost:5000/animal', id, 'http://localhost:5000/user/shelter/');
-    const post = {
-        name: "Lola",
-        description: "Poznaj Lolę lepiej. Lorem ipsum dolor sit amet, consectetur adipiscing elit lorem....",
-        male: true,
-        city: "Kraków",
-        size: "Mały/a",
-        age: "3",
-        healthy: true,
-        date: "19.10.2021 19:20",
-        breed: "Mieszaniec",
-        weight: "6",
-        color: "white",
-        photo_path: "https://images.unsplash.com/photo-1583337130417-3346a1be7dee?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80"
-    }
 
     const handleClickOnHeart = () => {
         if (heart === faHeartCirclePlus) {
@@ -104,15 +90,9 @@ const Post = () => {
             {hasError ? <div>404</div> :
                 loading ? <div>Loading...</div> :
                     <div className='post-info-container'>
-                        {id === '1' ? <>
-                            <img src={post.photo_path} alt="post" className="post-carousel"/>
-                            <Description post={post} heart={heart} handleClickOnHeart={handleClickOnHeart}/>
-                            <Info dataInfo={dataInfo}/>
-                        </> : <>
-                            <img src={data.photo_path.substring('/public'.length)} alt="post" className="post-carousel"/>
-                            <Description post={data} town={town} size={size} heart={heart} handleClickOnHeart={handleClickOnHeart} owner={owner} trash={faTrashCan} handleClickOnTrash={handleClickOnTrash}/>
-                            <Info dataInfo={dataInfo}/>
-                        </>}
+                        <img src={data.photo_path.substring('/public'.length)} alt="post" className="post-carousel"/>
+                        <Description post={data} town={town} size={size} heart={heart} handleClickOnHeart={handleClickOnHeart} owner={owner} trash={faTrashCan} handleClickOnTrash={handleClickOnTrash}/>
+                        <Info dataInfo={dataInfo}/>
                     </div>
             }
         </div>
