@@ -1,17 +1,21 @@
-import React from 'react';
+import React, {useState} from 'react';
 import CheckBoxes from '../AnimalSpec/CheckBoxes';
 import Color from '../AnimalSpec/Color';
 import Input from '../AnimalSpec/Input';
 import Photo from '../AnimalSpec/Photo';
-import { animalTypes, sexTypes, sizeTypes } from './utils';
+import {animalTypes, healthyTypes, sexTypes} from './utils';
 import './Form.css';
-import { useNavigate } from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
+import useFetchGetParam from "../../hooks/useFetchGetParam";
 
 const Form = () => {
     const navigate = useNavigate();
     const [photo, setPhoto] = React.useState([]);
     const [error, setError] = React.useState('Please fill in all fields');
     const [validated, setValidated] = React.useState(false);
+    const [sizes, setSizes] = useState('');
+    const [loading3, setLoading3] = useState(true);
+    const [hasError3, setError3] = useState(false);
     const [model, setModel] = React.useState({
         name: '',
         type: '',
@@ -26,8 +30,19 @@ const Form = () => {
         animal_type_id: 1,
     });
 
+    useFetchGetParam('/sizes', setSizes, setLoading3, setError3);
+
+    const reformatData = () => {
+        return sizes.map((data) => {
+            return {
+                name: data.size_id,
+                label: data.name,
+            };
+        });
+    }
+
     const handleFileInput = (e) => {
-        setPhoto([...photo, ...e.target.files]);
+        setPhoto([photo, e.target.files]);
     };
 
     const addAnimal = async (fetchData, photo) => {
@@ -71,7 +86,6 @@ const Form = () => {
         const values = Object.values(model);
         const isEmpty = values.some((value) => value === '');
         const isSpaces = values.some((value) => value === ' ');
-        console.log(isEmpty + ' ' + isSpaces);
         if (isEmpty || isSpaces) {
             setValidated(false);
             setError('Please fill in all fields');
@@ -89,70 +103,82 @@ const Form = () => {
     };
 
     return (
-        <form className="form-container">
-            <CheckBoxes
-                handleChange={handleChange}
-                type="radio"
-                name="type"
-                value={model.type}
-                data={animalTypes}
-            />
-            <CheckBoxes
-                handleChange={handleChange}
-                name="male"
-                type="radio"
-                value={model.male}
-                data={sexTypes}
-            />
-            <Color handleColorChange={handleChange} type="radio" />
-            <CheckBoxes
-                handleChange={handleChange}
-                type="radio"
-                name="size"
-                value={model.size}
-                data={sizeTypes}
-            />
-            <Input
-                type="text"
-                name="age"
-                value={model.age}
-                handleChange={handleChange}
-                placeholder={'Podaj wiek zwierzaka'}
-            />
-            <Input
-                type="text"
-                name="name"
-                value={model.name}
-                handleChange={handleChange}
-                placeholder={'Podaj imie zwierzaka'}
-            />
-            <Input
-                type="text"
-                name="weight"
-                value={model.weight}
-                handleChange={handleChange}
-                placeholder={'Podaj wagę zwierzaka (kg)'}
-            />
-            <textarea
-                className="textarea"
-                name="description"
-                onChange={handleChange}
-                placeholder={'Opis zwierzaka'}
-            />
-            <div>
-                <Photo value={photo} handlePhotoInput={handleFileInput} />
-                {photo.length === 0 && <p>Zdjęcia</p>}
-                {photo.map((x) => (
-                    <div className="file-preview" key={x.name}>
-                        {' '}
-                        {x.name}{' '}
-                    </div>
-                ))}
-            </div>
-            <button type="submit" className="log-sign-button" onClick={handleSubmit}>
-                Dodaj ogłoszenie
-            </button>
-        </form>
+        <>
+            { !loading3 ?
+                <>
+                    <form className="form-container">
+                        <CheckBoxes
+                            handleChange={handleChange}
+                            type="radio"
+                            name="type"
+                            value={model.type}
+                            data={animalTypes}
+                        />
+                        <CheckBoxes
+                            handleChange={handleChange}
+                            name="male"
+                            type="radio"
+                            value={model.male}
+                            data={sexTypes}
+                        />
+                        <Color handleColorChange={handleChange} type="radio" />
+                        <CheckBoxes
+                            handleChange={handleChange}
+                            type="radio"
+                            name="size"
+                            value={model.size}
+                            data={reformatData()}
+                        />
+                        <CheckBoxes
+                            handleChange={handleChange}
+                            type="radio"
+                            name="healthy"
+                            value={model.healthy}
+                            data={healthyTypes}
+                        />
+                        <Input
+                            type="text"
+                            name="age"
+                            value={model.age}
+                            handleChange={handleChange}
+                            placeholder={'Podaj wiek zwierzaka'}
+                        />
+                        <Input
+                            type="text"
+                            name="name"
+                            value={model.name}
+                            handleChange={handleChange}
+                            placeholder={'Podaj imie zwierzaka'}
+                        />
+                        <Input
+                            type="text"
+                            name="weight"
+                            value={model.weight}
+                            handleChange={handleChange}
+                            placeholder={'Podaj wagę zwierzaka (kg)'}
+                        />
+                        <textarea
+                            className="textarea"
+                            name="description"
+                            onChange={handleChange}
+                            placeholder={'Opis zwierzaka'}
+                        />
+                        <div>
+                            <Photo value={photo} handlePhotoInput={handleFileInput} />
+                            {photo.length === 0 && <p>Zdjęcia</p>}
+                            {photo.map((x) => (
+                                <div className="file-preview" key={x.name}>
+                                    {' '}
+                                    {x.name}{' '}
+                                </div>
+                            ))}
+                        </div>
+                        <button type="submit" className="log-sign-button" onClick={handleSubmit}>
+                            Dodaj ogłoszenie
+                        </button>
+                    </form>
+                </> : null }
+        </>
     );
 };
 

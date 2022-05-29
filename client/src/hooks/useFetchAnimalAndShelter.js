@@ -25,7 +25,7 @@ const useFetchAnimalAndShelter = (url, id = null, urlSecond) => {
                         .then(response => response.json())
                         .then(dataSecond => {
                             setDataInfo(dataSecond);
-                            if ('S'+dataSecond.shelter_id === localStorage.getItem('token'))
+                            if ('S'+dataSecond.details === localStorage.getItem('token'))
                                 setOwner(true);
                             fetch('/towns')
                                 .then(response => response.json())
