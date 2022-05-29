@@ -138,3 +138,26 @@ body{
        top:-2em;
        right:-1em;
    }
+
+   #image-row.animals {
+       position: absolute;
+       width: 100%;
+       margin-top: -1.5em;
+       padding: 5px 10px;
+   }
+
+   .animals #photo-name{
+       margin-left: -1.5em;
+       padding: 5px 20px;
+   }
+
+   .animals #photo-male {
+       padding: 10px 15px;
+       margin-right: -0.7em;
+   }
+
+    .animals #photo-male * {
+        padding: 5px 10px;
+        font-size: 16px;
+    ;
+    }
