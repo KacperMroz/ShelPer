@@ -116,6 +116,14 @@ body{
 .post-carousel{
     grid-row: 1/5;
     grid-column: 1/2;
+    border-radius: 30px;
+    height: 70%;
+    width: 70%;
+    max-width: 600px;
+    max-height: 700px;
+    object-fit: cover;
+    align-self: center;
+    justify-self: center;
 }
 
 .post-last-info{
