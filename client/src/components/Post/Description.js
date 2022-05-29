@@ -7,7 +7,11 @@ const Description = (props) => {
         <div className={"post-description-container"}>
             <div id='post-name-icon'>
                 <div id='post-name'>{props.post.name}</div>
-                <FontAwesomeIcon id='icon-heart' icon={props.heart} onClick={props.handleClickOnHeart}/>
+                {localStorage.getItem('token') != null ?
+                    <FontAwesomeIcon id='icon-heart' icon={props.heart} onClick={props.handleClickOnHeart}/>
+                    :
+                    null
+                }
                 {props.owner ?
                     <FontAwesomeIcon id='icon-heart' icon={props.trash} onClick={props.handleClickOnTrash}/>
                     : null}
