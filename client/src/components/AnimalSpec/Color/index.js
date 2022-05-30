@@ -2,7 +2,7 @@ import React from 'react';
 import './index.css';
 
 const Color = props => {
-  const colors = ['black', 'gray', 'brown', 'yellow', 'white', 'all'];
+  const colors = ['black', 'gray', 'brown', 'ginger', 'white', 'all'];
   const colorOptions = colors.map(color => {
     return (
       <input

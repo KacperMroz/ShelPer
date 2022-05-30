@@ -10,7 +10,7 @@ import useFetchGetParam from "../../hooks/useFetchGetParam";
 
 const Form = () => {
     const navigate = useNavigate();
-    const [photo, setPhoto] = React.useState([]);
+    const [photo, setPhoto] = React.useState('');
     const [error, setError] = React.useState('Please fill in all fields');
     const [validated, setValidated] = React.useState(false);
     const [sizes, setSizes] = useState('');
@@ -42,14 +42,15 @@ const Form = () => {
     }
 
     const handleFileInput = (e) => {
-        setPhoto([photo, e.target.files]);
+        setPhoto(e.target.files[0]);
+        console.log(e.target.files[0]);
     };
 
     const addAnimal = async (fetchData, photo) => {
         try {
             let formData = new FormData();
             formData.set("Info", JSON.stringify(fetchData))
-            formData.set("Photo", photo[0])
+            formData.set("Photo", photo)
             const response = await fetch('/animal', {
                 method: 'POST',
                 body: formData,
@@ -165,13 +166,8 @@ const Form = () => {
                         />
                         <div>
                             <Photo value={photo} handlePhotoInput={handleFileInput} />
-                            {photo.length === 0 && <p>Zdjęcia</p>}
-                            {photo.map((x) => (
-                                <div className="file-preview" key={x.name}>
-                                    {' '}
-                                    {x.name}{' '}
-                                </div>
-                            ))}
+                            {photo === '' && <p>Zdjęcie</p>}
+                            {photo !== '' && <div className="file-preview">{photo.name.toString()}</div>}
                         </div>
                         <button type="submit" className="log-sign-button" onClick={handleSubmit}>
                             Dodaj ogłoszenie
