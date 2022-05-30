@@ -1,7 +1,7 @@
 .acc-home-div{
-    background-color: #EBEFF5;
     width: 100vw;
     height: 100vh;
+    background: linear-gradient(180deg, rgba(241, 243, 246, 0.9) 0%, rgba(223, 230, 240, 0.9) 100%);
 }
 
 .acc-content-div{
@@ -38,4 +38,5 @@
     height: 30%;
     border-radius: 50px;
     font-size: 20px;
+    filter: drop-shadow(0px 4px 20px rgba(0, 0, 0, 0.14));
 }

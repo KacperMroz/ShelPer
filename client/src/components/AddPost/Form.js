@@ -7,6 +7,8 @@ import {animalTypes, healthyTypes, sexTypes} from './utils';
 import './Form.css';
 import {useNavigate} from 'react-router-dom';
 import useFetchGetParam from "../../hooks/useFetchGetParam";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faPlus } from "@fortawesome/free-solid-svg-icons";
 
 const Form = () => {
     const navigate = useNavigate();
@@ -69,7 +71,7 @@ const Form = () => {
         e.preventDefault();
         if (validated) {
             addAnimal(model, photo);
-        } else console.log(error);
+        } else alert(error);
 
     };
 
@@ -164,10 +166,14 @@ const Form = () => {
                             onChange={handleChange}
                             placeholder={'Opis zwierzaka'}
                         />
-                        <div>
-                            <Photo value={photo} handlePhotoInput={handleFileInput} />
-                            {photo === '' && <p>Zdjęcie</p>}
-                            {photo !== '' && <div className="file-preview">{photo.name.toString()}</div>}
+
+                        <div id="file" className="custom-file-upload">
+                            <label htmlFor="file-custom" id="label-file">
+                                <FontAwesomeIcon icon={faPlus} />
+                                {photo === '' && <div className="file-name">Zdjęcie</div>}
+                                {photo !== '' && <div className="file-name">{photo.name.toString()}</div>}
+                            </label>
+                            <input id="file-custom" name="file" type="file" onChange={e => handleFileInput(e)}/>
                         </div>
                         <button type="submit" className="log-sign-button" onClick={handleSubmit}>
                             Dodaj ogłoszenie

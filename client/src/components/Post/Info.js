@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { faPhone, faComment, faGlobe } from '@fortawesome/free-solid-svg-icons';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import "../pages/Post.css";
+import ReactTooltip from "react-tooltip";
 
 const Info = (props) => {
     const [phone, setPhone] = useState(false);
@@ -16,18 +17,20 @@ const Info = (props) => {
 
     return (
       <div className="post-last-info">
-        <div>
-          <FontAwesomeIcon icon={faPhone} onClick={() => handleClick(phone, setPhone)} />
-          {phone && <span>{props.dataInfo.phone_number}</span>}
-        </div>
-        <div>
-          <FontAwesomeIcon icon={faComment} onClick={() => handleClick(message, setMessage)} />
-          {message && <span>{props.dataInfo.email}</span>}
-        </div>
-        <div>
-          <FontAwesomeIcon icon={faGlobe} onClick={() => handleClick(website, setWebsite)} />
-          {website && <span>{props.dataInfo.phone_number}</span>}
-        </div>
+          <a data-tip data-for='phone'><FontAwesomeIcon icon={faPhone} onClick={() => handleClick(phone, setPhone)} /></a>
+          <ReactTooltip id="phone" className='extraClass' delayHide={200} effect='solid' type="error">
+              <span>{props.dataInfo.phone_number}</span>
+          </ReactTooltip>
+
+          <a data-tip data-for='email'><FontAwesomeIcon icon={faComment} onClick={() => handleClick(message, setMessage)} /></a>
+          <ReactTooltip id="email" className='extraClass' delayHide={200} effect='solid' type="error">
+              <span>{props.dataInfo.email}</span>
+          </ReactTooltip>
+
+          <a data-tip data-for='website'><FontAwesomeIcon icon={faGlobe} onClick={() => handleClick(website, setWebsite)} /></a>
+          <ReactTooltip id="website" className='extraClass' delayHide={200} effect='solid' type="error">
+              <span>{props.dataInfo.web_page}</span>
+          </ReactTooltip>
         <Link to={`${pathname}/appointments`} id="calendar">
           Kalendarz wizyt
         </Link>

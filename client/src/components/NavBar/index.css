@@ -3,6 +3,7 @@
   min-height: 15%;
   display: flex;
   justify-content: space-between;
+  padding: 70px 0px;
 }
 .login {
   grid-column: 1;
