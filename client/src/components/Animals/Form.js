@@ -1,72 +1,75 @@
-import { useState } from 'react';
+import React from 'react';
 import CheckBoxes from '../AnimalSpec/CheckBoxes';
 import Color from '../AnimalSpec/Color';
-import { animalTypes, sexTypes } from '../AddPost/utils';
+import {animalTypes, sexTypes} from "../AddPost/utils";
+import './Form.css'
 
+<<<<<<< HEAD
 const Form = props => {
   const [type, setType] = useState([]);
   const [male, setMale] = useState([]);
   const [color, setColor] = useState([]);
+=======
+const Form = () => {
+  const [type, setType] = React.useState([]);
+  const [male, setMale] = React.useState([]);
+  const [localization, setLocalization] = React.useState('');
+  const [color, setColor] = React.useState([]);
+>>>>>>> cb930ec1e528c319b8073850093af5a06ea5a32c
 
-  const filters = {
-    type,
-    male,
-    color,
-  };
-
-  const handleSubmit = e => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    props.onChangeFormFilters(filters);
-    props.setFilter(false);
+    console.log('Form submitted');
   };
 
-  const handleTypeChange = e => {
-    const newType = [...type];
+  const handleTypeChange = (e) => {
     if (e.target.checked) {
-      newType.push(e.target.value);
+      setType([...type, e.target.value]);
     } else {
-      newType.splice(newType.indexOf(e.target.value), 1);
+      setType(type.filter((type) => type !== e.target.value));
     }
-    setType(newType);
   };
 
-  const handleSexChange = e => {
-    const newMale = [...male];
+  const handleSexChange = (e) => {
     if (e.target.checked) {
-      newMale.push(e.target.value);
+      setMale([...male, e.target.value]);
     } else {
-      newMale.splice(newMale.indexOf(e.target.value), 1);
+      setMale(type.filter((sex) => sex !== e.target.value));
     }
-    setMale(newMale);
   };
 
-  const handleColorChange = e => {
-    const newColor = [...color];
+  const handleLocalizationChange = (e) => {
+    setLocalization(e.target.value);
+  };
+
+  const handleColorChange = (e) => {
     if (e.target.checked) {
-      newColor.push(e.target.value);
+      setColor([...color, e.target.value]);
     } else {
-      newColor.splice(newColor.indexOf(e.target.value), 1);
+      setColor(type.filter((color) => color !== e.target.value));
     }
-    setColor(newColor);
   };
 
   return (
     <form>
-      <CheckBoxes
-        handleChange={handleTypeChange}
-        type='checkbox'
-        value={type}
-        name='type'
-        data={animalTypes}
+      <CheckBoxes handleChange={handleTypeChange}
+                  type="checkbox"
+                  value={type}
+                  name="type"
+                  data={animalTypes}/>
+      <CheckBoxes handleChange={handleSexChange}
+                  type="checkbox"
+                  value={male}
+                  data={sexTypes}
       />
-      <CheckBoxes
-        handleChange={handleSexChange}
-        type='checkbox'
-        value={male}
-        data={sexTypes}
-      />
+<<<<<<< HEAD
       <Color handleColorChange={handleColorChange} type='checkbox' />
       <button className='button-filter' type='submit' onClick={handleSubmit}>
+=======
+      <Location handleLocalizationChange={handleLocalizationChange} type="checkbox" value={localization}/>
+      <Color handleColorChange={handleColorChange} type="checkbox" />
+      <button className='submit_btn' type="submit" onClick={handleSubmit}>
+>>>>>>> cb930ec1e528c319b8073850093af5a06ea5a32c
         Wyszukaj
       </button>
     </form>

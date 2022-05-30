@@ -1,0 +1,29 @@
+
+.btn-primary {
+    background: #E2A300;
+    border: none;
+    border-radius: 34px;
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 1em;
+    color: white;
+    position: inherit;
+    padding: 0.5em 1em;
+    margin: 1em;
+    right: 10em;
+}
+.order {
+    background: #F3F3F3;
+    border: none;
+    border-radius: 34px;
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 1em;
+    color: #969696;
+    padding: 0.5em 1em;
+    margin: 1em;
+    right: 0;
+    position: inherit;
+}

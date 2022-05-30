@@ -20,3 +20,13 @@
     align-items: center;
     justify-items: center;
 }
+
+.filter
+{
+
+}
+
+* {
+    box-sizing: border-box;
+    text-align: -webkit-center;
+}
