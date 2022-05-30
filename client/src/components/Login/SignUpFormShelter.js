@@ -153,11 +153,11 @@ export const SignUpFormShelter = ({ text }) => {
 
   const additionalInfoSection = useRef(null);
 
-  const goToAdditionalInfoSection = () =>
-    window.scrollTo({
-      top: additionalInfoSection.current.offsetTop,
+  const goToAdditionalInfoSection = () => {
+    additionalInfoSection.current.scrollIntoView({
       behavior: 'smooth',
     });
+  };
 
   return (
     <div className='sign-form-shelter-container'>
@@ -187,10 +187,9 @@ export const SignUpFormShelter = ({ text }) => {
               onChange={setConfirmPasswordHandler}
               placeholder={'Podaj swoje hasło'}
             />
-            {/* Zmieniłem to delikatnie, żeby móc automatycznie scrollowac do dołu, ale nie wiem czy nie zepsuje to logiki */}
-            {/* <Button text={text} navigate={navigate}/> */}
             <button
               className='go-bottom-button'
+              type='button'
               onClick={goToAdditionalInfoSection}
             >
               {text}
