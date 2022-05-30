@@ -50,3 +50,23 @@ def getSizes():
         sizes_dict.append(dict(size))
 
     return jsonify(sizes_dict)
+
+@bp.route('/types', methods=('GET',))
+def getTypes():
+    db = get_db()
+
+    try:
+        types = db.execute(
+            "SELECT * from animal_type",
+        ).fetchall()
+    except Exception:
+        return {"message": 'Select failed'}, 400
+
+    if types is None:
+        return {"message": 'Sizes not found'}, 404
+
+    types_dict = []
+    for type in types:
+        types_dict.append(dict(type))
+
+    return jsonify(types_dict)

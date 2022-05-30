@@ -23,6 +23,7 @@ body{
        margin:1em;
        position:absolute;
        right: 0;
+        z-index: 10;
    } 
    .btn-primary{
        background: #E2A300;
@@ -37,25 +38,26 @@ body{
        margin:1em;
        position:absolute;
        right: 10em;
+       z-index: 10;
    }
    
    .card{
        background-color: #EFEFEF;
        filter: drop-shadow(0px 4px 30px rgba(70, 120, 197, 0.15));
-       position:relative;
+       position: relative;
        border: none;
-       width:fit-content;
-       display:flex;
+       width: -moz-fit-content;
+       width: fit-content;
        flex-direction: column;
        border-color: #EFEFEF;
        height: 70%;
        border-radius: 10px;
        display: grid;
-       grid-template-rows: 60% 10% 10% 20% ;
+       grid-template-rows: 60% 10% 10% 20%;
        grid-template-columns: 50% 50%;
        max-width: 400px;
        min-width: 300px;
-       margin-top:4.2em;
+       margin-top: 4.2em;
        transition: all .2s;
        text-decoration: none;
    }

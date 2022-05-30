@@ -37,9 +37,10 @@ body{
     width: 80%;
 }
 #icon-heart{
-    color:#7c7c7c;
+    color:#B7B7B7;
     font-size:0.5em;
     font-weight: 400;
+    cursor: pointer;
 }
 #post-name{
     border-bottom: 3px solid #7c7c7c;
@@ -147,6 +148,7 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
 }
 
 #calendar{
@@ -209,4 +211,14 @@ body{
 
 #photo-male.male *{
     background-color: #4678C5;
+}
+
+.extraClass {
+    font-size: 16px !important;
+    pointer-events: auto !important;
+}
+
+.extraClass:hover {
+     visibility: visible !important;
+     opacity: 1 !important;
 }

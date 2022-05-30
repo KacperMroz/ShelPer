@@ -1,6 +1,6 @@
 import Card from '../Animal/Card';
 import useFetchGetParam from '../../hooks/useFetchGetParam';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const FetchAnimals = props => {
   const [data, setData] = useState('');
@@ -16,29 +16,26 @@ const FetchAnimals = props => {
   useFetchGetParam('/towns', setTowns, setLoading2, setError2);
   useFetchGetParam('/sizes', setSizes, setLoading3, setError3);
 
-  const returnWhenLoaded = () => {
-    if (loading || loading2 || loading3) {
-      return <div>Loading...</div>;
-    }
-    if (hasError || hasError2 || hasError3) {
-      return <div>Error...</div>;
-    }
-    return (
-      <>
-        {data.map(animal => (
-          <Card
-            key={animal.animal_id}
-            animal={animal}
-            town={towns.find(town => town.town_id === animal.town_id).name}
-            size={sizes.find(size => size.size_id === animal.size_id).name}
-          />
-        ))}
-      </>
-    );
-  };
-  console.log(data);
-
-  return <>{returnWhenLoaded()}</>;
+  return (
+    <>
+      {loading || loading2 || loading3 ? (
+        <div>Loading...</div>
+      ) : hasError || hasError2 || hasError3 ? (
+        <div>Error...</div>
+      ) : (
+        <>
+          {data.map(animal => (
+            <Card
+              key={animal.animal_id}
+              animal={animal}
+              town={towns.find(town => town.town_id === animal.town_id).name}
+              size={sizes.find(size => size.size_id === animal.size_id).name}
+            />
+          ))}
+        </>
+      )}
+    </>
+  );
 };
 
 export default FetchAnimals;
