@@ -13,7 +13,6 @@ const Form = props => {
   const filters = {
     type,
     male,
-    localization,
     color,
   };
 
@@ -42,11 +41,6 @@ const Form = props => {
     setMale(newMale);
   };
 
-  const handleLocalizationChange = e => {
-    const newLocalization = e.target.value;
-    setLocalization(newLocalization);
-  };
-
   const handleColorChange = e => {
     const newColor = [...color];
     if (e.target.checked) {
@@ -71,11 +65,6 @@ const Form = props => {
         type='checkbox'
         value={male}
         data={sexTypes}
-      />
-      <Location
-        handleLocalizationChange={handleLocalizationChange}
-        type='checkbox'
-        value={localization}
       />
       <Color handleColorChange={handleColorChange} type='checkbox' />
       <button className="button-filter" type='submit' onClick={handleSubmit}>
