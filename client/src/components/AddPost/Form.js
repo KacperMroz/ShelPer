@@ -3,7 +3,7 @@ import CheckBoxes from '../AnimalSpec/CheckBoxes';
 import Color from '../AnimalSpec/Color';
 import Input from '../AnimalSpec/Input';
 import Photo from '../AnimalSpec/Photo';
-import {animalTypes, healthyTypes, sexTypes} from './utils';
+import {healthyTypes, sexTypes} from './utils';
 import './Form.css';
 import {useNavigate} from 'react-router-dom';
 import useFetchGetParam from "../../hooks/useFetchGetParam";
@@ -18,9 +18,11 @@ const Form = () => {
     const [sizes, setSizes] = useState('');
     const [loading3, setLoading3] = useState(true);
     const [hasError3, setError3] = useState(false);
+    const [type, setType] = useState('');
+    const [loading2, setLoading2] = useState(true);
+    const [hasError2, setError2] = useState(false);
     const [model, setModel] = React.useState({
         name: '',
-        type: '',
         age: '',
         weight: '',
         description: '',
@@ -29,13 +31,14 @@ const Form = () => {
         color: '',
         breed_id: 1,
         size_id: 1,
-        animal_type_id: 1,
+        animal_type_id: '',
     });
 
     useFetchGetParam('/sizes', setSizes, setLoading3, setError3);
+    useFetchGetParam('/types', setType, setLoading2, setError2);
 
-    const reformatData = () => {
-        return sizes.map((data) => {
+    const reformatData = (arrays) => {
+        return arrays.map((data) => {
             return {
                 name: data.size_id,
                 label: data.name,
@@ -43,9 +46,30 @@ const Form = () => {
         });
     }
 
+    const addEmojiToTypeNames = (newArray) => {
+        newArray.map((data) => {
+            if (data.label === 'Kot')
+                data.label = data.label + ' 🐱';
+            if (data.label === 'Pies')
+                data.label = data.label + ' 🐶';
+            if (data.label === 'Inne')
+                data.label = data.label + ' 🐹';
+        });
+    }
+
+    const reformatDataType = (arrays) => {
+        const newArray =  arrays.map((data) => {
+            return {
+                name: data.animal_type_id,
+                label: data.name,
+            };
+        });
+        addEmojiToTypeNames(newArray);
+        return newArray;
+    }
+
     const handleFileInput = (e) => {
         setPhoto(e.target.files[0]);
-        console.log(e.target.files[0]);
     };
 
     const addAnimal = async (fetchData, photo) => {
@@ -107,15 +131,15 @@ const Form = () => {
 
     return (
         <>
-            { !loading3 ?
+            { !loading3 && !loading2 ?
                 <>
                     <form className="form-container">
                         <CheckBoxes
                             handleChange={handleChange}
                             type="radio"
-                            name="type"
+                            name="animal_type_id"
                             value={model.type}
-                            data={animalTypes}
+                            data={reformatDataType(type)}
                         />
                         <CheckBoxes
                             handleChange={handleChange}
@@ -130,7 +154,7 @@ const Form = () => {
                             type="radio"
                             name="size"
                             value={model.size}
-                            data={reformatData()}
+                            data={reformatData(sizes)}
                         />
                         <CheckBoxes
                             handleChange={handleChange}
