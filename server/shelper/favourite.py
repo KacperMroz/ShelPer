@@ -108,7 +108,7 @@ def getFavourites():
 
     for favourite in favourites:
         animal = db.execute(
-            "SELECT * FROM animal WHERE animal_id = ?",
+            "SELECT animal.*, town.town_id FROM animal LEFT JOIN shelter ON shelter.shelter_id = animal.shelter_id left join user_details on user_details.user_id = shelter.details left join building on building.building_id = user_details.building left join town on town.town_id = building.town_id  WHERE animal_id = ?",
             (favourite['animal_id'],),
         ).fetchone()
 
