@@ -28,7 +28,7 @@ const Filter = props => {
       </button>
       {filter && (
         <div className="form-filter">
-          <Form onChangeFormFilters={setFormFilters} />
+          <Form onChangeFormFilters={setFormFilters} setFilter={setFilter}/>
         </div>
       )}
     </div>
