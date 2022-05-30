@@ -77,6 +77,7 @@ CREATE TABLE animal(
     size_id INTEGER NOT NULL,
     shelter_id INTEGER NOT NULL,
     animal_type_id INTEGER NOT NULL,
+    photo_path TEXT,
     FOREIGN KEY (breed_id) REFERENCES breed(breed_id),
     FOREIGN KEY (shelter_id) REFERENCES shelter(shelter_id),
     FOREIGN KEY (animal_type_id) REFERENCES animal_type(animal_type_id),

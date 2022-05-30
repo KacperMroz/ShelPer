@@ -1,5 +1,4 @@
 import React, { useRef, useState } from 'react';
-import { Button } from '../UI/Button';
 import { NavLink as Link, useNavigate } from 'react-router-dom';
 import './SignUpForm.css';
 
@@ -8,6 +7,7 @@ export const SignUpFormShelter = ({ text }) => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [streetName, setStreetName] = useState('');
+  const [town_id, setTownId] = useState('');
   const [number, setNumber] = useState('');
   const [city, setCity] = useState('');
   const [postalCode, setPostalCode] = useState('');
@@ -20,8 +20,8 @@ export const SignUpFormShelter = ({ text }) => {
     email,
     password,
     name: 'Michael',
+    town_id,
     phone_number: phoneNumber,
-    town_id: 7,
     building_number: number,
     street_name: streetName,
     zip_code: postalCode,
@@ -89,6 +89,41 @@ export const SignUpFormShelter = ({ text }) => {
       return false;
     }
     return true;
+  };
+
+  const setTownIdHandler = () => {
+    switch (city) {
+      case 'Krakow':
+        setTownId(1);
+        break;
+      case 'Warszawa':
+        setTownId(2);
+        break;
+      case 'Wroclaw':
+        setTownId(3);
+        break;
+      case 'Poznan':
+        setTownId(4);
+        break;
+      case 'Bydgoszcz':
+        setTownId(5);
+        break;
+      case 'Katowice':
+        setTownId(6);
+        break;
+      case 'Gliwice':
+        setTownId(7);
+        break;
+      case 'Szczecin':
+        setTownId(8);
+        break;
+      case 'Gdansk':
+        setTownId(9);
+        break;
+      default:
+        setTownId(Math.floor(Math.random() * 9) + 1);
+    }
+    console.log(town_id);
   };
 
   const sendShelterData = async () => {
@@ -194,6 +229,7 @@ export const SignUpFormShelter = ({ text }) => {
               type='text'
               value={city}
               onChange={setCityHandler}
+              onBlur={setTownIdHandler}
               placeholder={'Podaj miejscowość'}
             />
           </div>

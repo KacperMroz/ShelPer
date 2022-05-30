@@ -1,15 +1,12 @@
-import { useState, useEffect } from "react";
+import React from 'react';
+import { useEffect } from "react";
 
-const useFetchGet = (url, id = null) => {
-    const [data, setData] = useState([]);
-    const [hasError, setErrors] =  useState(false);
-    const [loading, setLoading] = useState(true);
-
+const useFetchGetParam = (url, setData, setLoading, setErrors, id = null) => {
     useEffect( () => {
         try {
             if (id && !isNaN(id))
                 url = `${url}/${id}`;
-            if(isNaN(id))
+            if(isNaN(id) && id !== null)
                 throw new Error("Id must be a number");
 
             fetch(url)
@@ -25,8 +22,6 @@ const useFetchGet = (url, id = null) => {
             console.log(e);
         }
     }, []);
-
-    return {data, hasError, loading};
 };
 
-export default useFetchGet;
+export default useFetchGetParam;

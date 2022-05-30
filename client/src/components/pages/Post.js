@@ -1,56 +1,102 @@
-import React from 'react';
-import { faHeartCircleMinus, faHeartCirclePlus } from '@fortawesome/free-solid-svg-icons';
+import React, {useEffect} from 'react';
+import { faHeart, faTrashCan } from '@fortawesome/free-solid-svg-icons';
+import { faHeart as farHeart } from '@fortawesome/free-regular-svg-icons'
 import {useParams} from "react-router-dom";
 import Description from "../Post/Description";
 import Info from "../Post/Info";
 import NavBar from "../NavBar";
-import PhotoCarousel from "../Post/PhotoCarousel";
 import "./Post.css";
 import useFetchAnimalAndShelter from "../../hooks/useFetchAnimalAndShelter";
+import { useNavigate } from 'react-router-dom';
+import Photo from "../Post/Photo";
 
 const Post = () => {
-    const [heart, setHeart] = React.useState(faHeartCirclePlus);
+    const navigate = useNavigate();
+    const [heart, setHeart] = React.useState(farHeart);
+    const [fav, setFav] = React.useState('');
+    let tmpFavourites = localStorage.getItem('favourites') !== null ? JSON.parse(localStorage.getItem('favourites')) : [];
     let {id} = useParams();
+    const idEval = eval(id);
 
-    const { data, dataInfo, hasError, loading } = useFetchAnimalAndShelter('http://localhost:5000/animal', id, 'http://localhost:5000/user/shelter/');
-    // get shelter info (after backend is fixed)
-    const post = {
-        name: "Lola",
-        image: [
-            {image: "https://images.unsplash.com/photo-1583337130417-3346a1be7dee?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80"},
-            {image: "https://images.unsplash.com/photo-1583512603805-3cc6b41f3edb?crop=entropy&cs=tinysrgb&fm=jpg&ixlib=rb-1.2.1&q=80&raw_url=true&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880"},
-            {image: "https://images.unsplash.com/photo-1598628461950-268968751a2e?crop=entropy&cs=tinysrgb&fm=jpg&ixlib=rb-1.2.1&q=80&raw_url=true&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=688"},
-            {image: "https://images.unsplash.com/photo-1583511666372-62fc211f8377?ixlib=rb-1.2.1&raw_url=true&q=80&fm=jpg&crop=entropy&cs=tinysrgb&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=688"}
-        ],
-        description: "Poznaj Lolę lepiej. Lorem ipsum dolor sit amet, consectetur adipiscing elit lorem....",
-        male: true,
-        city: "Kraków",
-        size: "Mały/a",
-        age: "3",
-        healthy: true,
-        date: "19.10.2021 19:20",
-        breed: "Mieszaniec",
-        weight: "6",
-        color: "white"
+    const request = {
+        "animal_id":id
     }
+
+    const { data, dataInfo, town, size, hasError, loading, owner } = useFetchAnimalAndShelter('http://localhost:5000/animal', id, 'http://localhost:5000/user/shelter/');
 
     const handleClickOnHeart = () => {
-        if (heart === faHeartCirclePlus)
-            setHeart(faHeartCircleMinus);
-        else
-            setHeart(faHeartCirclePlus);
+        if (heart === farHeart) {
+            setHeart(faHeart);
+            setFav(true);
+            tmpFavourites.push(idEval);
+            localStorage.setItem('favourites', JSON.stringify(tmpFavourites));
+        }
+        else {
+            setHeart(farHeart);
+            setFav(false);
+            tmpFavourites.filter(item => item !== idEval);
+            localStorage.setItem('favourites', JSON.stringify(tmpFavourites));
+        }
     }
+
+    const handleClickOnTrash = () => {
+        if (window.confirm('Czy na pewno chcesz usunąć post?')) {
+            setFav(false);
+            tmpFavourites.filter(item => item !== idEval);
+            localStorage.setItem('favourites', JSON.stringify(tmpFavourites));
+
+            fetch('/animal/' + id, {
+                method: 'DELETE'
+            })
+            .then(res => res.json())
+            .then(() => {
+                navigate('/');
+            })
+        }
+    }
+
+    useEffect(() =>{
+        if (tmpFavourites.includes(idEval)) {
+            setHeart(faHeart);
+        }
+    }, []);
+
+    useEffect( () => {
+        async function fetchData(method) {
+            try {
+                await fetch('/favourite', {
+                    method: method,
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(request),
+                });
+                if (data.message) {
+                    console.log(data.message);
+                }
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        if (fav === true) {
+            fetchData('POST');
+        }
+        else if (fav === false) {
+            fetchData('DELETE');
+        }
+    }, [fav]);
 
     return (
         <div className='post-base-container'>
             <NavBar />
             {hasError ? <div>404</div> :
-                <div className='post-info-container'>
-                    <PhotoCarousel post={post.image}/>
-                    {id === '1' ? <Description post={post} heart={heart} handleClickOnHeart={handleClickOnHeart}/> :
-                        <Description post={data} heart={heart} handleClickOnHeart={handleClickOnHeart}/>}
-                    <Info dataInfo={dataInfo}/>
-                </div>
+                loading ? <div>Loading...</div> :
+                    <div className='post-info-container'>
+                        <Photo url={data.photo_path.substring('/public'.length)} name={data.name} male={data.male}/>
+                        {/*<img src={data.photo_path.substring('/public'.length)} alt="post" className="post-carousel"/>*/}
+                        <Description post={data} town={town} size={size} heart={heart} handleClickOnHeart={handleClickOnHeart} owner={owner} trash={faTrashCan} handleClickOnTrash={handleClickOnTrash}/>
+                        <Info dataInfo={dataInfo}/>
+                    </div>
             }
         </div>
     );

@@ -6,12 +6,11 @@ export const animalTypes = [
 ];
 
 export const sexTypes = [
-  { name: 'false', label: 'Samica' },
-  { name: 'true', label: 'Samiec' },
+  { name: 0, label: 'Samica' },
+  { name: 1, label: 'Samiec' },
 ];
 
-export const sizeTypes = [
-  { name: 'small', label: 'Mały' },
-  { name: 'medium', label: 'Średni' },
-  { name: 'big', label: 'Duży' },
+export const healthyTypes = [
+  { name: 1, label: 'Zdrowy/a' },
+  { name: 0, label: 'Wymaga leczenia' },
 ];
