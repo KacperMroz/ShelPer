@@ -1,28 +1,38 @@
-import React from 'react';
-import Form from "./Form";
-import './Filter.css'
+import { useState } from 'react';
+import Form from './Form';
 
-const Filter = () => {
-    const [filter, setFilter] = React.useState(false);
-    const [order, setOrder] = React.useState("Najnowsze");
+const Filter = props => {
+  const [filter, setFilter] = useState(false);
+  const [order, setOrder] = useState('Najnowsze');
+  const [formFilters, setFormFilters] = useState({});
 
-    const toggleFilter = () => {
-        setFilter(!filter);
-    }
+  const toggleFilter = () => {
+    setFilter(!filter);
+  };
 
-    return (
-        <div>
-            <button className={"btn-primary"} onClick={toggleFilter}>Pokaż filtry</button>
-            {filter &&
-                (<div class_name='filter_box'>
-                    <Form />
-                </div>)}
-            <select className={"order"} onChange={(e) => setOrder(e.target.value)}>
-                <option>Najnowsze</option>
-                <option>Najstarsze</option>
-            </select>
+  const handleOrderChange = e => {
+    setOrder(e.target.value);
+    props.onSetOrder(e.target.value);
+  };
+
+  props.onSetFilters(formFilters);
+
+  return (
+    <div>
+      <select className='order' onChange={handleOrderChange}>
+        <option>Najnowsze</option>
+        <option>Najstarsze</option>
+      </select>
+      <button className='btn btn-primary' onClick={toggleFilter}>
+        Pokaż filtry
+      </button>
+      {filter && (
+        <div className='form-filter'>
+          <Form onChangeFormFilters={setFormFilters} setFilter={setFilter} />
         </div>
-    );
+      )}
+    </div>
+  );
 };
 
 export default Filter;

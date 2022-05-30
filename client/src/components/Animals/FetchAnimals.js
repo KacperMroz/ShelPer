@@ -32,10 +32,10 @@ const FetchAnimals = props => {
         <>
           {data
             .filter(animal => {
-              if (colors.length === 0) {
+              if (colors?.length === 0) {
                 return animal;
               }
-              return colors.includes(animal.color);
+              return colors?.includes(animal.color);
             })
             .map(animal => (
               <Card
