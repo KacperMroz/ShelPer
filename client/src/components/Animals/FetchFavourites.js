@@ -36,11 +36,7 @@ const FetchFavourites = (props) => {
         return (
             <>
                 {data.map((animal) => (
-                    //TODO: add town after backend is done
-
-                    // <Card key={animal.animal_id} animal={animal} town={towns.find(townItem => townItem.town_id === animal.town_id).name} size ={sizes.find(sizeItem => sizeItem.size_id === animal.size_id).name}/>
-                    <Card key={animal.animal_id} animal={animal} size ={sizes.find(sizeItem => sizeItem.size_id === animal.size_id).name}/>
-
+                    <Card key={animal.animal_id} animal={animal} town={towns.find(townItem => townItem.town_id === animal.town_id).name} size ={sizes.find(sizeItem => sizeItem.size_id === animal.size_id).name}/>
                     ))}
             </>
         );
