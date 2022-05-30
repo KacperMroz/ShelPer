@@ -167,7 +167,7 @@ const Form = () => {
                         <div>
                             <Photo value={photo} handlePhotoInput={handleFileInput} />
                             {photo === '' && <p>Zdjęcie</p>}
-                            <div className="file-preview">{photo.name.toString()}</div>
+                            {photo !== '' && <div className="file-preview">{photo.name.toString()}</div>}
                         </div>
                         <button type="submit" className="log-sign-button" onClick={handleSubmit}>
                             Dodaj ogłoszenie
