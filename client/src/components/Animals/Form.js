@@ -4,16 +4,22 @@ import Location from '../AnimalSpec/Location';
 import Color from '../AnimalSpec/Color';
 import { animalTypes, sexTypes } from '../AddPost/utils';
 
-const Form = () => {
+const Form = props => {
   const [type, setType] = useState([]);
   const [male, setMale] = useState([]);
   const [localization, setLocalization] = useState('');
   const [color, setColor] = useState([]);
 
+  const filters = {
+    type,
+    male,
+    localization,
+    color,
+  };
+
   const handleSubmit = e => {
     e.preventDefault();
-    console.log('Form submitted');
-    console.log(type, male, localization, color);
+    props.onChangeFormFilters(filters);
   };
 
   const handleTypeChange = e => {

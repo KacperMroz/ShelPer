@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import Form from './Form';
 
-const Filter = () => {
+const Filter = props => {
   const [filter, setFilter] = useState(false);
   const [order, setOrder] = useState('Najnowsze');
+  const [formFilters, setFormFilters] = useState({});
 
   const toggleFilter = () => {
     setFilter(!filter);
@@ -11,7 +12,10 @@ const Filter = () => {
 
   const handleOrderChange = e => {
     setOrder(e.target.value);
+    props.onSetOrder(e.target.value);
   };
+
+  props.onSetFilters(formFilters);
 
   return (
     <div>
@@ -20,7 +24,7 @@ const Filter = () => {
       </button>
       {filter && (
         <>
-          <Form />
+          <Form onChangeFormFilters={setFormFilters} />
         </>
       )}
       <select className='order' onChange={handleOrderChange}>
