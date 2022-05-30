@@ -3,6 +3,7 @@ import NavBar from '../NavBar';
 import Filter from '../Animals/Filter';
 import './Animals.css';
 import FetchFavourites from '../Animals/FetchFavourites';
+import './Favourites.css';
 
 const Favourites = () => {
   const [filters, setFilters] = useState('');

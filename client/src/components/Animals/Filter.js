@@ -19,18 +19,18 @@ const Filter = props => {
 
   return (
     <div>
-      <button className='btn btn-primary' onClick={toggleFilter}>
-        Pokaż filtry
-      </button>
-      {filter && (
-        <>
-          <Form onChangeFormFilters={setFormFilters} />
-        </>
-      )}
       <select className='order' onChange={handleOrderChange}>
         <option>Najnowsze</option>
         <option>Najstarsze</option>
       </select>
+      <button className='btn btn-primary' onClick={toggleFilter}>
+        Pokaż filtry
+      </button>
+      {filter && (
+        <div className="form-filter">
+          <Form onChangeFormFilters={setFormFilters} />
+        </div>
+      )}
     </div>
   );
 };

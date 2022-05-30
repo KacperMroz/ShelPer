@@ -13,8 +13,10 @@
 .container{
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    grid-gap: 3em;
-    padding: 2em;
+    grid-gap: 0 3em;
+    padding: 0 2em;
     overflow: auto;
     height: 100%;
+    align-items: center;
+    justify-items: center;
 }

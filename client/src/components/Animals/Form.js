@@ -78,7 +78,7 @@ const Form = props => {
         value={localization}
       />
       <Color handleColorChange={handleColorChange} type='checkbox' />
-      <button type='submit' onClick={handleSubmit}>
+      <button className="button-filter" type='submit' onClick={handleSubmit}>
         Wyszukaj
       </button>
     </form>
