@@ -1,13 +1,11 @@
 import { useState } from 'react';
 import CheckBoxes from '../AnimalSpec/CheckBoxes';
-import Location from '../AnimalSpec/Location';
 import Color from '../AnimalSpec/Color';
 import { animalTypes, sexTypes } from '../AddPost/utils';
 
 const Form = props => {
   const [type, setType] = useState([]);
   const [male, setMale] = useState([]);
-  const [localization, setLocalization] = useState('');
   const [color, setColor] = useState([]);
 
   const filters = {
@@ -68,7 +66,7 @@ const Form = props => {
         data={sexTypes}
       />
       <Color handleColorChange={handleColorChange} type='checkbox' />
-      <button className="button-filter" type='submit' onClick={handleSubmit}>
+      <button className='button-filter' type='submit' onClick={handleSubmit}>
         Wyszukaj
       </button>
     </form>

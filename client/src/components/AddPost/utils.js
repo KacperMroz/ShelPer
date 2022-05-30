@@ -1,8 +1,8 @@
 export const animalTypes = [
-  { name: 'dog', label: 'Pies 🐶' },
-  { name: 'cat', label: 'Kot 🐱' },
-  { name: 'other', label: 'Inne 🐹' },
-  { name: 'all', label: 'Wszystkie' },
+  { name: 2, label: 'Pies 🐶' },
+  { name: 1, label: 'Kot 🐱' },
+  { name: 3, label: 'Inne 🐹' },
+  { name: 4, label: 'Wszystkie' },
 ];
 
 export const sexTypes = [
