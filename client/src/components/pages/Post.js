@@ -94,7 +94,7 @@ const Post = () => {
                     <div className='post-info-container'>
                         <Photo url={data.photo_path.substring('/public'.length)} name={data.name} male={data.male}/>
                         {/*<img src={data.photo_path.substring('/public'.length)} alt="post" className="post-carousel"/>*/}
-                        <Description post={data} town={town} size={size} heart={heart} handleClickOnHeart={handleClickOnHeart} owner={owner} trash={faTrashCan} handleClickOnTrash={handleClickOnTrash}/>
+                        <Description post={data} town={town ? town : 'Krakow'} size={size} heart={heart} handleClickOnHeart={handleClickOnHeart} owner={owner} trash={faTrashCan} handleClickOnTrash={handleClickOnTrash}/>
                         <Info dataInfo={dataInfo}/>
                     </div>
             }
