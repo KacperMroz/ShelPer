@@ -13,7 +13,7 @@ const Favourites = () => {
     <div className='animals-base-container'>
       <NavBar />
       <div className='animals-content-container'>
-        <Filter onSetFilters={setFilters} onSetOrder={setOrder} />
+        {/*<Filter onSetFilters={setFilters} onSetOrder={setOrder} />*/}
         <div className={'container'}>
           <FetchFavourites url={'/favourites'} />
         </div>

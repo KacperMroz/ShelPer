@@ -12,7 +12,7 @@ const Animals = () => {
     <div className='animals-base-container'>
       <NavBar />
       <div className='animals-content-container'>
-        <Filter onSetFilters={setFilters} onSetOrder={setOrder} />
+        {/*<Filter onSetFilters={setFilters} onSetOrder={setOrder} />*/}
         <div className={'container'}>
           <FetchAnimals url={'/animals'} filters={filters} order={order} />
         </div>
