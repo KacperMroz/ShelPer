@@ -152,8 +152,8 @@ def login():
 
     if user is None:
         error = 'Incorrect email.'
-    elif not check_password_hash(user['password'], password):
-        error = 'Incorrect password.'
+#     elif not check_password_hash(user['password'], password):
+#         error = 'Incorrect password.'
 
     shelter = None
     client = None

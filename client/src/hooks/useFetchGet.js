@@ -17,7 +17,6 @@ const useFetchGet = (url, id = null) => {
                 .then(data => {
                     setData(data);
                     setLoading(false);
-                    console.log(data);
                 });
         } catch (e) {
             setErrors(true);
