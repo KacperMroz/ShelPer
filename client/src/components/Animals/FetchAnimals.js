@@ -16,6 +16,19 @@ const FetchAnimals = props => {
   useFetchGetParam('/towns', setTowns, setLoading2, setError2);
   useFetchGetParam('/sizes', setSizes, setLoading3, setError3);
 
+  const checkIfTownExists = town => {
+    if (towns) {
+      const townExists = towns.find(t => t.town_id === data.town_id);
+      if (townExists) {
+        return townExists.name;
+      } else {
+        return 'Krakow';
+      }
+    } else {
+      return null;
+    }
+  };
+
   return (
     <>
       {loading || loading2 || loading3 ? (
@@ -28,7 +41,7 @@ const FetchAnimals = props => {
             <Card
               key={animal.animal_id}
               animal={animal}
-              town={towns.find(town => town.town_id === animal.town_id).name}
+              town={checkIfTownExists()}
               size={sizes.find(size => size.size_id === animal.size_id).name}
             />
           ))}
