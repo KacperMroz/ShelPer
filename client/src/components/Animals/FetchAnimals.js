@@ -16,12 +16,6 @@ const FetchAnimals = props => {
   useFetchGetParam('/towns', setTowns, setLoading2, setError2);
   useFetchGetParam('/sizes', setSizes, setLoading3, setError3);
 
-  let colors = [];
-  let types = [];
-
-  colors = props.filters.color;
-  types = props.filters.type;
-
   return (
     <>
       {loading || loading2 || loading3 ? (
@@ -30,21 +24,14 @@ const FetchAnimals = props => {
         <div>Error...</div>
       ) : (
         <>
-          {data
-            .filter(animal => {
-              if (colors?.length === 0) {
-                return animal;
-              }
-              return colors?.includes(animal.color);
-            })
-            .map(animal => (
-              <Card
-                key={animal.animal_id}
-                animal={animal}
-                town={towns.find(town => town.town_id === animal.town_id).name}
-                size={sizes.find(size => size.size_id === animal.size_id).name}
-              />
-            ))}
+          {data.map(animal => (
+            <Card
+              key={animal.animal_id}
+              animal={animal}
+              town={towns.find(town => town.town_id === animal.town_id).name}
+              size={sizes.find(size => size.size_id === animal.size_id).name}
+            />
+          ))}
         </>
       )}
     </>
