@@ -21,12 +21,7 @@
     justify-items: center;
 }
 
-.filter
-{
-
-}
-
 * {
     box-sizing: border-box;
-    text-align: -webkit-center;
+    /*text-align: -webkit-center;*/
 }
