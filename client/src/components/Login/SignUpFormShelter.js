@@ -12,7 +12,7 @@ export const SignUpFormShelter = ({ text }) => {
   const [city, setCity] = useState('');
   const [postalCode, setPostalCode] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
-  const [website, setWebiste] = useState('');
+  const [web_page, setWebiste] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
@@ -25,6 +25,7 @@ export const SignUpFormShelter = ({ text }) => {
     building_number: number,
     street_name: streetName,
     zip_code: postalCode,
+    web_page
   };
 
   const setUsernameHandler = event => {
@@ -254,7 +255,7 @@ export const SignUpFormShelter = ({ text }) => {
             <input
               className='shelter-sign-input'
               type='text'
-              value={website}
+              value={web_page}
               onChange={setWebsiteHandler}
               placeholder={'Podaj stronę internetową'}
             />
